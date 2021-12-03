@@ -11,12 +11,14 @@ RUN pip3 install --no-cache-dir \
 	nsenter \
 	paramiko \
 	pylxd \
-	pyroute2 \
+	pyroute2==0.5.18 \
 	pyyaml \
 	git+https://github.com/active-expressions/active-expressions-static-python
 
 # Copy the sumo python packages (traci, sumolib and libsumo) from the sumo image
 COPY --from=sumo /usr/local/lib/python3.7 /usr/local/lib/python3.7
+
+ENV TRACI_HOME=/usr/local/lib/python3.7/dist-packages
 
 ENV COLOREDLOGS_DATE_FORMAT="%H:%M:%S" \
 	COLOREDLOGS_LOG_FORMAT="%(asctime)s %(name)-32s %(levelname)-8s %(message)s" \

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketException;
 
 public class FileServer {
 
@@ -35,6 +36,8 @@ public class FileServer {
 					System.out.println("Sending " + FILE_TO_SEND + "(" + mybytearray.length + " bytes)");
 					os.write(mybytearray, 0, mybytearray.length);
 					os.flush();
+				} catch(SocketException socketException) {
+					System.out.println("Broken Pipe, propably other device out of range.");
 				} finally {
 					if (bis != null) {
 						bis.close();

@@ -1,6 +1,5 @@
-#!/usr/bin/env python3
-
 from marvis import ArgumentParser, Network, DockerNode, Scenario
+
 
 def main():
     scenario = Scenario()
@@ -17,8 +16,9 @@ def main():
     scenario.add_network(net)
 
     with scenario as sim:
-        # To simulate forever, just do not specifiy the simulation_time parameter.
+        # To simulate forever, do not specify the simulation_time parameter.
         sim.simulate(simulation_time=60)
+
 
 if __name__ == "__main__":
     parser = ArgumentParser()

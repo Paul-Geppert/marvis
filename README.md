@@ -1,119 +1,89 @@
-# marvis
+# Marvis [![Github Actions CI](https://github.com/diselab/marvis/actions/workflows/main.yml/badge.svg)](https://github.com/diselab/marvis/actions/workflows/main.yml)
 
-[![Github Actions CI](https://github.com/diselab/marvis/actions/workflows/main.yml/badge.svg)](https://github.com/diselab/marvis/actions/workflows/main.yml)
+Marvis is a hybrid testbed for evaluating distributed IoT applications.
+It can combine real hardware and virtualized nodes in a co-simulation, featuring the network simulator [ns-3](https://nsnam.org) and other domain-specific simulators (currently included is the traffic simulator [SUMO](https://sumo.dlr.de)).
+For more information on the idea behind Marvis, please refer to our publication [Towards a Staging Environment for the Internet of Things](https://arxiv.org/pdf/2101.10697.pdf).
+
+It is recommended to run Marvis using our pre-built docker image.
+If you don't want to use the recommended setup, Marvis can also be installed directly on your machine and has so far been tested with **Debian 10 Buster**, **Ubuntu 18.04 Bionic Beaver**, and **Ubuntu 20.04 Focal Fossa**.
 
 
-## Installation
+## Prerequisites 🤖
 
-### Installation Using Docker
+You need a [working installation of docker](https://docs.docker.com/engine/install/ubuntu/). You can test your docker installation with:
+```sh
+docker run hello-world
+```
 
-Marvis can be obtained via docker.
-The easiest solution is using the VSCode *Remote - Containers* extension.
-After cloning the repository and opening it in the container, your scenarios will by executing them with `python3`.
+## Get Started 🌤
 
-Otherwise, you can build the [Dockerfile](./Dockerfile) in the project's root directory yourself by running `make`. In the container, marvis will be added to your
-`PYTHONPATH`. But you need to make sure, that you run the container with privileges to access the host network in order to have access to the host's network interfaces. You of course need to modify the volume mount to allow marvis access to your scenarios.
+First download the project, for example, via git:
 
 ```sh
-docker run -it --rm --cap-add=ALL -v /var/run/docker.sock:/var/run/docker.sock --net host --pid host --userns host --privileged ghcr.io/diselab/marvis:latest
+git clone https://github.com/diselab/marvis.git
+cd marvis
 ```
 
-The main image [`ghcr.io/diselab/marvis`](./docker/Dockerfile) is based on the images in the [docker](./docker) directory.
-The [`ghcr.io/diselab/marvis:base`](./docker/marvis-base/Dockerfile) image installs all neccessary dependencies for marvis,
-[`ghcr.io/diselab/marvis:dev`](./docker/marvis-dev/Dockerfile) is for development purposes (docker-cli in the container).
-
-### Installation Without Using Docker
-
-In the case you do not want to use the prebuilt Docker, a normal ns-3
-installation with *NetAnim* Python bindings will work, too. Marvis has
-so far been tested with **Debian 10 Buster**, **Ubuntu 18.04 Bionic
-Beaver** and **Ubuntu 20.04 Focal Fossa**.
-
-The following instructions describe how to install marvis system-wide.
-If you want to install marvis for your user only (`pip3 install --user
-…`), in a virtualenv, or in a pipenv, feel free to do so. However, we
-won't cover instructions in how to get the
-`PYTHONPATH`/virtualenv/pipenv together with privilege escalation (sudo)
-working.
-
-First, make sure you have the required packages to build dependencies
-installed:
-
-```shell script
-apt install \
-  build-essential \
-  cargo \
-  git \
-  libssl-dev \
-  python3-dev \
-  python3-pip \
-  python3-setuptools \
-  python3-wheel \
-  rustc
+To run Marvis, we recommend to use our pre-built docker image (if on Windows, exchange `$(pwd)` with `%cd%`):
+```sh
+docker run -it --rm --cap-add=ALL -v /var/run/docker.sock:/var/run/docker.sock -v $(pwd)/examples:/marvisscenarios --net host --pid host --userns host --privileged ghcr.io/diselab/marvis:latest /bin/bash
 ```
 
-The recommended Python version is Python 3.7. Python 3.8 is right now not supported (if you are running Ubuntu 20.04, make sure to install Python 3.7). 
-Also, make sure you have pip3 version 21 or up
-(if not, try `pip3 install --upgrade pip`).
+Inside the container, you can now run the `basic_example.py`:
 
-#### User Installation
-
-If you do not plan to modify the source code of marvis yourself,
-marvis can be installed with the following command:
-
-```shell script
-# without ns-3
-pip3 install git+https://github.com/diselab/marvis.git
-
-# including ns-3
-pip3 install 'git+https://github.com/diselab/marvis.git#egg=cohydra[ns-3]'
-```
-
-The second of the commands above, will use our
-[Python Wheels repository](https://github.com/osmhpi/python-wheels)
-for easier installation of binary dependencies, such as ns-3.
-
-To run an example testcase, download this repository, go to the example folder and run:
-```shell script
+```sh
+cd marvisscenarios
 python3 basic_example.py
 ```
 
-#### Developer Installation
+You should see two docker containers pinging each other. The ping should have a delay of ~400ms.
 
-If you do plan to modify the source code of marvis, clone this
-repository and to install dependencies, run, e.g.:
+Now, have look at our [other examples](https://github.com/diselab/marvis/tree/master/examples)!
 
-```shell script
-# without ns-3
-pip3 install -e .
 
-# including ns-3
-pip3 install -e '.[ns-3]'
+## Use Marvis with SUMO 🚗
 
-# including dev tools, if you want to contribute <3
-pip3 install -e '.[dev]'
+To run Marvis with the SUMO traffic simulator, you first have to [install SUMO](https://sumo.dlr.de/docs/Installing/index.html) on the same host as Marvis.
 
-# including ns-3 and dev tools
-pip3 install -e '.[ns-3,dev]'
+If you run Marvis in the recommended docker setup, you have to start SUMO before Marvis via:
+
+```sh
+sumo-gui --remote-port 8813 -c examples/docker/sumo/sumo-scenario/scenario.sumocfg
 ```
 
-In this case, where you do not install marvis itself but just its
-dependencies, the code of marvis needs to be in your `PYTHONPATH`.
-E.g.:
+(You can also use sumo without the GUI, just use the command `sumo`).
+If you run Marvis locally on your machine, just provide the configuration path to the SUMO setup in your Marvis scenario. Marvis will start SUMO by itself.
 
-```shell script
-export PYTHONPATH=$PYTHONPATH:$PWD/path/to/marvis-repo
+To execute the example scenario run inside the container:
+
+```sh
+cd marvisscenarios
+python3 sumo_example.py
+```
+
+## Citing Marvis 📖
+If you use Marvis in your work, please cite our paper
+
+**Towards a Staging Environment for the Internet of Things**. Jossekin Beilharz, Philipp Wiesner, Arne Boockmeyer, Florian Brokhausen, Ilja Behnke, Robert Schmid, Lukas Pirl, and Lauritz Thamsen. In the Proceedings of the *2021 IEEE International Conference on Pervasive Computing and Communications Workshops (PerCom Workshops)*. Presented in the Work in Progress (WiP) session of the conference. IEEE. 2021. [pdf](https://arxiv.org/pdf/2101.10697.pdf)
+
+You can use the bibtex
+
+```
+@inproceedings{Beilharz2021_StagingEnvironmentIoT,
+  author={Beilharz, Jossekin and Wiesner, Philipp and Boockmeyer, Arne and Brokhausen, Florian and Behnke, Ilja and Schmid, Robert and Pirl, Lukas and Thamsen, Lauritz},
+  booktitle={2021 IEEE International Conference on Pervasive Computing and Communications Workshops (PerCom Workshops)}, 
+  title={Towards a Staging Environment for the Internet of Things}, 
+  year={2021},
+  pages={312-315},
+  doi={10.1109/PerComWorkshops51409.2021.9431087}
+}
 ```
 
 
-## Contribution
+## Development & Contribution
 
-We are always happy when somebody contributes to marvis.
-Therefore please create a fork and create a pull request to our repository.
-Make sure, that [`pylint`](https://www.pylint.org/) does not show any additional errors or warnings.
-Also make sure that your code and your pull request is well documented.
-The documentation should also contain how to test your feature, if it is more complex.
-Afterwards we are going to test your new feature and review the code.
+We always welcome contributions or forks.
+Please refer to our [CONTRIBUTING](https://github.com/diselab/marvis/blob/master/CONTIBRUTING.md) guide on how to develop and extend Marvis.
 
 
 ## Contributors
