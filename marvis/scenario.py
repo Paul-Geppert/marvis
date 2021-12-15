@@ -38,6 +38,10 @@ class Scenario:
         self.context = None
         self.mobility_inputs = []
 
+        #: A set of nodes that are not connected by virtual network to other simulation nodes
+        #: These nodes may communication by real hardware devices
+        self.standalone_nodes = set()
+
     def add_network(self, network):
         """Add a network to be simulated.
 
@@ -59,6 +63,17 @@ class Scenario:
             It will get prepared on simulation start.
         """
         self.mobility_inputs.append(mobility_input)
+
+    def add_standalone_node(self, node):
+        """Add a :class:`.Node`.
+
+        Parameters
+        ----------
+        node : :class:`.Node`
+            The Node to add.
+            It will get prepared on simulation start.
+        """
+        self.standalone_nodes.add(node)
 
     def set_visualization(self, visualization):
         """Sets the new :class:`.Visualization`.
@@ -97,6 +112,10 @@ class Scenario:
                 if node not in seen:
                     seen.add(node)
                     yield node
+        for standalone_node in self.standalone_nodes:
+            if standalone_node not in seen:
+                seen.add(standalone_node)
+                yield standalone_node
 
     def workflow(self, func):
         """Add a workflow to the scenario.
