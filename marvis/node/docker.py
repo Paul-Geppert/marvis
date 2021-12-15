@@ -86,10 +86,12 @@ class DockerNode(Node):
     environment_variables : dict or list
         A dictonary of environment variables or a list of environment variables.
         If a list is specified each item should be in the form :code:`'KEY=VALUE'`.
+    devices : list of str
+        A list of devices. Each entry contains the path on host, the path inside the container and optional permission settings: :code:`<path_on_host>[:<path_in_container>[:<cgroup_permissions>]]`.
     """
 
     def __init__(self, name, docker_image=None, docker_build_dir=None, dockerfile='Dockerfile', pull=False,
-                 cpus=0.0, memory=None, command=None, volumes=None, exposed_ports=None, environment_variables=None):
+                 cpus=0.0, memory=None, command=None, volumes=None, exposed_ports=None, environment_variables=None, devices=None):
         super().__init__(name)
         #: The docker image to use.
         self.docker_image = docker_image
@@ -113,6 +115,8 @@ class DockerNode(Node):
         self.exposed_ports = exposed_ports if exposed_ports is not None else dict()
         #: Environment variables in the container.
         self.environment_variables = environment_variables
+        #: Devices to map into the container.
+        self.devices = devices
 
         #: The container instance.
         self.container = None
@@ -209,6 +213,8 @@ class DockerNode(Node):
             volumes=self.volumes,
             ports=self.exposed_ports,
             environment=self.environment_variables,
+
+            devices=self.devices,
         )
         defer(f'stop docker container {self.name}', self.stop_docker_container)
 
