@@ -1,0 +1,4 @@
+<map id="inheritance742fa9954a" name="inheritance742fa9954a">
+<area shape="rect" id="node1" href="../marvis.node.base/#marvis.node.base.Node" target="_top" title="A node represents a computer in the simulation." alt="" coords="13,5,189,31"/>
+<area shape="rect" id="node2" href="#marvis.node.lxd.LXDNode" target="_top" title="A LXDNode represents a LXD container." alt="" coords="5,79,196,104"/>
+</map>

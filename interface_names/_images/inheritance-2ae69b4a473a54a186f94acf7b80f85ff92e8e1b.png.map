@@ -1,0 +1,4 @@
+<map id="inheritance5aa3ccb123" name="inheritance5aa3ccb123">
+<area shape="rect" id="node1" href="../marvis.command_executor.base/#marvis.command_executor.base.CommandExecutor" target="_top" title="The CommandExecutor abstracts away the code for running" alt="" coords="13,5,376,31"/>
+<area shape="rect" id="node2" href="#marvis.command_executor.ssh.SSHCommandExecutor" target="_top" title="The SSHCommandExecutor runs commands on a SSH remote host." alt="" coords="5,79,384,104"/>
+</map>

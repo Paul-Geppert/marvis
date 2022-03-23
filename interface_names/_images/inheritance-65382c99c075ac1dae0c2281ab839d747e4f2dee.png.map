@@ -1,0 +1,5 @@
+<map id="inheritanced3fbb63175" name="inheritanced3fbb63175">
+<area shape="rect" id="node1" href="../marvis.node.base/#marvis.node.base.Node" target="_top" title="A node represents a computer in the simulation." alt="" coords="44,5,220,31"/>
+<area shape="rect" id="node2" href="../marvis.node.external/#marvis.node.external.ExternalNode" target="_top" title="An ExternalNode represents an external device." alt="" coords="5,79,259,104"/>
+<area shape="rect" id="node3" href="#marvis.node.ssh.SSHNode" target="_top" title="An SSH node represents an external device reachable via SSH." alt="" coords="35,152,229,177"/>
+</map>
