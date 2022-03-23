@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 from marvis import ArgumentParser, Network, DockerNode, LXDNode, Scenario
 
 
@@ -17,7 +15,7 @@ def main():
     scenario.add_network(net)
 
     with scenario as sim:
-        # To simulate forever, just do not specifiy the simluation_time parameter.
+        # To simulate forever, do not specify the simulation_time parameter.
         sim.simulate()
 
 

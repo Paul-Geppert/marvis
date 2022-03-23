@@ -28,10 +28,10 @@ latest:
 marvis-base:
 	${docker_build} -t ghcr.io/diselab/marvis:base-${PROJECT_TAG} docker/marvis-base
 
-marvis:
+marvis: marvis-base
 	${docker_build} -t ghcr.io/diselab/marvis:${PROJECT_TAG} . -f docker/Dockerfile
 
-marvis-dev:
+marvis-dev: marvis
 	${docker_build} -t ghcr.io/diselab/marvis:dev-${PROJECT_TAG} docker/marvis-dev
 
 pull-latest:

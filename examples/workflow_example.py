@@ -47,7 +47,7 @@ def main():
 
     scenario.add_network(net)
     with scenario as sim:
-        # To simulate forever, just do not specifiy the time parameter.
+        # To simulate forever, do not specify the time parameter.
         sim.simulate(simluation_time=60)
 
 

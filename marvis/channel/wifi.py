@@ -168,7 +168,7 @@ class WiFiChannel(Channel):
         self.delay = delay
 
         logger.debug("Setting up physical layer of WiFi.")
-        self.wifi_phy_helper = wifi.YansWifiPhyHelper.Default()
+        self.wifi_phy_helper = wifi.YansWifiPhyHelper()
         self.wifi_phy_helper.Set("ChannelWidth", core.UintegerValue(self.channel_width))
         if self.frequency:
             self.wifi_phy_helper.Set("Frequency", core.UintegerValue(self.frequency))

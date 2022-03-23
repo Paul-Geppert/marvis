@@ -6,7 +6,11 @@ import sys
 import threading
 import time
 
-if 'SUMO_HOME' in os.environ:
+if 'TRACI_HOME' in os.environ:
+    TRACI_HOME = os.environ['TRACI_HOME']
+    sys.path.append(TRACI_HOME)
+    os.environ['PATH'] += os.pathsep + TRACI_HOME
+elif 'SUMO_HOME' in os.environ:
     SUMO_HOME = os.environ['SUMO_HOME']
     sys.path.append(os.path.join(SUMO_HOME, 'tools'))
     os.environ['PATH'] += os.pathsep + os.path.join(SUMO_HOME, 'bin')
