@@ -1,0 +1,4 @@
+<map id="inheritance588c8853c6" name="inheritance588c8853c6">
+<area shape="rect" id="node1" href="../marvis.node.base/#marvis.node.base.Node" target="_top" title="A node represents a computer in the simulation." alt="" coords="48,5,224,31"/>
+<area shape="rect" id="node2" href="#marvis.node.interface.InterfaceNode" target="_top" title="A Interface Node represents a node (or network) behind an local network interface." alt="" coords="5,79,267,104"/>
+</map>

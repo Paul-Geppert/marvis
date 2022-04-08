@@ -1,0 +1,5 @@
+<map id="inheritance1a0715582c" name="inheritance1a0715582c">
+<area shape="rect" id="node1" title="Helper class that provides a standard way to create an ABC using" alt="" coords="141,5,217,31"/>
+<area shape="rect" id="node3" href="#marvis.visualization.visualization.Visualization" target="_top" title="The Visualization class is the abstract super class of all visualizations." alt="" coords="14,79,343,104"/>
+<area shape="rect" id="node2" href="#marvis.visualization.visualization.NoVisualization" target="_top" title="The NoContext is a Null&#45;Object and therefore **does nothing**." alt="" coords="5,152,352,177"/>
+</map>

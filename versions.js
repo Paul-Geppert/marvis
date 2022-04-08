@@ -51,7 +51,7 @@ window.addEventListener('load', function() {
     var branchesContainer = createElement(otherVersionsContainer, 'dl');
     createElement(branchesContainer, 'dt', {}, 'Branches');
 
-    var branches = ["master", "actions-ci", "add-license", "bugfix/docsbuild", "cleanup", "delete_old_examples", "example/diak", "feat/devices_in_docker_containers", "feat/standalone_nodes", "feature/devices_in_docker", "feature/non-root-user", "fix/remove_veth_pair_after_simulation", "gh-pages", "interface_names", "linting", "mobility_input", "new-naming-marvis", "onboarding", "qemu_branch", "readthedocs", "renaming-v2"];
+    var branches = ["master", "actions-ci", "add-license", "bugfix/docsbuild", "cleanup", "delete_old_examples", "example/diak", "feat/devices_in_docker_containers", "feat/standalone_nodes", "feature/devices_in_docker", "feature/non-root-user", "fix/remove_veth_pair_after_simulation", "gh-pages", "interface_names", "linting", "mobility_input", "new-naming-marvis", "onboarding", "qemu_branch", "readthedocs", "renaming-v2", "thesis"];
     for (var i = 0; i < branches.length; i++) {
         var branch = branches[i];
         var container = branchesContainer;
