@@ -1,0 +1,5 @@
+<map id="inheritancee85b95465d" name="inheritancee85b95465d">
+<area shape="rect" id="node1" href="#marvis.network.ChannelPrototype" target="_top" title="A channel prototype defines all parameters for the channel creation and offers a method to add nodes." alt="" coords="5,5,249,31"/>
+<area shape="rect" id="node2" href="#marvis.network.ConnectedNode" target="_top" title="marvis.network.ConnectedNode" alt="" coords="273,5,504,31"/>
+<area shape="rect" id="node3" href="#marvis.network.Network" target="_top" title="A network connects many nodes together and assigns IP addresses." alt="" coords="528,5,711,31"/>
+</map>

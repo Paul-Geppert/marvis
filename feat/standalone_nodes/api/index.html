@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API Reference &mdash; marvis 0.2.0 - feat/standalone_nodes documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="https://diselab.github.io/marvis/versions.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex/" />
+    <link rel="search" title="Search" href="../search/" />
+    <link rel="next" title="marvis.argparse" href="marvis.argparse/" />
+    <link rel="prev" title="Using SUMO With marvis" href="../sumo/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../" class="icon icon-home"> marvis
+          </a>
+              <div class="version">
+                0.2.0 - feat/standalone_nodes
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation/">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sumo/">Using SUMO With marvis</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-marvis">marvis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="marvis.argparse/">marvis.argparse</a></li>
+<li class="toctree-l3"><a class="reference internal" href="marvis.channel/">marvis.channel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="marvis.command_executor/">marvis.command_executor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="marvis.context/">marvis.context</a></li>
+<li class="toctree-l3"><a class="reference internal" href="marvis.events/">marvis.events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="marvis.interface/">marvis.interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="marvis.mobility_input/">marvis.mobility_input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="marvis.network/">marvis.network</a></li>
+<li class="toctree-l3"><a class="reference internal" href="marvis.node/">marvis.node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="marvis.scenario/">marvis.scenario</a></li>
+<li class="toctree-l3"><a class="reference internal" href="marvis.simulation/">marvis.simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="marvis.util/">marvis.util</a></li>
+<li class="toctree-l3"><a class="reference internal" href="marvis.visualization/">marvis.visualization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="marvis.workflow/">marvis.workflow</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../">marvis</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../" class="icon icon-home"></a> &raquo;</li>
+      <li>API Reference</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="api-reference">
+<h1>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this headline"></a></h1>
+<section id="module-marvis">
+<span id="marvis"></span><h2>marvis<a class="headerlink" href="#module-marvis" title="Permalink to this headline"></a></h2>
+<p>Marvis is a testbed for writing scenarios with the ns-3 network simulator.</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="marvis.argparse/#module-marvis.argparse" title="marvis.argparse"><code class="xref py py-obj docutils literal notranslate"><span class="pre">marvis.argparse</span></code></a></p></td>
+<td><p>Argument parsing for the simulation.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="marvis.channel/#module-marvis.channel" title="marvis.channel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">marvis.channel</span></code></a></p></td>
+<td><p>Channels are used to connect nodes.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="marvis.command_executor/#module-marvis.command_executor" title="marvis.command_executor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">marvis.command_executor</span></code></a></p></td>
+<td><p>A <a class="reference internal" href="marvis.command_executor.base/#marvis.command_executor.base.CommandExecutor" title="marvis.command_executor.base.CommandExecutor"><code class="xref py py-class docutils literal notranslate"><span class="pre">CommandExecutor</span></code></a> can be used to run commands during the simulation and is thereful useful in combination with a <a class="reference internal" href="marvis.workflow/#marvis.workflow.Workflow" title="marvis.workflow.Workflow"><code class="xref py py-class docutils literal notranslate"><span class="pre">Workflow</span></code></a>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="marvis.context/#module-marvis.context" title="marvis.context"><code class="xref py py-obj docutils literal notranslate"><span class="pre">marvis.context</span></code></a></p></td>
+<td><p>Contexts to tear down the simulation.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="marvis.events/#module-marvis.events" title="marvis.events"><code class="xref py py-obj docutils literal notranslate"><span class="pre">marvis.events</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="marvis.interface/#module-marvis.interface" title="marvis.interface"><code class="xref py py-obj docutils literal notranslate"><span class="pre">marvis.interface</span></code></a></p></td>
+<td><p>Internal network card.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="marvis.mobility_input/#module-marvis.mobility_input" title="marvis.mobility_input"><code class="xref py py-obj docutils literal notranslate"><span class="pre">marvis.mobility_input</span></code></a></p></td>
+<td><p>MobilityInputs describe how external simulation interfaces move nodes.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="marvis.network/#module-marvis.network" title="marvis.network"><code class="xref py py-obj docutils literal notranslate"><span class="pre">marvis.network</span></code></a></p></td>
+<td><p>A subnet.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="marvis.node/#module-marvis.node" title="marvis.node"><code class="xref py py-obj docutils literal notranslate"><span class="pre">marvis.node</span></code></a></p></td>
+<td><p>Nodes are the main components of simulating behaviour.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="marvis.scenario/#module-marvis.scenario" title="marvis.scenario"><code class="xref py py-obj docutils literal notranslate"><span class="pre">marvis.scenario</span></code></a></p></td>
+<td><p>The blueprint for a simulation.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="marvis.simulation/#module-marvis.simulation" title="marvis.simulation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">marvis.simulation</span></code></a></p></td>
+<td><p>The simulation executable.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="marvis.util/#module-marvis.util" title="marvis.util"><code class="xref py py-obj docutils literal notranslate"><span class="pre">marvis.util</span></code></a></p></td>
+<td><p>Internal utility functions.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="marvis.visualization/#module-marvis.visualization" title="marvis.visualization"><code class="xref py py-obj docutils literal notranslate"><span class="pre">marvis.visualization</span></code></a></p></td>
+<td><p>Visualization offers multiple visualizations and has an interface for user defined visualizations.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="marvis.workflow/#module-marvis.workflow" title="marvis.workflow"><code class="xref py py-obj docutils literal notranslate"><span class="pre">marvis.workflow</span></code></a></p></td>
+<td><p>Allow fault-injection by executing a sequence of instructions.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../sumo/" class="btn btn-neutral float-left" title="Using SUMO With marvis" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="marvis.argparse/" class="btn btn-neutral float-right" title="marvis.argparse" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Arne Boockmeyer, Martin Michaelis, Felix Gohla.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

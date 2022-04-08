@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>marvis.command_executor.docker &mdash; marvis 0.2.0 - feat/standalone_nodes documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="https://diselab.github.io/marvis/versions.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex/" />
+    <link rel="search" title="Search" href="../../search/" />
+    <link rel="next" title="marvis.command_executor.local" href="../marvis.command_executor.local/" />
+    <link rel="prev" title="marvis.command_executor.console" href="../marvis.command_executor.console/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../" class="icon icon-home"> marvis
+          </a>
+              <div class="version">
+                0.2.0 - feat/standalone_nodes
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../installation/">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sumo/">Using SUMO With marvis</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../#module-marvis">marvis</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../marvis.argparse/">marvis.argparse</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../marvis.channel/">marvis.channel</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../marvis.command_executor/">marvis.command_executor</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../marvis.command_executor.base/">marvis.command_executor.base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../marvis.command_executor.console/">marvis.command_executor.console</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">marvis.command_executor.docker</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../marvis.command_executor.local/">marvis.command_executor.local</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../marvis.command_executor.lxd/">marvis.command_executor.lxd</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../marvis.command_executor.ssh/">marvis.command_executor.ssh</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../marvis.command_executor.util/">marvis.command_executor.util</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../marvis.context/">marvis.context</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../marvis.events/">marvis.events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../marvis.interface/">marvis.interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../marvis.mobility_input/">marvis.mobility_input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../marvis.network/">marvis.network</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../marvis.node/">marvis.node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../marvis.scenario/">marvis.scenario</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../marvis.simulation/">marvis.simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../marvis.util/">marvis.util</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../marvis.visualization/">marvis.visualization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../marvis.workflow/">marvis.workflow</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../">marvis</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../">API Reference</a> &raquo;</li>
+          <li><a href="../marvis.command_executor/">marvis.command_executor</a> &raquo;</li>
+      <li>marvis.command_executor.docker</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-marvis.command_executor.docker">
+<span id="marvis-command-executor-docker"></span><h1>marvis.command_executor.docker<a class="headerlink" href="#module-marvis.command_executor.docker" title="Permalink to this headline"></a></h1>
+<p>Execute commands in docker containers.</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+</tbody>
+</table>
+<p class="rubric">Classes</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#marvis.command_executor.docker.DockerCommandExecutor" title="marvis.command_executor.docker.DockerCommandExecutor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DockerCommandExecutor</span></code></a></p></td>
+<td><p>The DockerCommandExecutor runs commands in a Docker container.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl class="py class">
+<dt class="sig sig-object py" id="marvis.command_executor.docker.DockerCommandExecutor">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">marvis.command_executor.docker.</span></span><span class="sig-name descname"><span class="pre">DockerCommandExecutor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">container</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">docker.models.containers.Container</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/marvis/command_executor/docker/#DockerCommandExecutor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#marvis.command_executor.docker.DockerCommandExecutor" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../marvis.command_executor.base/#marvis.command_executor.base.CommandExecutor" title="marvis.command_executor.base.CommandExecutor"><code class="xref py py-class docutils literal notranslate"><span class="pre">marvis.command_executor.base.CommandExecutor</span></code></a></p>
+<p>The DockerCommandExecutor runs commands in a Docker container.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – The name of the command executor.</p></li>
+<li><p><strong>container</strong> (<em>str</em>) – The container to run the commands in.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.command_executor.docker.DockerCommandExecutor.container">
+<span class="sig-name descname"><span class="pre">container</span></span><a class="headerlink" href="#marvis.command_executor.docker.DockerCommandExecutor.container" title="Permalink to this definition"></a></dt>
+<dd><p>The container to run the commands in.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="marvis.command_executor.docker.DockerCommandExecutor.execute">
+<span class="sig-name descname"><span class="pre">execute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">command</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shell</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stdout_logfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stderr_logfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/marvis/command_executor/docker/#DockerCommandExecutor.execute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#marvis.command_executor.docker.DockerCommandExecutor.execute" title="Permalink to this definition"></a></dt>
+<dd><p>Execute a command.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>command</strong> (<em>str</em>) – The command to run.</p></li>
+<li><p><strong>user</strong> (<em>str</em>) – The user to run the command as.</p></li>
+<li><p><strong>shell</strong> (<em>str</em>) – The type of shell to use (<code class="code docutils literal notranslate"><span class="pre">sh</span></code>, <code class="code docutils literal notranslate"><span class="pre">bash</span></code>, …).</p></li>
+<li><p><strong>stdout_logfile</strong> (<em>str</em>) – The path to the log file to append the stdout output.</p></li>
+<li><p><strong>stderr_logfile</strong> (<em>str</em>) – The path to the log file to append the stderr output.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="marvis.command_executor.docker.DockerCommandExecutor.get_logger">
+<span class="sig-name descname"><span class="pre">get_logger</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#marvis.command_executor.docker.DockerCommandExecutor.get_logger" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieve the logger for this command executor.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.command_executor.docker.DockerCommandExecutor.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#marvis.command_executor.docker.DockerCommandExecutor.name" title="Permalink to this definition"></a></dt>
+<dd><p>The name of the CommandExecutor.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.command_executor.docker.DockerCommandExecutor.counter">
+<span class="sig-name descname"><span class="pre">counter</span></span><a class="headerlink" href="#marvis.command_executor.docker.DockerCommandExecutor.counter" title="Permalink to this definition"></a></dt>
+<dd><p>A counter for loggers.</p>
+</dd></dl>
+
+</dd></dl>
+
+<p class="rubric">Inheritance Diagramm</p>
+<div class="graphviz"><img src="../../_images/inheritance-cbacf93df364ef854e588dc3751b7ef8ad67fcc4.png" alt="Inheritance diagram of marvis.command_executor.docker" usemap="#inheritance4ff43b4b88" class="inheritance graphviz" /></div>
+<map id="inheritance4ff43b4b88" name="inheritance4ff43b4b88">
+<area shape="rect" id="node1" href="../marvis.command_executor.base/#marvis.command_executor.base.CommandExecutor" target="_top" title="The CommandExecutor abstracts away the code for running" alt="" coords="34,5,397,31"/>
+<area shape="rect" id="node2" href="#marvis.command_executor.docker.DockerCommandExecutor" target="_top" title="The DockerCommandExecutor runs commands in a Docker container." alt="" coords="5,79,425,104"/>
+</map><div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../marvis.command_executor.console/" class="btn btn-neutral float-left" title="marvis.command_executor.console" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../marvis.command_executor.local/" class="btn btn-neutral float-right" title="marvis.command_executor.local" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Arne Boockmeyer, Martin Michaelis, Felix Gohla.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
