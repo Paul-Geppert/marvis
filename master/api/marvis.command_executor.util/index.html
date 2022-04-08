@@ -1,73 +1,39 @@
-
-
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>marvis.command_executor.util &mdash; marvis 0.2.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
-
-  
-  
-  
-  
-
-  
-  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/language_data.js"></script>
         <script src="https://diselab.github.io/marvis/versions.js"></script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
-    
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+    <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex/" />
     <link rel="search" title="Search" href="../../search/" />
     <link rel="next" title="marvis.context" href="../marvis.context/" />
     <link rel="prev" title="marvis.command_executor.ssh" href="../marvis.command_executor.ssh/" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../../" class="icon icon-home"> marvis
-          
-
-          
           </a>
-
-          
-            
-            
               <div class="version">
                 0.2.0
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search/" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -75,17 +41,7 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../installation/">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../getting-started/">Getting Started</a></li>
@@ -107,6 +63,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../marvis.context/">marvis.context</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../marvis.events/">marvis.events</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../marvis.interface/">marvis.interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../marvis.mobility_input/">marvis.mobility_input</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../marvis.network/">marvis.network</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../marvis.node/">marvis.node</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../marvis.scenario/">marvis.scenario</a></li>
@@ -120,72 +77,33 @@
 </li>
 </ul>
 
-            
-          
         </div>
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../">marvis</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="../../">Docs</a> &raquo;</li>
-        
+      <li><a href="../../" class="icon icon-home"></a> &raquo;</li>
           <li><a href="../">API Reference</a> &raquo;</li>
-        
           <li><a href="../marvis.command_executor/">marvis.command_executor</a> &raquo;</li>
-        
       <li>marvis.command_executor.util</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-            
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="module-marvis.command_executor.util">
-<span id="marvis-command-executor-util"></span><h1>marvis.command_executor.util<a class="headerlink" href="#module-marvis.command_executor.util" title="Permalink to this headline">¶</a></h1>
+             
+  <section id="module-marvis.command_executor.util">
+<span id="marvis-command-executor-util"></span><h1>marvis.command_executor.util<a class="headerlink" href="#module-marvis.command_executor.util" title="Permalink to this headline"></a></h1>
 <p>Internal utility functions.</p>
 <table class="longtable docutils align-default">
 <colgroup>
@@ -228,88 +146,68 @@
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<dl class="function">
-<dt id="marvis.command_executor.util.stringify_shell_arguments">
-<code class="sig-prename descclassname">marvis.command_executor.util.</code><code class="sig-name descname">stringify_shell_arguments</code><span class="sig-paren">(</span><em class="sig-param">command</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/marvis/command_executor/util/#stringify_shell_arguments"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#marvis.command_executor.util.stringify_shell_arguments" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="marvis.command_executor.util.stringify_shell_arguments">
+<span class="sig-prename descclassname"><span class="pre">marvis.command_executor.util.</span></span><span class="sig-name descname"><span class="pre">stringify_shell_arguments</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">command</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/marvis/command_executor/util/#stringify_shell_arguments"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#marvis.command_executor.util.stringify_shell_arguments" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
-<dl class="function">
-<dt id="marvis.command_executor.util.split_shell_arguments">
-<code class="sig-prename descclassname">marvis.command_executor.util.</code><code class="sig-name descname">split_shell_arguments</code><span class="sig-paren">(</span><em class="sig-param">command</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/marvis/command_executor/util/#split_shell_arguments"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#marvis.command_executor.util.split_shell_arguments" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="marvis.command_executor.util.split_shell_arguments">
+<span class="sig-prename descclassname"><span class="pre">marvis.command_executor.util.</span></span><span class="sig-name descname"><span class="pre">split_shell_arguments</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">command</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/marvis/command_executor/util/#split_shell_arguments"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#marvis.command_executor.util.split_shell_arguments" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
-<dl class="function">
-<dt id="marvis.command_executor.util.apply_user_and_shell">
-<code class="sig-prename descclassname">marvis.command_executor.util.</code><code class="sig-name descname">apply_user_and_shell</code><span class="sig-paren">(</span><em class="sig-param">command</em>, <em class="sig-param">user=None</em>, <em class="sig-param">shell=None</em>, <em class="sig-param">sudo=False</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/marvis/command_executor/util/#apply_user_and_shell"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#marvis.command_executor.util.apply_user_and_shell" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="marvis.command_executor.util.apply_user_and_shell">
+<span class="sig-prename descclassname"><span class="pre">marvis.command_executor.util.</span></span><span class="sig-name descname"><span class="pre">apply_user_and_shell</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">command</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shell</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sudo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/marvis/command_executor/util/#apply_user_and_shell"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#marvis.command_executor.util.apply_user_and_shell" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
-<dl class="class">
-<dt id="marvis.command_executor.util.LogFile">
-<em class="property">class </em><code class="sig-prename descclassname">marvis.command_executor.util.</code><code class="sig-name descname">LogFile</code><span class="sig-paren">(</span><em class="sig-param">logger</em>, <em class="sig-param">path</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/marvis/command_executor/util/#LogFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#marvis.command_executor.util.LogFile" title="Permalink to this definition">¶</a></dt>
+<dl class="py class">
+<dt class="sig sig-object py" id="marvis.command_executor.util.LogFile">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">marvis.command_executor.util.</span></span><span class="sig-name descname"><span class="pre">LogFile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logger</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/marvis/command_executor/util/#LogFile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#marvis.command_executor.util.LogFile" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>The logfile helps by prepending timestamps to log lines.</p>
-<dl class="method">
-<dt id="marvis.command_executor.util.LogFile.log">
-<code class="sig-name descname">log</code><span class="sig-paren">(</span><em class="sig-param">level</em>, <em class="sig-param">line</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/marvis/command_executor/util/#LogFile.log"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#marvis.command_executor.util.LogFile.log" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="marvis.command_executor.util.LogFile.log">
+<span class="sig-name descname"><span class="pre">log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/marvis/command_executor/util/#LogFile.log"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#marvis.command_executor.util.LogFile.log" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <p class="rubric">Inheritance Diagramm</p>
-<div class="graphviz"><img src="../../_images/inheritance-945989157b8c3765eff8b390110fcaba2d604139.png" alt="Inheritance diagram of marvis.command_executor.util" usemap="#inheritance73dd3e12a1" class="inheritance graphviz" /></div>
+<div class="graphviz"><img src="../../_images/inheritance-b1fe873018122d8a2d9f35ccc251f9f8af81aa2a.png" alt="Inheritance diagram of marvis.command_executor.util" usemap="#inheritance73dd3e12a1" class="inheritance graphviz" /></div>
 <map id="inheritance73dd3e12a1" name="inheritance73dd3e12a1">
 <area shape="rect" id="node1" href="#marvis.command_executor.util.LogFile" target="_top" title="The logfile helps by prepending timestamps to log lines." alt="" coords="5,5,279,31"/>
 </map><div class="line-block">
 <div class="line"><br /></div>
 </div>
-</div>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="../marvis.context/" class="btn btn-neutral float-right" title="marvis.context" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="../marvis.command_executor.ssh/" class="btn btn-neutral float-left" title="marvis.command_executor.ssh" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../marvis.command_executor.ssh/" class="btn btn-neutral float-left" title="marvis.command_executor.ssh" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../marvis.context/" class="btn btn-neutral float-right" title="marvis.context" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &copy; Copyright 2021, Arne Boockmeyer, Martin Michaelis, Felix Gohla
+    <p>&#169; Copyright 2022, Arne Boockmeyer, Martin Michaelis, Felix Gohla.</p>
+  </div>
 
-    </p>
-  </div> 
+   
 
 </footer>
-
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

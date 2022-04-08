@@ -1,72 +1,38 @@
-
-
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>marvis.workflow &mdash; marvis 0.2.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
-
-  
-  
-  
-  
-
-  
-  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/language_data.js"></script>
         <script src="https://diselab.github.io/marvis/versions.js"></script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
-    
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+    <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex/" />
     <link rel="search" title="Search" href="../../search/" />
     <link rel="prev" title="marvis.visualization.visualization" href="../marvis.visualization.visualization/" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../../" class="icon icon-home"> marvis
-          
-
-          
           </a>
-
-          
-            
-            
               <div class="version">
                 0.2.0
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search/" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -74,17 +40,7 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../installation/">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../getting-started/">Getting Started</a></li>
@@ -97,6 +53,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../marvis.context/">marvis.context</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../marvis.events/">marvis.events</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../marvis.interface/">marvis.interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../marvis.mobility_input/">marvis.mobility_input</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../marvis.network/">marvis.network</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../marvis.node/">marvis.node</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../marvis.scenario/">marvis.scenario</a></li>
@@ -110,70 +67,32 @@
 </li>
 </ul>
 
-            
-          
         </div>
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../">marvis</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="../../">Docs</a> &raquo;</li>
-        
+      <li><a href="../../" class="icon icon-home"></a> &raquo;</li>
           <li><a href="../">API Reference</a> &raquo;</li>
-        
       <li>marvis.workflow</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-            
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="module-marvis.workflow">
-<span id="marvis-workflow"></span><h1>marvis.workflow<a class="headerlink" href="#module-marvis.workflow" title="Permalink to this headline">¶</a></h1>
+             
+  <section id="module-marvis.workflow">
+<span id="marvis-workflow"></span><h1>marvis.workflow<a class="headerlink" href="#module-marvis.workflow" title="Permalink to this headline"></a></h1>
 <p>Allow fault-injection by executing a sequence of instructions.</p>
 <table class="longtable docutils align-default">
 <colgroup>
@@ -198,9 +117,9 @@
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<dl class="class">
-<dt id="marvis.workflow.Workflow">
-<em class="property">class </em><code class="sig-prename descclassname">marvis.workflow.</code><code class="sig-name descname">Workflow</code><span class="sig-paren">(</span><em class="sig-param">task</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/marvis/workflow/#Workflow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#marvis.workflow.Workflow" title="Permalink to this definition">¶</a></dt>
+<dl class="py class">
+<dt class="sig sig-object py" id="marvis.workflow.Workflow">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">marvis.workflow.</span></span><span class="sig-name descname"><span class="pre">Workflow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/marvis/workflow/#Workflow"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#marvis.workflow.Workflow" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>A workflow is a contains a list of commands for planned execution during the simulation.</p>
 <p>This is based on the work of Arne Boockmeyer’s
@@ -223,41 +142,41 @@
 <dd class="field-odd"><p><strong>task</strong> (<em>callable</em>) – The function to be executed in the workflow.</p>
 </dd>
 </dl>
-<dl class="attribute">
-<dt id="marvis.workflow.Workflow.stop_event">
-<code class="sig-name descname">stop_event</code><em class="property"> = None</em><a class="headerlink" href="#marvis.workflow.Workflow.stop_event" title="Permalink to this definition">¶</a></dt>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.workflow.Workflow.stop_event">
+<span class="sig-name descname"><span class="pre">stop_event</span></span><a class="headerlink" href="#marvis.workflow.Workflow.stop_event" title="Permalink to this definition"></a></dt>
 <dd><p>An event indicating when to stop the workflow thread.</p>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="marvis.workflow.Workflow.current_waiting_events">
-<code class="sig-name descname">current_waiting_events</code><em class="property"> = None</em><a class="headerlink" href="#marvis.workflow.Workflow.current_waiting_events" title="Permalink to this definition">¶</a></dt>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.workflow.Workflow.current_waiting_events">
+<span class="sig-name descname"><span class="pre">current_waiting_events</span></span><a class="headerlink" href="#marvis.workflow.Workflow.current_waiting_events" title="Permalink to this definition"></a></dt>
 <dd><p>These events are waiting on some condition to come true.</p>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="marvis.workflow.Workflow.task">
-<code class="sig-name descname">task</code><em class="property"> = None</em><a class="headerlink" href="#marvis.workflow.Workflow.task" title="Permalink to this definition">¶</a></dt>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.workflow.Workflow.task">
+<span class="sig-name descname"><span class="pre">task</span></span><a class="headerlink" href="#marvis.workflow.Workflow.task" title="Permalink to this definition"></a></dt>
 <dd><p>The function being executed by the workflow thread.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="marvis.workflow.Workflow.stop">
-<code class="sig-name descname">stop</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/marvis/workflow/#Workflow.stop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#marvis.workflow.Workflow.stop" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="marvis.workflow.Workflow.stop">
+<span class="sig-name descname"><span class="pre">stop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/marvis/workflow/#Workflow.stop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#marvis.workflow.Workflow.stop" title="Permalink to this definition"></a></dt>
 <dd><p>Stop the workflow.</p>
 <p><strong>Warning:</strong> Do not call this manually. This is done by the <a class="reference internal" href="../marvis.simulation/#marvis.simulation.Simulation" title="marvis.simulation.Simulation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Simulation</span></code></a>.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="marvis.workflow.Workflow.start">
-<code class="sig-name descname">start</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/marvis/workflow/#Workflow.start"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#marvis.workflow.Workflow.start" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="marvis.workflow.Workflow.start">
+<span class="sig-name descname"><span class="pre">start</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/marvis/workflow/#Workflow.start"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#marvis.workflow.Workflow.start" title="Permalink to this definition"></a></dt>
 <dd><p>Start the workflow.</p>
 <p><strong>Warning:</strong> Do not call this manually. This is done by the <a class="reference internal" href="../marvis.simulation/#marvis.simulation.Simulation" title="marvis.simulation.Simulation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Simulation</span></code></a>.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="marvis.workflow.Workflow.sleep">
-<code class="sig-name descname">sleep</code><span class="sig-paren">(</span><em class="sig-param">duration</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/marvis/workflow/#Workflow.sleep"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#marvis.workflow.Workflow.sleep" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="marvis.workflow.Workflow.sleep">
+<span class="sig-name descname"><span class="pre">sleep</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">duration</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/marvis/workflow/#Workflow.sleep"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#marvis.workflow.Workflow.sleep" title="Permalink to this definition"></a></dt>
 <dd><p>Sleep and wait.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -266,9 +185,9 @@
 </dl>
 </dd></dl>
 
-<dl class="method">
-<dt id="marvis.workflow.Workflow.wait_until">
-<code class="sig-name descname">wait_until</code><span class="sig-paren">(</span><em class="sig-param">expression</em>, <em class="sig-param">expected_result</em>, <em class="sig-param">global_variables</em>, <em class="sig-param">local_variables</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/marvis/workflow/#Workflow.wait_until"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#marvis.workflow.Workflow.wait_until" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="marvis.workflow.Workflow.wait_until">
+<span class="sig-name descname"><span class="pre">wait_until</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expression</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expected_result</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">global_variables</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_variables</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/marvis/workflow/#Workflow.wait_until"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#marvis.workflow.Workflow.wait_until" title="Permalink to this definition"></a></dt>
 <dd><p>Wait until an expression is equal to a specific value.</p>
 <p>Like <a class="reference internal" href="#marvis.workflow.Workflow.sleep" title="marvis.workflow.Workflow.sleep"><code class="xref py py-func docutils literal notranslate"><span class="pre">sleep()</span></code></a> this is a blocking call.</p>
 <dl class="field-list simple">
@@ -285,9 +204,9 @@ See <a class="reference external" href="https://github.com/active-expressions/ac
 </dl>
 </dd></dl>
 
-<dl class="method">
-<dt id="marvis.workflow.Workflow.wait_until_true">
-<code class="sig-name descname">wait_until_true</code><span class="sig-paren">(</span><em class="sig-param">expression</em>, <em class="sig-param">global_variables</em>, <em class="sig-param">local_variables</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/marvis/workflow/#Workflow.wait_until_true"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#marvis.workflow.Workflow.wait_until_true" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="marvis.workflow.Workflow.wait_until_true">
+<span class="sig-name descname"><span class="pre">wait_until_true</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expression</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">global_variables</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_variables</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/marvis/workflow/#Workflow.wait_until_true"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#marvis.workflow.Workflow.wait_until_true" title="Permalink to this definition"></a></dt>
 <dd><p>Wait until an expression is equal to True.</p>
 <p>Like <a class="reference internal" href="#marvis.workflow.Workflow.sleep" title="marvis.workflow.Workflow.sleep"><code class="xref py py-func docutils literal notranslate"><span class="pre">sleep()</span></code></a> this is a blocking call.</p>
 <dl class="field-list simple">
@@ -306,58 +225,39 @@ See <a class="reference external" href="https://github.com/active-expressions/ac
 </dd></dl>
 
 <p class="rubric">Inheritance Diagramm</p>
-<div class="graphviz"><img src="../../_images/inheritance-85dbb5ff85912b1b192a26364a18b11cca034882.png" alt="Inheritance diagram of marvis.workflow" usemap="#inheritance58292f791e" class="inheritance graphviz" /></div>
+<div class="graphviz"><img src="../../_images/inheritance-13770ff2448ffcf20f63cafe5ca131468e883457.png" alt="Inheritance diagram of marvis.workflow" usemap="#inheritance58292f791e" class="inheritance graphviz" /></div>
 <map id="inheritance58292f791e" name="inheritance58292f791e">
 <area shape="rect" id="node1" href="#marvis.workflow.Workflow" target="_top" title="A workflow is a contains a list of commands for planned execution during the simulation." alt="" coords="5,5,199,31"/>
 </map><div class="line-block">
 <div class="line"><br /></div>
 </div>
-</div>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-      
-        <a href="../marvis.visualization.visualization/" class="btn btn-neutral float-left" title="marvis.visualization.visualization" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../marvis.visualization.visualization/" class="btn btn-neutral float-left" title="marvis.visualization.visualization" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &copy; Copyright 2021, Arne Boockmeyer, Martin Michaelis, Felix Gohla
+    <p>&#169; Copyright 2022, Arne Boockmeyer, Martin Michaelis, Felix Gohla.</p>
+  </div>
 
-    </p>
-  </div> 
+   
 
 </footer>
-
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>
