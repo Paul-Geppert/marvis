@@ -1,6 +1,8 @@
 """Base abstract class for a node."""
 import logging
 
+from random import randint
+
 from ns import core, csma, network, wifi, mobility
 
 logger = logging.getLogger(__name__)
@@ -33,7 +35,8 @@ class Node:
         core.Names.Add(self.name, self.ns3_node)
 
         #: The position of the node (used by wifi models and visualization)
-        self.position = (0, 0, 0)
+        # TODO GPA: Find a better solution for positioning problem
+        self.position = (randint(1, 10), randint(1, 10), 0)
 
         # Install mobility model for networks
         mobility_helper = mobility.MobilityHelper()

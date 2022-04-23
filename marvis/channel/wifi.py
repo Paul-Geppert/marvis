@@ -1,4 +1,4 @@
-"""Wireless channel."""
+"""Wireless Local Area channel."""
 import ipaddress
 import logging
 import os
