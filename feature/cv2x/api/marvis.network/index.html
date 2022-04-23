@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>marvis.network &mdash; marvis 0.2.0 - feature/cv2x documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="https://diselab.github.io/marvis/versions.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex/" />
+    <link rel="search" title="Search" href="../../search/" />
+    <link rel="next" title="marvis.node" href="../marvis.node/" />
+    <link rel="prev" title="marvis.mobility_input.sumo" href="../marvis.mobility_input.sumo/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../" class="icon icon-home"> marvis
+          </a>
+              <div class="version">
+                0.2.0 - feature/cv2x
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../installation/">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sumo/">Using SUMO With marvis</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../#module-marvis">marvis</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../marvis.argparse/">marvis.argparse</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../marvis.channel/">marvis.channel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../marvis.command_executor/">marvis.command_executor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../marvis.context/">marvis.context</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../marvis.events/">marvis.events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../marvis.interface/">marvis.interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../marvis.mobility_input/">marvis.mobility_input</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">marvis.network</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../marvis.node/">marvis.node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../marvis.scenario/">marvis.scenario</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../marvis.simulation/">marvis.simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../marvis.util/">marvis.util</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../marvis.visualization/">marvis.visualization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../marvis.workflow/">marvis.workflow</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../">marvis</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../">API Reference</a> &raquo;</li>
+      <li>marvis.network</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-marvis.network">
+<span id="marvis-network"></span><h1>marvis.network<a class="headerlink" href="#module-marvis.network" title="Permalink to this headline"></a></h1>
+<p>A subnet.</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+</tbody>
+</table>
+<p class="rubric">Classes</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#marvis.network.ChannelPrototype" title="marvis.network.ChannelPrototype"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ChannelPrototype</span></code></a></p></td>
+<td><p>A channel prototype defines all parameters for the channel creation and offers a method to add nodes.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#marvis.network.ConnectedNode" title="marvis.network.ConnectedNode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ConnectedNode</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#marvis.network.Network" title="marvis.network.Network"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Network</span></code></a></p></td>
+<td><p>A network connects many nodes together and assigns IP addresses.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl class="py class">
+<dt class="sig sig-object py" id="marvis.network.Network">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">marvis.network.</span></span><span class="sig-name descname"><span class="pre">Network</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">network_address</span></em>, <em class="sig-param"><span class="pre">netmask=None</span></em>, <em class="sig-param"><span class="pre">base=None</span></em>, <em class="sig-param"><span class="pre">default_channel_type=&lt;class</span> <span class="pre">'marvis.channel.csma.CSMAChannel'&gt;</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/marvis/network/#Network"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#marvis.network.Network" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A network connects many nodes together and assigns IP addresses.</p>
+<p>It can be compared to a subnet or so.
+It should also support IPv6 (untested!).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>network_address</strong> (<em>str</em>) – The network base address (and optional subnet mask).
+An example for this parameter could be <code class="code docutils literal notranslate"><span class="pre">&quot;10.42.42.0/24&quot;</span></code>.</p></li>
+<li><p><strong>netmask</strong> (<em>str</em>) – The networks subnet mask. It can be used to provide a mask
+if not already given in the <code class="code docutils literal notranslate"><span class="pre">network_address</span></code> parameter.</p></li>
+<li><p><strong>base</strong> (<em>str</em>) – The base / start for the IP-addresses of this network.
+An IPv4 example for this parameter could be <code class="code docutils literal notranslate"><span class="pre">&quot;0.0.0.50&quot;</span></code>.</p></li>
+<li><p><strong>default_channel_type</strong> (<em>class</em>) – The default channel to use.
+This can be one of <a class="reference internal" href="../marvis.channel.csma/#marvis.channel.csma.CSMAChannel" title="marvis.channel.csma.CSMAChannel"><code class="xref py py-class docutils literal notranslate"><span class="pre">CSMAChannel</span></code></a> or <a class="reference internal" href="../marvis.channel.wifi/#marvis.channel.wifi.WiFiChannel" title="marvis.channel.wifi.WiFiChannel"><code class="xref py py-class docutils literal notranslate"><span class="pre">WiFiChannel</span></code></a>.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.network.Network.channels">
+<span class="sig-name descname"><span class="pre">channels</span></span><a class="headerlink" href="#marvis.network.Network.channels" title="Permalink to this definition"></a></dt>
+<dd><p>All the channels in the network.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.network.Network.channels_prototypes">
+<span class="sig-name descname"><span class="pre">channels_prototypes</span></span><a class="headerlink" href="#marvis.network.Network.channels_prototypes" title="Permalink to this definition"></a></dt>
+<dd><p>The prototypes for the future channels.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.network.Network.default_channel_type">
+<span class="sig-name descname"><span class="pre">default_channel_type</span></span><a class="headerlink" href="#marvis.network.Network.default_channel_type" title="Permalink to this definition"></a></dt>
+<dd><p>The channel type</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.network.Network.random_channel_names">
+<span class="sig-name descname"><span class="pre">random_channel_names</span></span><a class="headerlink" href="#marvis.network.Network.random_channel_names" title="Permalink to this definition"></a></dt>
+<dd><p>The list of random generated channel names to avoid duplicates</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.network.Network.nodes">
+<span class="sig-name descname"><span class="pre">nodes</span></span><a class="headerlink" href="#marvis.network.Network.nodes" title="Permalink to this definition"></a></dt>
+<dd><p>The list of the connected nodes</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.network.Network.allocated_ip_addresses">
+<span class="sig-name descname"><span class="pre">allocated_ip_addresses</span></span><a class="headerlink" href="#marvis.network.Network.allocated_ip_addresses" title="Permalink to this definition"></a></dt>
+<dd><p>The list of already allocated ip addresses</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.network.Network.network">
+<span class="sig-name descname"><span class="pre">network</span></span><a class="headerlink" href="#marvis.network.Network.network" title="Permalink to this definition"></a></dt>
+<dd><p>The network’s address (containing the subnet mask).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.network.Network.netmask">
+<span class="sig-name descname"><span class="pre">netmask</span></span><a class="headerlink" href="#marvis.network.Network.netmask" title="Permalink to this definition"></a></dt>
+<dd><p>The network’s netmask</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.network.Network.next_free_ip">
+<span class="sig-name descname"><span class="pre">next_free_ip</span></span><a class="headerlink" href="#marvis.network.Network.next_free_ip" title="Permalink to this definition"></a></dt>
+<dd><p>The next potentially free ip address of that network moved by base</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.network.Network.color">
+<span class="sig-name descname"><span class="pre">color</span></span><a class="headerlink" href="#marvis.network.Network.color" title="Permalink to this definition"></a></dt>
+<dd><p>The color of the network’s nodes in a visualization.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="marvis.network.Network.create_channel">
+<span class="sig-name descname"><span class="pre">create_channel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">channel_kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/marvis/network/#Network.create_channel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#marvis.network.Network.create_channel" title="Permalink to this definition"></a></dt>
+<dd><p>Adds one named channel prototype to the network.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – The name of the channel. If set to <code class="code docutils literal notranslate"><span class="pre">None</span></code>, a random name will be generated</p></li>
+<li><p><strong>channel_type</strong> (<em>class</em>) – The channel type. If set to <code class="code docutils literal notranslate"><span class="pre">None</span></code>, the default channel type will be set.</p></li>
+<li><p><strong>channel_kwargs</strong> (<em>dict</em>) – The arguments of the new channel</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="marvis.network.Network.block_ip_address">
+<span class="sig-name descname"><span class="pre">block_ip_address</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ip_addr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/marvis/network/#Network.block_ip_address"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#marvis.network.Network.block_ip_address" title="Permalink to this definition"></a></dt>
+<dd><p>Blocks an IP address.</p>
+<p>That IP address will not be assigned to any node.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>ip_addr</strong> (<em>str</em>) – The IP address which will be blocked.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="marvis.network.Network.get_free_ip_address">
+<span class="sig-name descname"><span class="pre">get_free_ip_address</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/marvis/network/#Network.get_free_ip_address"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#marvis.network.Network.get_free_ip_address" title="Permalink to this definition"></a></dt>
+<dd><p>Get a free ip address.</p>
+<p>This returns an ip address which is not already allocated or blocked.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="marvis.network.Network.prepare">
+<span class="sig-name descname"><span class="pre">prepare</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">simulation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">network_index</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/marvis/network/#Network.prepare"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#marvis.network.Network.prepare" title="Permalink to this definition"></a></dt>
+<dd><p>Prepares the network.</p>
+<p><em>Warning:</em> Don’t call this function manually.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>simulation</strong> (<a class="reference internal" href="../marvis.simulation/#marvis.simulation.Simulation" title="marvis.simulation.Simulation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Simulation</span></code></a>) – The simulation to prepare the network for.</p></li>
+<li><p><strong>network_index</strong> (<em>int</em>) – The index of the network (needed for coloring).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="marvis.network.Network.set_delay">
+<span class="sig-name descname"><span class="pre">set_delay</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delay</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/marvis/network/#Network.set_delay"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#marvis.network.Network.set_delay" title="Permalink to this definition"></a></dt>
+<dd><p>Sets the delay of a specific channel (if name is present) or all channels.</p>
+<p>In case of WiFi-Channels, the distance between the nodes is important. The requested delay is configured at 100
+meters distance. If the distance is smaller, the delay is smaller as well (for example half of the delay at
+50 meters).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>delay</strong> (<em>str</em>) – The new time for delay in the channel in seconds (10s) or milliseconds (10ms)</p></li>
+<li><p><strong>channel_name</strong> (<em>str</em>) – The name of a specific channel (or all channels if value is None)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="marvis.network.Network.set_speed">
+<span class="sig-name descname"><span class="pre">set_speed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">speed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/marvis/network/#Network.set_speed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#marvis.network.Network.set_speed" title="Permalink to this definition"></a></dt>
+<dd><p>Sets the speed of a specific channel (if name is present) or all channels.</p>
+<p><em>Warning:</em> So far this only has an effect before the simulation is started.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>speed</strong> (<em>str</em>) – The new speed</p></li>
+<li><p><strong>channel_name</strong> (<em>str</em>) – The name of a specific channel (or all channels if value is None)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="marvis.network.ChannelPrototype">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">marvis.network.</span></span><span class="sig-name descname"><span class="pre">ChannelPrototype</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">network</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/marvis/network/#ChannelPrototype"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#marvis.network.ChannelPrototype" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A channel prototype defines all parameters for the channel creation and offers a method to add nodes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>network</strong> (<a class="reference internal" href="#marvis.network.Network" title="marvis.network.Network"><code class="xref py py-class docutils literal notranslate"><span class="pre">Network</span></code></a>) – The network where the channel is located in.</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – The name of the channel.</p></li>
+<li><p><strong>channel_type</strong> (<em>class</em>) – The channel to use.
+This can be one of <a class="reference internal" href="../marvis.channel.csma/#marvis.channel.csma.CSMAChannel" title="marvis.channel.csma.CSMAChannel"><code class="xref py py-class docutils literal notranslate"><span class="pre">CSMAChannel</span></code></a> or <a class="reference internal" href="../marvis.channel.wifi/#marvis.channel.wifi.WiFiChannel" title="marvis.channel.wifi.WiFiChannel"><code class="xref py py-class docutils literal notranslate"><span class="pre">WiFiChannel</span></code></a>.</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em>) – The parameters of the channel.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="marvis.network.ChannelPrototype.connect">
+<span class="sig-name descname"><span class="pre">connect</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ip_addr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ifname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/marvis/network/#ChannelPrototype.connect"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#marvis.network.ChannelPrototype.connect" title="Permalink to this definition"></a></dt>
+<dd><p>Adds one node to the channel.</p>
+<p>Please note: Every node can only be added to one channel in the same network. Otherwise proper routing is not
+possible. Use SwitchNode to connect channels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>node</strong> (<a class="reference internal" href="../marvis.node.base/#marvis.node.base.Node" title="marvis.node.base.Node"><code class="xref py py-class docutils literal notranslate"><span class="pre">Node</span></code></a>) – The node that should be connected to the network. It must be instance a subclass of <a class="reference internal" href="../marvis.node.base/#marvis.node.base.Node" title="marvis.node.base.Node"><code class="xref py py-class docutils literal notranslate"><span class="pre">Node</span></code></a>.</p></li>
+<li><p><strong>ip_addr</strong> (<em>str</em>) – The IP address of that node. If <code class="code docutils literal notranslate"><span class="pre">None</span></code> an random IP from the network will be assigned.
+If not <code class="code docutils literal notranslate"><span class="pre">None</span></code> the IP address have to be in the range of the network.</p></li>
+<li><p><strong>ifname</strong> (<em>str</em>) – The name of the interface. If <code class="code docutils literal notranslate"><span class="pre">None</span></code> a random name will be assigned.
+If not <code class="code docutils literal notranslate"><span class="pre">None</span></code> the max. length is <code class="code docutils literal notranslate"><span class="pre">IFNAMSIZ</span></code> (system depended). This will not be checked.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="marvis.network.ChannelPrototype.set_delay">
+<span class="sig-name descname"><span class="pre">set_delay</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delay</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/marvis/network/#ChannelPrototype.set_delay"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#marvis.network.ChannelPrototype.set_delay" title="Permalink to this definition"></a></dt>
+<dd><p>Sets the delay of a specific channel.</p>
+<p>In case of WiFi-Channels, the distance between the nodes is important. The requested delay is configured at 100
+meters distance. If the distance is smaller, the delay is smaller as well (for example half of the delay at
+50 meters).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>delay</strong> (<em>str</em>) – The new time for delay in the channel in seconds (10s) or milliseconds (10ms)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="marvis.network.ChannelPrototype.set_speed">
+<span class="sig-name descname"><span class="pre">set_speed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">speed</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/marvis/network/#ChannelPrototype.set_speed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#marvis.network.ChannelPrototype.set_speed" title="Permalink to this definition"></a></dt>
+<dd><p>Sets the speed of a specific channel.</p>
+<p><em>Warning:</em> So far this only has an effect before the simulation is started.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>speed</strong> (<em>str</em>) – The new speed</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="marvis.network.ConnectedNode">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">marvis.network.</span></span><span class="sig-name descname"><span class="pre">ConnectedNode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">address</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ifname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/marvis/network/#ConnectedNode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#marvis.network.ConnectedNode" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+</dd></dl>
+
+<p class="rubric">Inheritance Diagramm</p>
+<div class="graphviz"><img src="../../_images/inheritance-f6085956067c62223c18c924015c90615f113c1e.png" alt="Inheritance diagram of marvis.network" usemap="#inheritancee85b95465d" class="inheritance graphviz" /></div>
+<map id="inheritancee85b95465d" name="inheritancee85b95465d">
+<area shape="rect" id="node1" href="#marvis.network.ChannelPrototype" target="_top" title="A channel prototype defines all parameters for the channel creation and offers a method to add nodes." alt="" coords="5,5,249,31"/>
+<area shape="rect" id="node2" href="#marvis.network.ConnectedNode" target="_top" title="marvis.network.ConnectedNode" alt="" coords="273,5,504,31"/>
+<area shape="rect" id="node3" href="#marvis.network.Network" target="_top" title="A network connects many nodes together and assigns IP addresses." alt="" coords="528,5,711,31"/>
+</map><div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../marvis.mobility_input.sumo/" class="btn btn-neutral float-left" title="marvis.mobility_input.sumo" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../marvis.node/" class="btn btn-neutral float-right" title="marvis.node" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Arne Boockmeyer, Martin Michaelis, Felix Gohla.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

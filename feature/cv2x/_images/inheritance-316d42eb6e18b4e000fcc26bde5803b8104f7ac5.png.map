@@ -1,0 +1,4 @@
+<map id="inheritance8f70097fe4" name="inheritance8f70097fe4">
+<area shape="rect" id="node1" href="../marvis.node.base/#marvis.node.base.Node" target="_top" title="A node represents a computer in the simulation." alt="" coords="33,5,209,31"/>
+<area shape="rect" id="node2" href="#marvis.node.switch.SwitchNode" target="_top" title="This is representing a switch between other nodes." alt="" coords="5,79,236,104"/>
+</map>

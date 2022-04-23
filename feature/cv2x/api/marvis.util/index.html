@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>marvis.util &mdash; marvis 0.2.0 - feature/cv2x documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="https://diselab.github.io/marvis/versions.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex/" />
+    <link rel="search" title="Search" href="../../search/" />
+    <link rel="next" title="marvis.visualization" href="../marvis.visualization/" />
+    <link rel="prev" title="marvis.simulation" href="../marvis.simulation/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../" class="icon icon-home"> marvis
+          </a>
+              <div class="version">
+                0.2.0 - feature/cv2x
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../installation/">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sumo/">Using SUMO With marvis</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../#module-marvis">marvis</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../marvis.argparse/">marvis.argparse</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../marvis.channel/">marvis.channel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../marvis.command_executor/">marvis.command_executor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../marvis.context/">marvis.context</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../marvis.events/">marvis.events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../marvis.interface/">marvis.interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../marvis.mobility_input/">marvis.mobility_input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../marvis.network/">marvis.network</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../marvis.node/">marvis.node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../marvis.scenario/">marvis.scenario</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../marvis.simulation/">marvis.simulation</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">marvis.util</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../marvis.visualization/">marvis.visualization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../marvis.workflow/">marvis.workflow</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../">marvis</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../">API Reference</a> &raquo;</li>
+      <li>marvis.util</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-marvis.util">
+<span id="marvis-util"></span><h1>marvis.util<a class="headerlink" href="#module-marvis.util" title="Permalink to this headline"></a></h1>
+<p>Internal utility functions.</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+</tbody>
+</table>
+<p class="rubric">Functions</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#marvis.util.network_color_for" title="marvis.util.network_color_for"><code class="xref py py-obj docutils literal notranslate"><span class="pre">network_color_for</span></code></a></p></td>
+<td><p>Calculates a color on the hue-spectrum for a specific network.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#marvis.util.once" title="marvis.util.once"><code class="xref py py-obj docutils literal notranslate"><span class="pre">once</span></code></a></p></td>
+<td><p>Runs a method (successfully) only once per instance.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#marvis.util.unique" title="marvis.util.unique"><code class="xref py py-obj docutils literal notranslate"><span class="pre">unique</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#marvis.util.unique_generator" title="marvis.util.unique_generator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">unique_generator</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl class="py function">
+<dt class="sig sig-object py" id="marvis.util.once">
+<span class="sig-prename descclassname"><span class="pre">marvis.util.</span></span><span class="sig-name descname"><span class="pre">once</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/marvis/util/#once"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#marvis.util.once" title="Permalink to this definition"></a></dt>
+<dd><p>Runs a method (successfully) only once per instance.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="marvis.util.network_color_for">
+<span class="sig-prename descclassname"><span class="pre">marvis.util.</span></span><span class="sig-name descname"><span class="pre">network_color_for</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">network</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_networks</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/marvis/util/#network_color_for"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#marvis.util.network_color_for" title="Permalink to this definition"></a></dt>
+<dd><p>Calculates a color on the hue-spectrum for a specific network.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>network</strong> (<em>int</em>) – The 0-based index of the network.</p></li>
+<li><p><strong>number_of_networks</strong> (<em>int</em>) – The overall number of networks available.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>r</strong> (<em>int</em>) – The red value (0-255).</p></li>
+<li><p><strong>g</strong> (<em>int</em>) – The green value (0-255).</p></li>
+<li><p><strong>b</strong> (<em>int</em>) – The blue value (0-255).</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="marvis.util.unique">
+<span class="sig-prename descclassname"><span class="pre">marvis.util.</span></span><span class="sig-name descname"><span class="pre">unique</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">iterable</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/marvis/util/#unique"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#marvis.util.unique" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="marvis.util.unique_generator">
+<span class="sig-prename descclassname"><span class="pre">marvis.util.</span></span><span class="sig-name descname"><span class="pre">unique_generator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/marvis/util/#unique_generator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#marvis.util.unique_generator" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../marvis.simulation/" class="btn btn-neutral float-left" title="marvis.simulation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../marvis.visualization/" class="btn btn-neutral float-right" title="marvis.visualization" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Arne Boockmeyer, Martin Michaelis, Felix Gohla.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>marvis.channel.cv2x &mdash; marvis 0.2.0 - feature/cv2x documentation</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="https://diselab.github.io/marvis/versions.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex/" />
+    <link rel="search" title="Search" href="../../../../search/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../" class="icon icon-home"> marvis
+          </a>
+              <div class="version">
+                0.2.0 - feature/cv2x
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../installation/">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../getting-started/">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../sumo/">Using SUMO With marvis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../">marvis</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../../">Module code</a> &raquo;</li>
+      <li>marvis.channel.cv2x</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for marvis.channel.cv2x</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Cellular V2X channel.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">ipaddress</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="kn">from</span> <span class="nn">ns</span> <span class="kn">import</span> <span class="n">buildings</span><span class="p">,</span> <span class="n">config_store</span><span class="p">,</span> <span class="n">core</span><span class="p">,</span> <span class="n">internet</span><span class="p">,</span> <span class="n">lte</span><span class="p">,</span> <span class="n">mobility</span><span class="p">,</span> <span class="n">network</span> <span class="k">as</span> <span class="n">ns_net</span>
+
+<span class="kn">from</span> <span class="nn">.channel</span> <span class="kn">import</span> <span class="n">Channel</span>
+<span class="kn">from</span> <span class="nn">..interface</span> <span class="kn">import</span> <span class="n">Interface</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<div class="viewcode-block" id="CV2XChannel"><a class="viewcode-back" href="../../../../api/marvis.channel.cv2x/#marvis.channel.cv2x.CV2XChannel">[docs]</a><span class="k">class</span> <span class="nc">CV2XChannel</span><span class="p">(</span><span class="n">Channel</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A Cellular V2X Channel is a physical (but of course wireless) connection</span>
+<span class="sd">    between two or more wireless V2X devices based on cellular technology.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    channel : int</span>
+<span class="sd">        The WiFi channel to use.</span>
+<span class="sd">        This will be **ignored** if frequency is set.</span>
+<span class="sd">    frequency : int</span>
+<span class="sd">        The frequency of the wireless channel in MHz.</span>
+<span class="sd">    channel_width : int</span>
+<span class="sd">        The width of the channel in MHz.</span>
+<span class="sd">        Valid values are :code:`5`, :code:`10`, :code:`20`, :code:`22`, :code:`40`, :code:`80`, :code:`160`.</span>
+<span class="sd">    antennas : int</span>
+<span class="sd">        The number of antennas / spatial streams to use.</span>
+<span class="sd">    tx_power : float</span>
+<span class="sd">        The sending power in dBm.</span>
+<span class="sd">    standard : :class:`.WiFiStandard`</span>
+<span class="sd">        The WiFi standard to use.</span>
+<span class="sd">    data_rate : :class:`.WiFiDataRate`</span>
+<span class="sd">        The WiFi data rate to use. Please make sure to pick a valid data rate for your :code:`standard`.</span>
+<span class="sd">    delay : str</span>
+<span class="sd">        A time for delay in the channel in seconds (10s) or milliseconds (10ms) at 100m distance.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">network</span><span class="p">,</span> <span class="n">channel_name</span><span class="p">,</span> <span class="n">nodes</span><span class="p">,</span> <span class="n">frequency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">channel</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">channel_width</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">antennas</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">tx_power</span><span class="o">=</span><span class="mf">20.0</span><span class="p">,</span> <span class="n">delay</span><span class="o">=</span><span class="s2">&quot;0ms&quot;</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">network</span><span class="p">,</span> <span class="n">channel_name</span><span class="p">,</span> <span class="n">nodes</span><span class="p">)</span>
+
+        <span class="n">ueTxPower</span> <span class="o">=</span> <span class="mf">23.0</span>            <span class="c1"># Transmission power in dBm</span>
+        <span class="n">probResourceKeep</span> <span class="o">=</span> <span class="mf">0.0</span>      <span class="c1"># Probability to select the previous resource again [0.0-0.8]</span>
+        <span class="n">mcs</span> <span class="o">=</span> <span class="mi">20</span>                    <span class="c1"># Modulation and Coding Scheme</span>
+        <span class="n">harqEnabled</span> <span class="o">=</span> <span class="kc">False</span>         <span class="c1"># Retransmission enabled </span>
+        <span class="n">adjacencyPscchPssch</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># Subchannelization scheme</span>
+        <span class="n">partialSensing</span> <span class="o">=</span> <span class="kc">False</span>      <span class="c1"># Partial sensing enabled (actual only partialSensing is false supported)</span>
+        <span class="n">sizeSubchannel</span> <span class="o">=</span> <span class="mi">10</span>         <span class="c1"># Number of RBs per subchannel</span>
+        <span class="n">numSubchannel</span> <span class="o">=</span> <span class="mi">3</span>           <span class="c1"># Number of subchannels per subframe</span>
+        <span class="n">startRbSubchannel</span> <span class="o">=</span> <span class="mi">0</span>       <span class="c1"># Index of first RB corresponding to subchannelization</span>
+        <span class="n">pRsvp</span> <span class="o">=</span> <span class="mi">100</span>                 <span class="c1"># Resource reservation interval </span>
+        <span class="n">t1</span> <span class="o">=</span> <span class="mi">4</span>                      <span class="c1"># T1 value of selection window</span>
+        <span class="n">t2</span> <span class="o">=</span> <span class="mi">100</span>                    <span class="c1"># T2 value of selection window</span>
+        <span class="n">slBandwidth</span> <span class="o">=</span> <span class="kc">None</span>          <span class="c1"># Sidelink bandwidth</span>
+        <span class="n">ulEarfcn</span> <span class="o">=</span> <span class="mi">54990</span>            <span class="c1"># Uplink frequency</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Starting network configuration...&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Set the UEs power in dBm</span>
+        <span class="n">core</span><span class="o">.</span><span class="n">Config</span><span class="o">.</span><span class="n">SetDefault</span> <span class="p">(</span><span class="s2">&quot;ns3::LteUePhy::TxPower&quot;</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">DoubleValue</span> <span class="p">(</span><span class="n">ueTxPower</span><span class="p">))</span>
+        <span class="n">core</span><span class="o">.</span><span class="n">Config</span><span class="o">.</span><span class="n">SetDefault</span> <span class="p">(</span><span class="s2">&quot;ns3::LteUePhy::RsrpUeMeasThreshold&quot;</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">DoubleValue</span> <span class="p">(</span><span class="o">-</span><span class="mf">10.0</span><span class="p">))</span>
+
+        <span class="c1"># Enable V2X communication on PHY layer</span>
+        <span class="n">core</span><span class="o">.</span><span class="n">Config</span><span class="o">.</span><span class="n">SetDefault</span> <span class="p">(</span><span class="s2">&quot;ns3::LteUePhy::EnableV2x&quot;</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">BooleanValue</span> <span class="p">(</span><span class="kc">True</span><span class="p">))</span>
+
+        <span class="c1"># Set power</span>
+        <span class="n">core</span><span class="o">.</span><span class="n">Config</span><span class="o">.</span><span class="n">SetDefault</span> <span class="p">(</span><span class="s2">&quot;ns3::LteUePowerControl::Pcmax&quot;</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">DoubleValue</span> <span class="p">(</span><span class="n">ueTxPower</span><span class="p">))</span>
+        <span class="n">core</span><span class="o">.</span><span class="n">Config</span><span class="o">.</span><span class="n">SetDefault</span> <span class="p">(</span><span class="s2">&quot;ns3::LteUePowerControl::PsschTxPower&quot;</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">DoubleValue</span> <span class="p">(</span><span class="n">ueTxPower</span><span class="p">))</span>
+        <span class="n">core</span><span class="o">.</span><span class="n">Config</span><span class="o">.</span><span class="n">SetDefault</span> <span class="p">(</span><span class="s2">&quot;ns3::LteUePowerControl::PscchTxPower&quot;</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">DoubleValue</span> <span class="p">(</span><span class="n">ueTxPower</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">adjacencyPscchPssch</span><span class="p">:</span>
+            <span class="n">slBandwidth</span> <span class="o">=</span> <span class="n">sizeSubchannel</span> <span class="o">*</span> <span class="n">numSubchannel</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">slBandwidth</span> <span class="o">=</span> <span class="p">(</span><span class="n">sizeSubchannel</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">numSubchannel</span>
+
+        <span class="c1"># Configure for UE selected</span>
+        <span class="n">core</span><span class="o">.</span><span class="n">Config</span><span class="o">.</span><span class="n">SetDefault</span> <span class="p">(</span><span class="s2">&quot;ns3::LteUeMac::UlBandwidth&quot;</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">UintegerValue</span><span class="p">(</span><span class="n">slBandwidth</span><span class="p">))</span>
+        <span class="n">core</span><span class="o">.</span><span class="n">Config</span><span class="o">.</span><span class="n">SetDefault</span> <span class="p">(</span><span class="s2">&quot;ns3::LteUeMac::EnableV2xHarq&quot;</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">BooleanValue</span><span class="p">(</span><span class="n">harqEnabled</span><span class="p">))</span>
+        <span class="n">core</span><span class="o">.</span><span class="n">Config</span><span class="o">.</span><span class="n">SetDefault</span> <span class="p">(</span><span class="s2">&quot;ns3::LteUeMac::EnableAdjacencyPscchPssch&quot;</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">BooleanValue</span><span class="p">(</span><span class="n">adjacencyPscchPssch</span><span class="p">))</span>
+        <span class="n">core</span><span class="o">.</span><span class="n">Config</span><span class="o">.</span><span class="n">SetDefault</span> <span class="p">(</span><span class="s2">&quot;ns3::LteUeMac::EnablePartialSensing&quot;</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">BooleanValue</span><span class="p">(</span><span class="n">partialSensing</span><span class="p">))</span>
+        <span class="n">core</span><span class="o">.</span><span class="n">Config</span><span class="o">.</span><span class="n">SetDefault</span> <span class="p">(</span><span class="s2">&quot;ns3::LteUeMac::SlGrantMcs&quot;</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">UintegerValue</span><span class="p">(</span><span class="n">mcs</span><span class="p">))</span>
+        <span class="n">core</span><span class="o">.</span><span class="n">Config</span><span class="o">.</span><span class="n">SetDefault</span> <span class="p">(</span><span class="s2">&quot;ns3::LteUeMac::SlSubchannelSize&quot;</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">UintegerValue</span> <span class="p">(</span><span class="n">sizeSubchannel</span><span class="p">))</span>
+        <span class="n">core</span><span class="o">.</span><span class="n">Config</span><span class="o">.</span><span class="n">SetDefault</span> <span class="p">(</span><span class="s2">&quot;ns3::LteUeMac::SlSubchannelNum&quot;</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">UintegerValue</span> <span class="p">(</span><span class="n">numSubchannel</span><span class="p">))</span>
+        <span class="n">core</span><span class="o">.</span><span class="n">Config</span><span class="o">.</span><span class="n">SetDefault</span> <span class="p">(</span><span class="s2">&quot;ns3::LteUeMac::SlStartRbSubchannel&quot;</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">UintegerValue</span> <span class="p">(</span><span class="n">startRbSubchannel</span><span class="p">))</span>
+        <span class="n">core</span><span class="o">.</span><span class="n">Config</span><span class="o">.</span><span class="n">SetDefault</span> <span class="p">(</span><span class="s2">&quot;ns3::LteUeMac::SlPrsvp&quot;</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">UintegerValue</span><span class="p">(</span><span class="n">pRsvp</span><span class="p">))</span>
+        <span class="n">core</span><span class="o">.</span><span class="n">Config</span><span class="o">.</span><span class="n">SetDefault</span> <span class="p">(</span><span class="s2">&quot;ns3::LteUeMac::SlProbResourceKeep&quot;</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">DoubleValue</span><span class="p">(</span><span class="n">probResourceKeep</span><span class="p">))</span>
+        <span class="n">core</span><span class="o">.</span><span class="n">Config</span><span class="o">.</span><span class="n">SetDefault</span> <span class="p">(</span><span class="s2">&quot;ns3::LteUeMac::SelectionWindowT1&quot;</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">UintegerValue</span><span class="p">(</span><span class="n">t1</span><span class="p">))</span>
+        <span class="n">core</span><span class="o">.</span><span class="n">Config</span><span class="o">.</span><span class="n">SetDefault</span> <span class="p">(</span><span class="s2">&quot;ns3::LteUeMac::SelectionWindowT2&quot;</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">UintegerValue</span><span class="p">(</span><span class="n">t2</span><span class="p">))</span>
+        <span class="c1"># core.Config.SetDefault (&quot;ns3::LteUeMac::EnableExcludeSubframe&quot;, core.BooleanValue(excludeSubframe)) </span>
+
+        <span class="n">inputConfig</span> <span class="o">=</span> <span class="n">config_store</span><span class="o">.</span><span class="n">ConfigStore</span><span class="p">()</span>
+        <span class="n">inputConfig</span><span class="o">.</span><span class="n">ConfigureDefaults</span><span class="p">()</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Creating helpers...&quot;</span><span class="p">)</span>
+
+        <span class="c1"># EPC</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">epcHelper</span> <span class="o">=</span> <span class="n">lte</span><span class="o">.</span><span class="n">PointToPointEpcHelper</span><span class="p">()</span>
+        <span class="n">pgw</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">epcHelper</span><span class="o">.</span><span class="n">GetPgwNode</span><span class="p">()</span>
+
+        <span class="c1"># LTE Helper</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lteHelper</span> <span class="o">=</span> <span class="n">lte</span><span class="o">.</span><span class="n">LteHelper</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lteHelper</span><span class="o">.</span><span class="n">SetEpcHelper</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">epcHelper</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lteHelper</span><span class="o">.</span><span class="n">DisableNewEnbPhy</span><span class="p">()</span>       <span class="c1"># Disable eNBs for out-of-coverage modelling</span>
+            
+        <span class="c1"># V2X </span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lteV2xHelper</span> <span class="o">=</span> <span class="n">lte</span><span class="o">.</span><span class="n">LteV2xHelper</span> <span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lteV2xHelper</span><span class="o">.</span><span class="n">SetLteHelper</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lteHelper</span><span class="p">)</span>
+
+        <span class="c1"># Configure eNBs&#39; antenna parameters before deploying them.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lteHelper</span><span class="o">.</span><span class="n">SetEnbAntennaModelType</span> <span class="p">(</span><span class="s2">&quot;ns3::NistParabolic3dAntennaModel&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Set pathloss model</span>
+        <span class="c1"># FIXME: InstallEnbDevice overrides PathlossModel Frequency with values from Earfcn</span>
+        <span class="c1"># </span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lteHelper</span><span class="o">.</span><span class="n">SetAttribute</span> <span class="p">(</span><span class="s2">&quot;UseSameUlDlPropagationCondition&quot;</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">BooleanValue</span><span class="p">(</span><span class="kc">True</span><span class="p">))</span>
+        <span class="n">core</span><span class="o">.</span><span class="n">Config</span><span class="o">.</span><span class="n">SetDefault</span> <span class="p">(</span><span class="s2">&quot;ns3::LteEnbNetDevice::UlEarfcn&quot;</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">StringValue</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">ulEarfcn</span><span class="p">)))</span>
+        <span class="c1"># core.Config.SetDefault (&quot;ns3::CniUrbanmicrocellPropagationLossModel::Frequency&quot;, core.DoubleValue(5800e6));</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lteHelper</span><span class="o">.</span><span class="n">SetAttribute</span> <span class="p">(</span><span class="s2">&quot;PathlossModel&quot;</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">StringValue</span> <span class="p">(</span><span class="s2">&quot;ns3::CniUrbanmicrocellPropagationLossModel&quot;</span><span class="p">))</span>
+
+        <span class="c1"># Create eNB Container</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">eNodeB</span> <span class="o">=</span> <span class="n">ns_net</span><span class="o">.</span><span class="n">NodeContainer</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">eNodeB</span><span class="o">.</span><span class="n">Create</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># Topology eNodeB</span>
+        <span class="n">pos_eNB</span> <span class="o">=</span> <span class="n">mobility</span><span class="o">.</span><span class="n">ListPositionAllocator</span><span class="p">()</span>
+        <span class="n">pos_eNB</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">Vector</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+
+        <span class="c1"># Install mobility eNodeB</span>
+        <span class="n">mob_eNB</span> <span class="o">=</span> <span class="n">mobility</span><span class="o">.</span><span class="n">MobilityHelper</span><span class="p">()</span>
+        <span class="n">mob_eNB</span><span class="o">.</span><span class="n">SetMobilityModel</span><span class="p">(</span><span class="s2">&quot;ns3::ConstantPositionMobilityModel&quot;</span><span class="p">)</span>
+        <span class="n">mob_eNB</span><span class="o">.</span><span class="n">SetPositionAllocator</span><span class="p">(</span><span class="n">pos_eNB</span><span class="p">)</span>
+        <span class="n">mob_eNB</span><span class="o">.</span><span class="n">Install</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">eNodeB</span><span class="p">)</span>
+
+        <span class="c1"># Install Service</span>
+        <span class="n">enbDevs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lteHelper</span><span class="o">.</span><span class="n">InstallEnbDevice</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">eNodeB</span><span class="p">)</span>
+
+        <span class="n">ueAllNodes</span> <span class="o">=</span> <span class="n">ns_net</span><span class="o">.</span><span class="n">NodeContainer</span><span class="p">()</span>
+        <span class="n">ueAllNodes</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ns3_nodes_container</span><span class="p">)</span>
+
+        <span class="c1"># Required to use NIST 3GPP model</span>
+        <span class="n">buildings</span><span class="o">.</span><span class="n">BuildingsHelper</span><span class="o">.</span><span class="n">Install</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">eNodeB</span><span class="p">)</span>
+        <span class="n">buildings</span><span class="o">.</span><span class="n">BuildingsHelper</span><span class="o">.</span><span class="n">Install</span> <span class="p">(</span><span class="n">ueAllNodes</span><span class="p">)</span>
+        <span class="n">buildings</span><span class="o">.</span><span class="n">BuildingsHelper</span><span class="o">.</span><span class="n">MakeMobilityModelConsistent</span> <span class="p">()</span>
+
+        <span class="c1"># Install LTE devices to all UEs </span>
+        <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Installing UE&#39;s network devices...&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lteHelper</span><span class="o">.</span><span class="n">SetAttribute</span><span class="p">(</span><span class="s2">&quot;UseSidelink&quot;</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">BooleanValue</span> <span class="p">(</span><span class="kc">True</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ueRespondersDevs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lteHelper</span><span class="o">.</span><span class="n">InstallUeDevice</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ns3_nodes_container</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ueDevs</span> <span class="o">=</span> <span class="n">ns_net</span><span class="o">.</span><span class="n">NetDeviceContainer</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ueDevs</span><span class="o">.</span><span class="n">Add</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ueRespondersDevs</span><span class="p">)</span>
+
+        <span class="n">internet_stack_helper</span> <span class="o">=</span> <span class="n">internet</span><span class="o">.</span><span class="n">InternetStackHelper</span><span class="p">()</span>
+        <span class="n">internet_stack_helper</span><span class="o">.</span><span class="n">Install</span> <span class="p">(</span><span class="n">ueAllNodes</span><span class="p">)</span>
+
+        <span class="c1"># Assign IP adress to UEs</span>
+        <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Allocating IP addresses and setting up network route...&quot;</span><span class="p">)</span>
+        <span class="n">ueIpIface</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">epcHelper</span><span class="o">.</span><span class="n">AssignUeIpv4Address</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ueDevs</span><span class="p">)</span>
+        <span class="n">ipv4RoutingHelper</span> <span class="o">=</span> <span class="n">internet</span><span class="o">.</span><span class="n">Ipv4StaticRoutingHelper</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ueAllNodes</span><span class="o">.</span><span class="n">GetN</span><span class="p">()):</span>
+            <span class="n">ueNode</span> <span class="o">=</span> <span class="n">ueAllNodes</span><span class="o">.</span><span class="n">Get</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+            <span class="c1"># Set the default gateway for the UE</span>
+            <span class="n">ueNode_ipv4</span> <span class="o">=</span> <span class="n">ueNode</span><span class="o">.</span><span class="n">GetObject</span><span class="p">(</span><span class="n">internet</span><span class="o">.</span><span class="n">Ipv4</span><span class="o">.</span><span class="n">GetTypeId</span><span class="p">())</span>
+            <span class="n">ueStaticRouting</span> <span class="o">=</span> <span class="n">ipv4RoutingHelper</span><span class="o">.</span><span class="n">GetStaticRouting</span><span class="p">(</span><span class="n">ueNode_ipv4</span><span class="p">)</span>
+            <span class="n">ueStaticRouting</span><span class="o">.</span><span class="n">SetDefaultRoute</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">epcHelper</span><span class="o">.</span><span class="n">GetUeDefaultGatewayAddress</span><span class="p">(),</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Attaching UE&#39;s to LTE network...&quot;</span><span class="p">)</span>
+        <span class="c1"># Attach each UE to the best available eNB</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lteHelper</span><span class="o">.</span><span class="n">Attach</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ueDevs</span><span class="p">)</span>
+
+        <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Creating sidelink groups...&quot;</span><span class="p">)</span>
+        <span class="n">txGroups</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lteV2xHelper</span><span class="o">.</span><span class="n">AssociateForV2xBroadcast</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ueRespondersDevs</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="p">))</span>
+
+        <span class="n">groupL2Addresses</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">groupL2Address</span> <span class="o">=</span> <span class="mh">0x00</span>
+        <span class="c1"># TODO GPA: clientRespondersAddress ist glaube ich unwichtig</span>
+        <span class="n">internet</span><span class="o">.</span><span class="n">Ipv4AddressGenerator</span><span class="o">.</span><span class="n">Init</span><span class="p">(</span><span class="n">ns_net</span><span class="o">.</span><span class="n">Ipv4Address</span> <span class="p">(</span><span class="s2">&quot;225.0.0.0&quot;</span><span class="p">),</span> <span class="n">ns_net</span><span class="o">.</span><span class="n">Ipv4Mask</span><span class="p">(</span><span class="s2">&quot;255.0.0.0&quot;</span><span class="p">))</span>
+        <span class="n">clientRespondersAddress</span> <span class="o">=</span> <span class="n">internet</span><span class="o">.</span><span class="n">Ipv4AddressGenerator</span><span class="o">.</span><span class="n">NextAddress</span> <span class="p">(</span><span class="n">ns_net</span><span class="o">.</span><span class="n">Ipv4Mask</span> <span class="p">(</span><span class="s2">&quot;255.0.0.0&quot;</span><span class="p">))</span>
+
+        <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">txGroups</span><span class="p">:</span>
+            <span class="c1"># Create Sidelink bearers</span>
+            <span class="c1"># Use Tx for the group transmitter and Rx for all the receivers</span>
+            <span class="c1"># Split Tx/Rx</span>
+        
+            <span class="n">txUe</span> <span class="o">=</span> <span class="n">ns_net</span><span class="o">.</span><span class="n">NetDeviceContainer</span> <span class="p">(</span><span class="n">group</span><span class="o">.</span><span class="n">Get</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>    <span class="c1"># TODO GPA: wirklich neues Objekt?</span>
+            <span class="n">rxUes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lteV2xHelper</span><span class="o">.</span><span class="n">RemoveNetDevice</span> <span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">txUe</span><span class="o">.</span><span class="n">Get</span> <span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+            <span class="n">tft</span> <span class="o">=</span> <span class="n">lte</span><span class="o">.</span><span class="n">LteSlTft</span> <span class="p">(</span><span class="n">lte</span><span class="o">.</span><span class="n">LteSlTft</span><span class="o">.</span><span class="n">TRANSMIT</span><span class="p">,</span> <span class="n">clientRespondersAddress</span><span class="p">,</span> <span class="n">groupL2Address</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">lteV2xHelper</span><span class="o">.</span><span class="n">ActivateSidelinkBearer</span> <span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">Seconds</span><span class="p">(</span><span class="mf">0.0</span><span class="p">),</span> <span class="n">txUe</span><span class="p">,</span> <span class="n">tft</span><span class="p">)</span>
+            <span class="n">tft</span> <span class="o">=</span> <span class="n">lte</span><span class="o">.</span><span class="n">LteSlTft</span> <span class="p">(</span><span class="n">lte</span><span class="o">.</span><span class="n">LteSlTft</span><span class="o">.</span><span class="n">RECEIVE</span><span class="p">,</span> <span class="n">clientRespondersAddress</span><span class="p">,</span> <span class="n">groupL2Address</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">lteV2xHelper</span><span class="o">.</span><span class="n">ActivateSidelinkBearer</span> <span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">Seconds</span><span class="p">(</span><span class="mf">0.0</span><span class="p">),</span> <span class="n">rxUes</span><span class="p">,</span> <span class="n">tft</span><span class="p">)</span>
+
+            <span class="c1"># store and increment addresses</span>
+            <span class="n">groupL2Addresses</span><span class="o">.</span><span class="n">append</span> <span class="p">(</span><span class="n">groupL2Address</span><span class="p">)</span>
+            <span class="n">groupL2Address</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">clientRespondersAddress</span> <span class="o">=</span> <span class="n">internet</span><span class="o">.</span><span class="n">Ipv4AddressGenerator</span><span class="o">.</span><span class="n">NextAddress</span> <span class="p">(</span><span class="n">ns_net</span><span class="o">.</span><span class="n">Ipv4Mask</span> <span class="p">(</span><span class="s2">&quot;255.0.0.0&quot;</span><span class="p">))</span>
+
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">connected_node</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">nodes</span><span class="p">):</span>
+            <span class="n">ns3_device</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ueDevs</span><span class="o">.</span><span class="n">Get</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+            <span class="n">node</span> <span class="o">=</span> <span class="n">connected_node</span><span class="o">.</span><span class="n">node</span>
+
+            <span class="n">mac_address</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">ns3_device</span><span class="o">.</span><span class="n">GetAddress</span><span class="p">())</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span>
+
+            <span class="n">address</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">interface</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">wants_ip_stack</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">ns3_node</span><span class="o">.</span><span class="n">GetObject</span><span class="p">(</span><span class="n">internet</span><span class="o">.</span><span class="n">Ipv4</span><span class="o">.</span><span class="n">GetTypeId</span><span class="p">())</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Installing IP stack on </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+                    <span class="n">internet_stack_helper</span><span class="o">.</span><span class="n">Install</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">ns3_node</span><span class="p">)</span>
+                <span class="n">address</span> <span class="o">=</span> <span class="n">connected_node</span><span class="o">.</span><span class="n">address</span>
+                <span class="k">if</span> <span class="n">address</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">address</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">network</span><span class="o">.</span><span class="n">get_free_ip_address</span><span class="p">()</span>
+
+                <span class="n">network_address</span> <span class="o">=</span> <span class="n">ipaddress</span><span class="o">.</span><span class="n">ip_network</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">address</span><span class="p">)</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="n">network</span><span class="o">.</span><span class="n">netmask</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                <span class="n">ns3_network_address</span> <span class="o">=</span> <span class="n">ns_net</span><span class="o">.</span><span class="n">Ipv4Address</span><span class="p">(</span><span class="n">network_address</span><span class="o">.</span><span class="n">network_address</span><span class="p">)</span>
+                <span class="n">ns3_network_prefix</span> <span class="o">=</span> <span class="n">ns_net</span><span class="o">.</span><span class="n">Ipv4Mask</span><span class="p">(</span><span class="n">network_address</span><span class="o">.</span><span class="n">netmask</span><span class="p">)</span>
+                <span class="n">base</span> <span class="o">=</span> <span class="n">ipaddress</span><span class="o">.</span><span class="n">ip_address</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">address</span><span class="p">)</span> <span class="o">-</span> <span class="nb">int</span><span class="p">(</span><span class="n">network_address</span><span class="o">.</span><span class="n">network_address</span><span class="p">))</span>
+                <span class="n">helper</span> <span class="o">=</span> <span class="n">internet</span><span class="o">.</span><span class="n">Ipv4AddressHelper</span><span class="p">(</span><span class="n">ns3_network_address</span><span class="p">,</span> <span class="n">ns3_network_prefix</span><span class="p">,</span>
+                                                    <span class="n">base</span><span class="o">=</span><span class="n">ns_net</span><span class="o">.</span><span class="n">Ipv4Address</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">base</span><span class="p">)))</span>
+                <span class="n">device_container</span> <span class="o">=</span> <span class="n">ns_net</span><span class="o">.</span><span class="n">NetDeviceContainer</span><span class="p">(</span><span class="n">ns3_device</span><span class="p">)</span>
+                <span class="n">helper</span><span class="o">.</span><span class="n">Assign</span><span class="p">(</span><span class="n">device_container</span><span class="p">)</span>
+
+                <span class="n">interface</span> <span class="o">=</span> <span class="n">Interface</span><span class="p">(</span><span class="n">node</span><span class="o">=</span><span class="n">node</span><span class="p">,</span> <span class="n">ns3_device</span><span class="o">=</span><span class="n">ns3_device</span><span class="p">,</span> <span class="n">mac_address</span><span class="o">=</span><span class="n">mac_address</span><span class="p">,</span>
+                                      <span class="n">address</span><span class="o">=</span><span class="n">ipaddress</span><span class="o">.</span><span class="n">ip_interface</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">address</span><span class="p">)</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="n">network</span><span class="o">.</span><span class="n">netmask</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">interface</span> <span class="o">=</span> <span class="n">Interface</span><span class="p">(</span><span class="n">node</span><span class="o">=</span><span class="n">node</span><span class="p">,</span> <span class="n">ns3_device</span><span class="o">=</span><span class="n">ns3_device</span><span class="p">,</span> <span class="n">mac_address</span><span class="o">=</span><span class="n">mac_address</span><span class="p">,</span> <span class="n">address</span><span class="o">=</span><span class="n">connected_node</span><span class="o">.</span><span class="n">address</span><span class="p">)</span>
+            <span class="c1"># ns3_device.SetAddress(ns_net.Mac48Address(interface.mac_address))</span>
+            <span class="n">node</span><span class="o">.</span><span class="n">add_interface</span><span class="p">(</span><span class="n">interface</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">connected_node</span><span class="o">.</span><span class="n">ifname</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">interfaces</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">interface</span><span class="p">)</span>
+
+        <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Creating Sidelink Configuration...&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ueSidelinkConfiguration</span> <span class="o">=</span> <span class="n">lte</span><span class="o">.</span><span class="n">LteUeRrcSl</span> <span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ueSidelinkConfiguration</span><span class="o">.</span><span class="n">SetSlEnabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ueSidelinkConfiguration</span><span class="o">.</span><span class="n">SetV2xEnabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">preconfiguration</span> <span class="o">=</span> <span class="n">lte</span><span class="o">.</span><span class="n">LteRrcSap</span><span class="o">.</span><span class="n">SlV2xPreconfiguration</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">preconfiguration</span><span class="o">.</span><span class="n">v2xPreconfigFreqList</span><span class="o">.</span><span class="n">freq</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">v2xCommPreconfigGeneral</span><span class="o">.</span><span class="n">carrierFreq</span> <span class="o">=</span> <span class="mi">54890</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">preconfiguration</span><span class="o">.</span><span class="n">v2xPreconfigFreqList</span><span class="o">.</span><span class="n">freq</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">v2xCommPreconfigGeneral</span><span class="o">.</span><span class="n">slBandwidth</span> <span class="o">=</span> <span class="n">slBandwidth</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">preconfiguration</span><span class="o">.</span><span class="n">v2xPreconfigFreqList</span><span class="o">.</span><span class="n">freq</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">v2xCommTxPoolList</span><span class="o">.</span><span class="n">nbPools</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">preconfiguration</span><span class="o">.</span><span class="n">v2xPreconfigFreqList</span><span class="o">.</span><span class="n">freq</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">v2xCommRxPoolList</span><span class="o">.</span><span class="n">nbPools</span> <span class="o">=</span> <span class="mi">1</span>
+
+        <span class="n">pFactory</span> <span class="o">=</span> <span class="n">lte</span><span class="o">.</span><span class="n">SlV2xPreconfigPoolFactory</span><span class="p">()</span>
+        <span class="n">pFactory</span><span class="o">.</span><span class="n">SetHaveUeSelectedResourceConfig</span> <span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">pFactory</span><span class="o">.</span><span class="n">SetSlSubframe</span> <span class="p">(</span><span class="mh">0xFFFFF</span><span class="p">)</span>
+        <span class="n">pFactory</span><span class="o">.</span><span class="n">SetAdjacencyPscchPssch</span> <span class="p">(</span><span class="n">adjacencyPscchPssch</span><span class="p">)</span>
+        <span class="n">pFactory</span><span class="o">.</span><span class="n">SetSizeSubchannel</span> <span class="p">(</span><span class="n">sizeSubchannel</span><span class="p">)</span>
+        <span class="n">pFactory</span><span class="o">.</span><span class="n">SetNumSubchannel</span> <span class="p">(</span><span class="n">numSubchannel</span><span class="p">)</span>
+        <span class="n">pFactory</span><span class="o">.</span><span class="n">SetStartRbSubchannel</span> <span class="p">(</span><span class="n">startRbSubchannel</span><span class="p">)</span>
+        <span class="n">pFactory</span><span class="o">.</span><span class="n">SetStartRbPscchPool</span> <span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">pFactory</span><span class="o">.</span><span class="n">SetDataTxP0</span> <span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">)</span>
+        <span class="n">pFactory</span><span class="o">.</span><span class="n">SetDataTxAlpha</span> <span class="p">(</span><span class="mf">0.9</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">v2xCommTxPool</span> <span class="o">=</span> <span class="n">pFactory</span><span class="o">.</span><span class="n">CreatePool</span> <span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">v2xCommRxPool</span> <span class="o">=</span> <span class="n">pFactory</span><span class="o">.</span><span class="n">CreatePool</span> <span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">preconfiguration</span><span class="o">.</span><span class="n">v2xPreconfigFreqList</span><span class="o">.</span><span class="n">freq</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">v2xCommTxPoolList</span><span class="o">.</span><span class="n">SetPoolAt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">v2xCommTxPool</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">preconfiguration</span><span class="o">.</span><span class="n">v2xPreconfigFreqList</span><span class="o">.</span><span class="n">freq</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">v2xCommRxPoolList</span><span class="o">.</span><span class="n">SetPoolAt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">v2xCommRxPool</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ueSidelinkConfiguration</span><span class="o">.</span><span class="n">SetSlV2xPreconfiguration</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">preconfiguration</span><span class="p">)</span> 
+
+        <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Installing Sidelink Configuration...&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lteHelper</span><span class="o">.</span><span class="n">InstallSidelinkV2xConfiguration</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ueRespondersDevs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ueSidelinkConfiguration</span><span class="p">)</span>
+
+        <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Enabling LTE traces...&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lteHelper</span><span class="o">.</span><span class="n">EnableTraces</span><span class="p">()</span>
+
+<div class="viewcode-block" id="CV2XChannel.prepare"><a class="viewcode-back" href="../../../../api/marvis.channel.cv2x/#marvis.channel.cv2x.CV2XChannel.prepare">[docs]</a>    <span class="k">def</span> <span class="nf">prepare</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">simulation</span><span class="p">):</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="CV2XChannel.set_delay"><a class="viewcode-back" href="../../../../api/marvis.channel.cv2x/#marvis.channel.cv2x.CV2XChannel.set_delay">[docs]</a>    <span class="k">def</span> <span class="nf">set_delay</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">delay</span><span class="p">):</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="CV2XChannel.set_data_rate"><a class="viewcode-back" href="../../../../api/marvis.channel.cv2x/#marvis.channel.cv2x.CV2XChannel.set_data_rate">[docs]</a>    <span class="k">def</span> <span class="nf">set_data_rate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_rate</span><span class="p">):</span>
+        <span class="k">pass</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Arne Boockmeyer, Martin Michaelis, Felix Gohla.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
