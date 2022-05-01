@@ -1,0 +1,4 @@
+<map id="inheritance4ff43b4b88" name="inheritance4ff43b4b88">
+<area shape="rect" id="node1" href="../marvis.command_executor.base/#marvis.command_executor.base.CommandExecutor" target="_top" title="The CommandExecutor abstracts away the code for running" alt="" coords="34,5,397,31"/>
+<area shape="rect" id="node2" href="#marvis.command_executor.docker.DockerCommandExecutor" target="_top" title="The DockerCommandExecutor runs commands in a Docker container." alt="" coords="5,79,425,104"/>
+</map>

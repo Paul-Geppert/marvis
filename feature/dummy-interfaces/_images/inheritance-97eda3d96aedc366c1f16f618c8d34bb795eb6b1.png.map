@@ -1,0 +1,4 @@
+<map id="inheritance0ad636e03e" name="inheritance0ad636e03e">
+<area shape="rect" id="node1" href="../marvis.channel.channel/#marvis.channel.channel.Channel" target="_top" title="The Channel resembles a physical connection of nodes." alt="" coords="12,5,247,31"/>
+<area shape="rect" id="node2" href="#marvis.channel.cv2x.CV2XChannel" target="_top" title="A Cellular V2X Channel is a physical (but of course wireless) connection" alt="" coords="5,79,253,104"/>
+</map>

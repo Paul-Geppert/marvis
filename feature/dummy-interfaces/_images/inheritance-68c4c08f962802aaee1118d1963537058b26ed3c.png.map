@@ -1,0 +1,4 @@
+<map id="inheritancef28f26f29a" name="inheritancef28f26f29a">
+<area shape="rect" id="node1" href="../marvis.node.base/#marvis.node.base.Node" target="_top" title="A node represents a computer in the simulation." alt="" coords="35,5,211,31"/>
+<area shape="rect" id="node2" href="#marvis.node.docker.DockerNode" target="_top" title="A DockerNode represents a docker container." alt="" coords="5,79,240,104"/>
+</map>
