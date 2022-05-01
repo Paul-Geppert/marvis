@@ -111,7 +111,10 @@
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#marvis.interface.Interface" title="marvis.interface.Interface"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Interface</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#marvis.interface.DummyInterface" title="marvis.interface.DummyInterface"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DummyInterface</span></code></a></p></td>
+<td><p>The DummyInterface describes an interface of type dummy on the Node.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#marvis.interface.Interface" title="marvis.interface.Interface"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Interface</span></code></a></p></td>
 <td><p>The Interface resembles a network card.</p></td>
 </tr>
 </tbody>
@@ -294,10 +297,66 @@ This can e.g. contain the network namespace (see <a class="reference internal" h
 
 </dd></dl>
 
+<dl class="py class">
+<dt class="sig sig-object py" id="marvis.interface.DummyInterface">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">marvis.interface.</span></span><span class="sig-name descname"><span class="pre">DummyInterface</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">address</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mac_address</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/marvis/interface/#DummyInterface"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#marvis.interface.DummyInterface" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>The DummyInterface describes an interface of type dummy on the Node.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>node</strong> (<a class="reference internal" href="../marvis.node.base/#marvis.node.base.Node" title="marvis.node.base.Node"><code class="xref py py-class docutils literal notranslate"><span class="pre">Node</span></code></a>) – The node to connect the interface to.</p></li>
+<li><p><strong>address</strong> (<em>str</em>) – An IP address.</p></li>
+<li><p><strong>mac_address</strong> (<em>str</em>) – An MAC address. If <code class="code docutils literal notranslate"><span class="pre">None</span></code>, a random MAC address will be assigned internally.
+<strong>Warning:</strong> You may need to set the MAC address in order to reach your nodes correctly.
+If you have any constraints on MAC addresses used externally, set it here.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.interface.DummyInterface.node">
+<span class="sig-name descname"><span class="pre">node</span></span><a class="headerlink" href="#marvis.interface.DummyInterface.node" title="Permalink to this definition"></a></dt>
+<dd><p>The node to connect the interface to.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.interface.DummyInterface.mask">
+<span class="sig-name descname"><span class="pre">mask</span></span><a class="headerlink" href="#marvis.interface.DummyInterface.mask" title="Permalink to this definition"></a></dt>
+<dd><p>The netmask size</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.interface.DummyInterface.address">
+<span class="sig-name descname"><span class="pre">address</span></span><a class="headerlink" href="#marvis.interface.DummyInterface.address" title="Permalink to this definition"></a></dt>
+<dd><p>The interface’s IP</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.interface.DummyInterface.mac_address">
+<span class="sig-name descname"><span class="pre">mac_address</span></span><a class="headerlink" href="#marvis.interface.DummyInterface.mac_address" title="Permalink to this definition"></a></dt>
+<dd><p>The MAC address of this interface.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="marvis.interface.DummyInterface.setup">
+<span class="sig-name descname"><span class="pre">setup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ifname</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/marvis/interface/#DummyInterface.setup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#marvis.interface.DummyInterface.setup" title="Permalink to this definition"></a></dt>
+<dd><p>Setup a VETH pair for containers.</p>
+<p>This function also connects the external site of the pair to the bridge.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>peer</strong> (<em>dict</em>) – Options for the internal side of the VETH pair.
+This can e.g. contain the network namespace (see <a class="reference internal" href="../marvis.node.docker/#marvis.node.docker.DockerNode" title="marvis.node.docker.DockerNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">DockerNode</span></code></a> for example).</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 <p class="rubric">Inheritance Diagramm</p>
-<div class="graphviz"><img src="../../_images/inheritance-d04d00c51f2548f1228e957aff0369d8bf4982e1.png" alt="Inheritance diagram of marvis.interface" usemap="#inheritance3eb7d5cb43" class="inheritance graphviz" /></div>
+<div class="graphviz"><img src="../../_images/inheritance-caa90bdfc4e89d3cd22b7025c2d8ad0170931d55.png" alt="Inheritance diagram of marvis.interface" usemap="#inheritance3eb7d5cb43" class="inheritance graphviz" /></div>
 <map id="inheritance3eb7d5cb43" name="inheritance3eb7d5cb43">
-<area shape="rect" id="node1" href="#marvis.interface.Interface" target="_top" title="The Interface resembles a network card." alt="" coords="5,5,196,31"/>
+<area shape="rect" id="node1" href="#marvis.interface.DummyInterface" target="_top" title="The DummyInterface describes an interface of type dummy on the Node." alt="" coords="5,5,248,31"/>
+<area shape="rect" id="node2" href="#marvis.interface.Interface" target="_top" title="The Interface resembles a network card." alt="" coords="273,5,463,31"/>
 </map><div class="line-block">
 <div class="line"><br /></div>
 </div>

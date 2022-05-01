@@ -285,6 +285,51 @@
         <span class="n">index</span> <span class="o">=</span> <span class="n">ipr</span><span class="o">.</span><span class="n">link_lookup</span><span class="p">(</span><span class="n">ifname</span><span class="o">=</span><span class="n">ifname</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">ipr</span><span class="o">.</span><span class="n">addr</span><span class="p">(</span><span class="s1">&#39;add&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">,</span> <span class="n">address</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">address</span><span class="o">.</span><span class="n">ip</span><span class="p">),</span> <span class="n">mask</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">address</span><span class="o">.</span><span class="n">network</span><span class="o">.</span><span class="n">prefixlen</span><span class="p">)</span>
         <span class="n">ipr</span><span class="o">.</span><span class="n">link</span><span class="p">(</span><span class="s1">&#39;set&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="s1">&#39;up&#39;</span><span class="p">)</span></div></div>
+
+<div class="viewcode-block" id="DummyInterface"><a class="viewcode-back" href="../../../api/marvis.interface/#marvis.interface.DummyInterface">[docs]</a><span class="k">class</span> <span class="nc">DummyInterface</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;The DummyInterface describes an interface of type dummy on the Node.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    node : :class:`.Node`</span>
+<span class="sd">        The node to connect the interface to.</span>
+<span class="sd">    address : str</span>
+<span class="sd">        An IP address.</span>
+<span class="sd">    mac_address : str</span>
+<span class="sd">        An MAC address. If :code:`None`, a random MAC address will be assigned internally.</span>
+<span class="sd">        **Warning:** You may need to set the MAC address in order to reach your nodes correctly.</span>
+<span class="sd">        If you have any constraints on MAC addresses used externally, set it here.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">address</span><span class="p">,</span> <span class="n">mask</span><span class="p">,</span> <span class="n">mac_address</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="c1">#: The node to connect the interface to.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">node</span> <span class="o">=</span> <span class="n">node</span>
+        <span class="c1">#: The interface&#39;s IP</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">address</span> <span class="o">=</span> <span class="n">address</span>
+        <span class="c1">#: The netmask size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mask</span> <span class="o">=</span> <span class="n">mask</span>
+        <span class="c1">#: The interface&#39;s IP</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">address</span> <span class="o">=</span> <span class="n">address</span>
+        <span class="c1">#: The MAC address of this interface.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mac_address</span> <span class="o">=</span> <span class="n">mac_address</span>
+
+<div class="viewcode-block" id="DummyInterface.setup"><a class="viewcode-back" href="../../../api/marvis.interface/#marvis.interface.DummyInterface.setup">[docs]</a>    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ifname</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Setup a VETH pair for containers.</span>
+
+<span class="sd">        This function also connects the external site of the pair to the bridge.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        peer : dict</span>
+<span class="sd">            Options for the internal side of the VETH pair.</span>
+<span class="sd">            This can e.g. contain the network namespace (see :class:`.DockerNode` for example).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ipr</span> <span class="o">=</span> <span class="n">IPRoute</span><span class="p">()</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Create dummy interface </span><span class="si">%s</span><span class="s1"> on node </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">ifname</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">ipr</span><span class="o">.</span><span class="n">link</span><span class="p">(</span><span class="s1">&#39;add&#39;</span><span class="p">,</span> <span class="n">ifname</span><span class="o">=</span><span class="n">ifname</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;dummy&#39;</span><span class="p">)</span>
+        <span class="n">dev</span> <span class="o">=</span> <span class="n">ipr</span><span class="o">.</span><span class="n">link_lookup</span><span class="p">(</span><span class="n">ifname</span><span class="o">=</span><span class="n">ifname</span><span class="p">)</span>
+        <span class="n">ipr</span><span class="o">.</span><span class="n">addr</span><span class="p">(</span><span class="s1">&#39;add&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">dev</span><span class="p">,</span> <span class="n">address</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">address</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mask</span><span class="p">)</span></div></div>
 </pre></div>
 
            </div>
