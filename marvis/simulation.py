@@ -134,7 +134,6 @@ class Simulation:
         for mobility_input in self.scenario.mobility_inputs:
             mobility_input.prepare(self)
 
-        # TODO GPA: Find a solution to activate with other channels again
         routing_helper = internet.Ipv4GlobalRoutingHelper
         routing_helper.PopulateRoutingTables()
 
