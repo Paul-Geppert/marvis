@@ -150,6 +150,7 @@ class DockerNode(Node):
         self.build_docker_image()
         self.start_docker_container(simulation.log_directory, simulation.hosts)
         self.setup_host_interfaces()
+        self.setup_additional_routing_in_container()
 
     def build_docker_image(self):
         """Build the image for the container."""
@@ -255,3 +256,10 @@ class DockerNode(Node):
             # Get container's namespace and setup the interface in the container
             with Namespace(self.container_pid, 'net'):
                 interface.setup_veth_container_end(name)
+
+
+    def setup_additional_routing_in_container(self):
+        """Implement the additional routing rules on the node."""
+        for rule in self.routing_rules:
+            with Namespace(self.container_pid, 'net'):
+                rule.setup()

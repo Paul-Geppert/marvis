@@ -78,6 +78,7 @@ class LXDNode(Node):
         self.create_container()
         self.start_container(simulation.log_directory, simulation.hosts)
         self.setup_host_interfaces()
+        self.setup_additional_routing_in_container()
 
     def create_container(self):
         """Create the LXC container."""
@@ -171,3 +172,12 @@ class LXDNode(Node):
             # Get container's namespace and setup the interface in the container
             with Namespace(pid, 'net'):
                 interface.setup_veth_container_end(name)
+
+    def setup_additional_routing_in_container(self):
+        """Implement the additional routing rules on the node."""
+        container_state = pylxd.Client().api.containers[self.name].state.get().json()
+        pid = container_state['metadata']['pid']
+
+        for rule in self.routing_rules:
+            with Namespace(pid, 'net'):
+                rule.setup()

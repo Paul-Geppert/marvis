@@ -49,6 +49,7 @@ class ExternalNode(Node):
         for interface in self.interfaces.values():
             interface.connect_tap_to_bridge(bridge_name=self.bridge)
             self.setup_remote_address(interface.address)
+        self.setup_additional_routing()
 
     def setup_remote_address(self, address):
         """Add the simulation IP address to the remote device.
@@ -70,3 +71,32 @@ class ExternalNode(Node):
             The address to remove from the external node.
         """
         self.execute_command(['ip', 'addr', 'del', str(address), 'dev', self.ifname], user='root')
+
+
+    def setup_additional_routing(self):
+        """Implement the additional routing rules."""
+        
+        for rule in self.routing_rules:
+            command_base = ['ip', 'route', 'add']
+            command_params = []
+
+            if isinstance(rule.gateway, str):
+                # Set rule via IP address
+                command_params = [rule.dst, 'via', rule.gateway]
+            else:
+                # Set rule via network interface / network device
+                command_params = [rule.dst, 'dev', rule.gateway.ifname]
+
+            self.execute_command([*command_base, *command_params], user='root')
+            defer(f'remove routing for ip {rule.dst}', self.remove_additional_routing, command_params)
+
+    def remove_additional_routing(self, command_params):
+        """Remove the additional routing rules.
+
+        Parameters
+        ----------
+        command_params : str[]
+            The parameters used to create the route.
+        """
+        command_base = ['ip', 'route', 'delete']
+        self.execute_command([*command_base, *command_params], user='root')

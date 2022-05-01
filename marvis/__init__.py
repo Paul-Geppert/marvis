@@ -5,3 +5,4 @@ from .network import Network
 from .node import Node, SwitchNode, DockerNode, LXDNode, ExternalNode, SSHNode, InterfaceNode
 from .scenario import Scenario
 from .argparse import ArgumentParser
+from .routing_config import RoutingConfig
