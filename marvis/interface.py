@@ -212,3 +212,48 @@ class Interface:
         index = ipr.link_lookup(ifname=ifname)[0]
         ipr.addr('add', index=index, address=str(self.address.ip), mask=self.address.network.prefixlen)
         ipr.link('set', index=index, state='up')
+
+class DummyInterface():
+    """The DummyInterface describes an interface of type dummy on the Node.
+
+    Parameters
+    ----------
+    node : :class:`.Node`
+        The node to connect the interface to.
+    address : str
+        An IP address.
+    mac_address : str
+        An MAC address. If :code:`None`, a random MAC address will be assigned internally.
+        **Warning:** You may need to set the MAC address in order to reach your nodes correctly.
+        If you have any constraints on MAC addresses used externally, set it here.
+    """
+
+    def __init__(self, node, address, mask, mac_address=None):
+        #: The node to connect the interface to.
+        self.node = node
+        #: The interface's IP
+        self.address = address
+        #: The netmask size
+        self.mask = mask
+        #: The interface's IP
+        self.address = address
+        #: The MAC address of this interface.
+        self.mac_address = mac_address
+
+    def setup(self, ifname):
+        """Setup a VETH pair for containers.
+
+        This function also connects the external site of the pair to the bridge.
+
+        Parameters
+        ----------
+        peer : dict
+            Options for the internal side of the VETH pair.
+            This can e.g. contain the network namespace (see :class:`.DockerNode` for example).
+        """
+        ipr = IPRoute()
+
+        logger.debug('Create dummy interface %s on node %s', ifname, self.node.name)
+        ipr.link('add', ifname=ifname, kind='dummy')
+        dev = ipr.link_lookup(ifname=ifname)
+        ipr.addr('add', index=dev, address=self.address, mask=self.mask)
