@@ -1,0 +1,4 @@
+<map id="inheritance46373ed93d" name="inheritance46373ed93d">
+<area shape="rect" id="node1" href="../marvis.channel.channel/#marvis.channel.channel.Channel" target="_top" title="The Channel resembles a physical connection of nodes." alt="" coords="15,5,250,31"/>
+<area shape="rect" id="node2" href="#marvis.channel.csma.CSMAChannel" target="_top" title="The Channel resembles a physical connection of nodes." alt="" coords="5,79,260,104"/>
+</map>
