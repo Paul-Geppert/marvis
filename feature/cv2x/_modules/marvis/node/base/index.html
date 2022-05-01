@@ -124,6 +124,8 @@
 
         <span class="c1">#: The interfaces (~network cards) of this node.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">interfaces</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="c1">#: A list of additional routing configurations for this node.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">routing_configs</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="c1">#: The command executor for running (shell) commands.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">command_executor</span> <span class="o">=</span> <span class="kc">None</span>
 
@@ -172,6 +174,20 @@
         <span class="c1"># Set the name. The name can e.g. be used in a container.</span>
         <span class="n">interface</span><span class="o">.</span><span class="n">ifname</span> <span class="o">=</span> <span class="n">name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">interfaces</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">interface</span></div>
+
+<div class="viewcode-block" id="Node.add_routing"><a class="viewcode-back" href="../../../../api/marvis.node.base/#marvis.node.base.Node.add_routing">[docs]</a>    <span class="k">def</span> <span class="nf">add_routing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">routing_config</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Add a routing rule to configure routing inside the Node.</span>
+<span class="sd">        The rule will be activated will preparing the Node.</span>
+
+<span class="sd">        *Warning:* Do not call this function manually.</span>
+<span class="sd">            The functionality is handled by the network and channels.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        rule : :class:`.RoutingRule`</span>
+<span class="sd">            The routing to be configured on Node prepare.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">routing_configs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">routing_config</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Node.prepare"><a class="viewcode-back" href="../../../../api/marvis.node.base/#marvis.node.base.Node.prepare">[docs]</a>    <span class="k">def</span> <span class="nf">prepare</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">simulation</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Do all neccesary steps to prepare a node for the simulation.</span>
