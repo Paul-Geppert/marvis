@@ -135,8 +135,8 @@ class Simulation:
             mobility_input.prepare(self)
 
         # TODO GPA: Find a solution to activate with other channels again
-        # routing_helper = internet.Ipv4GlobalRoutingHelper
-        # routing_helper.PopulateRoutingTables()
+        routing_helper = internet.Ipv4GlobalRoutingHelper
+        routing_helper.PopulateRoutingTables()
 
     def __stop_workflows(self):
         """Stop all running workflows."""
