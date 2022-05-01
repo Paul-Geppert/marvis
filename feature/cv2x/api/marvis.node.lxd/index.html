@@ -66,6 +66,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../marvis.node.switch/">marvis.node.switch</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="../marvis.routing_config/">marvis.routing_config</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../marvis.scenario/">marvis.scenario</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../marvis.simulation/">marvis.simulation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../marvis.util/">marvis.util</a></li>
@@ -256,6 +257,12 @@ Before fetching from the server, local images will be checked.</p>
 <span class="sig-name descname"><span class="pre">setup_host_interfaces</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/marvis/node/lxd/#LXDNode.setup_host_interfaces"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#marvis.node.lxd.LXDNode.setup_host_interfaces" title="Permalink to this definition"></a></dt>
 <dd><p>Setup the interfaces (bridge, tap, VETH pair) on the host and connect
 them to the container.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="marvis.node.lxd.LXDNode.setup_additional_routing_in_container">
+<span class="sig-name descname"><span class="pre">setup_additional_routing_in_container</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/marvis/node/lxd/#LXDNode.setup_additional_routing_in_container"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#marvis.node.lxd.LXDNode.setup_additional_routing_in_container" title="Permalink to this definition"></a></dt>
+<dd><p>Implement the additional routing rules on the node.</p>
 </dd></dl>
 
 <dl class="py method">

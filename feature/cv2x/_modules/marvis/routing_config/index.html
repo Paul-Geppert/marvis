@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>marvis.routing_config &mdash; marvis 0.2.0 - feature/cv2x documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="https://diselab.github.io/marvis/versions.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex/" />
+    <link rel="search" title="Search" href="../../../search/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../" class="icon icon-home"> marvis
+          </a>
+              <div class="version">
+                0.2.0 - feature/cv2x
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation/">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting-started/">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sumo/">Using SUMO With marvis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../">marvis</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../">Module code</a> &raquo;</li>
+      <li>marvis.routing_config</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for marvis.routing_config</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Describes a route config for traffic on the Node.&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">pyroute2</span> <span class="kn">import</span> <span class="n">IPRoute</span>
+
+<span class="kn">from</span> <span class="nn">.interface</span> <span class="kn">import</span> <span class="n">Interface</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<div class="viewcode-block" id="RoutingConfig"><a class="viewcode-back" href="../../../api/marvis.routing_config/#marvis.routing_config.RoutingConfig">[docs]</a><span class="k">class</span> <span class="nc">RoutingConfig</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;The RoutingConfig describes a routing config on the Node.</span>
+<span class="sd">    At the moment, only ADD operation is supported.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    node : :class:`.Node`</span>
+<span class="sd">        The node to connect the interface to.</span>
+<span class="sd">    dst : str</span>
+<span class="sd">        The destination IP or subnet, e.g. 192.168.0.0/16.</span>
+<span class="sd">    gateway : :class:`.Interface` | str</span>
+<span class="sd">        The network interface or the gateway IP address to connect to.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">dst</span><span class="p">,</span> <span class="n">gateway</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">node</span> <span class="o">=</span> <span class="n">node</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dst</span> <span class="o">=</span> <span class="n">dst</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gateway</span> <span class="o">=</span> <span class="n">gateway</span>
+
+<div class="viewcode-block" id="RoutingConfig.setup"><a class="viewcode-back" href="../../../api/marvis.routing_config/#marvis.routing_config.RoutingConfig.setup">[docs]</a>    <span class="k">def</span> <span class="nf">setup</span> <span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">ipr</span> <span class="o">=</span> <span class="n">IPRoute</span><span class="p">()</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Adding routing rule on </span><span class="si">%s</span><span class="s1">: </span><span class="si">%s</span><span class="s1"> via gateway </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dst</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">gateway</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gateway</span><span class="p">,</span> <span class="n">Interface</span><span class="p">):</span>
+            <span class="c1"># Set rule via network interface / network device</span>
+            <span class="n">gateway_id</span> <span class="o">=</span> <span class="n">ipr</span><span class="o">.</span><span class="n">link_lookup</span><span class="p">(</span><span class="n">ifname</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">gateway</span><span class="o">.</span><span class="n">ifname</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">ipr</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;add&quot;</span><span class="p">,</span> <span class="n">dst</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dst</span><span class="p">,</span> <span class="n">oif</span><span class="o">=</span><span class="n">gateway_id</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Set rule via IP address</span>
+            <span class="n">ipr</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;add&quot;</span><span class="p">,</span> <span class="n">dst</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dst</span><span class="p">,</span> <span class="n">gateway</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">gateway</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Arne Boockmeyer, Martin Michaelis, Felix Gohla.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

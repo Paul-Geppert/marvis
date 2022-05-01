@@ -66,6 +66,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../marvis.node.switch/">marvis.node.switch</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="../marvis.routing_config/">marvis.routing_config</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../marvis.scenario/">marvis.scenario</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../marvis.simulation/">marvis.simulation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../marvis.util/">marvis.util</a></li>
@@ -227,6 +228,17 @@ the device is assigned during simulation.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="marvis.node.ssh.SSHNode.remove_additional_routing">
+<span class="sig-name descname"><span class="pre">remove_additional_routing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">command_params</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#marvis.node.ssh.SSHNode.remove_additional_routing" title="Permalink to this definition"></a></dt>
+<dd><p>Remove the additional routing rules.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>command_params</strong> (<em>str[]</em>) – The parameters used to create the route.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="marvis.node.ssh.SSHNode.remove_remote_address">
 <span class="sig-name descname"><span class="pre">remove_remote_address</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#marvis.node.ssh.SSHNode.remove_remote_address" title="Permalink to this definition"></a></dt>
 <dd><p>Remove the simulation IP address from the remote device.</p>
@@ -250,6 +262,12 @@ the device is assigned during simulation.</p>
 </ul>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="marvis.node.ssh.SSHNode.setup_additional_routing">
+<span class="sig-name descname"><span class="pre">setup_additional_routing</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#marvis.node.ssh.SSHNode.setup_additional_routing" title="Permalink to this definition"></a></dt>
+<dd><p>Implement the additional routing rules.</p>
 </dd></dl>
 
 <dl class="py method">
