@@ -60,8 +60,8 @@ class WiFiChannel(Channel):
         WIFI_802_11n_5G = wifi.WIFI_PHY_STANDARD_80211n_5GHZ
         #: Standard from 2013.
         WIFI_802_11ac = wifi.WIFI_PHY_STANDARD_80211ac
-        #: "WiFi 6".
-        WIFI_802_11ax = wifi.WIFI_PHY_STANDARD_80211ax
+        #: "WiFi 6" is Deactivated, as this ns-3 does not support it yet
+        # WIFI_802_11ax = wifi.WIFI_PHY_STANDARD_80211ax
         #: Wireless Access in Vehicular Environments (WAVE).
         WIFI_802_11p = wifi.WIFI_PHY_STANDARD_80211_10MHZ
 
@@ -168,7 +168,7 @@ class WiFiChannel(Channel):
         self.delay = delay
 
         logger.debug("Setting up physical layer of WiFi.")
-        self.wifi_phy_helper = wifi.YansWifiPhyHelper()
+        self.wifi_phy_helper = wifi.YansWifiPhyHelper.Default()
         self.wifi_phy_helper.Set("ChannelWidth", core.UintegerValue(self.channel_width))
         if self.frequency:
             self.wifi_phy_helper.Set("Frequency", core.UintegerValue(self.frequency))
