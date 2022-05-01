@@ -171,6 +171,12 @@
 </dd></dl>
 
 <dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.node.base.Node.routing_configs">
+<span class="sig-name descname"><span class="pre">routing_configs</span></span><a class="headerlink" href="#marvis.node.base.Node.routing_configs" title="Permalink to this definition"></a></dt>
+<dd><p>A list of additional routing configurations for this node.</p>
+</dd></dl>
+
+<dl class="py attribute">
 <dt class="sig sig-object py" id="marvis.node.base.Node.command_executor">
 <span class="sig-name descname"><span class="pre">command_executor</span></span><a class="headerlink" href="#marvis.node.base.Node.command_executor" title="Permalink to this definition"></a></dt>
 <dd><p>The command executor for running (shell) commands.</p>
@@ -207,6 +213,22 @@
 <li><p><strong>prefix</strong> (<em>str</em>) – If no name is supplied, the function works out
 a name by appending a number to the prefix.</p></li>
 </ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="marvis.node.base.Node.add_routing">
+<span class="sig-name descname"><span class="pre">add_routing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">routing_config</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/marvis/node/base/#Node.add_routing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#marvis.node.base.Node.add_routing" title="Permalink to this definition"></a></dt>
+<dd><p>Add a routing rule to configure routing inside the Node.
+The rule will be activated will preparing the Node.</p>
+<dl class="simple">
+<dt><em>Warning:</em> Do not call this function manually.</dt><dd><p>The functionality is handled by the network and channels.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>rule</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">RoutingRule</span></code>) – The routing to be configured on Node prepare.</p>
 </dd>
 </dl>
 </dd></dl>

@@ -203,6 +203,22 @@ as this user. <strong>Warning:</strong> Not all nodes support this feature.</p><
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="marvis.node.switch.SwitchNode.add_routing">
+<span class="sig-name descname"><span class="pre">add_routing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">routing_config</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#marvis.node.switch.SwitchNode.add_routing" title="Permalink to this definition"></a></dt>
+<dd><p>Add a routing rule to configure routing inside the Node.
+The rule will be activated will preparing the Node.</p>
+<dl class="simple">
+<dt><em>Warning:</em> Do not call this function manually.</dt><dd><p>The functionality is handled by the network and channels.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>rule</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">RoutingRule</span></code>) – The routing to be configured on Node prepare.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="marvis.node.switch.SwitchNode.go_offline">
 <span class="sig-name descname"><span class="pre">go_offline</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#marvis.node.switch.SwitchNode.go_offline" title="Permalink to this definition"></a></dt>
 <dd><p>Disconnect the node from all channels.</p>
@@ -257,6 +273,12 @@ as this user. <strong>Warning:</strong> Not all nodes support this feature.</p><
 <dt class="sig sig-object py" id="marvis.node.switch.SwitchNode.interfaces">
 <span class="sig-name descname"><span class="pre">interfaces</span></span><a class="headerlink" href="#marvis.node.switch.SwitchNode.interfaces" title="Permalink to this definition"></a></dt>
 <dd><p>The interfaces (~network cards) of this node.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.node.switch.SwitchNode.routing_configs">
+<span class="sig-name descname"><span class="pre">routing_configs</span></span><a class="headerlink" href="#marvis.node.switch.SwitchNode.routing_configs" title="Permalink to this definition"></a></dt>
+<dd><p>A list of additional routing configurations for this node.</p>
 </dd></dl>
 
 <dl class="py attribute">
