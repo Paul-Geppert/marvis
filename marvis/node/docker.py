@@ -260,6 +260,6 @@ class DockerNode(Node):
 
     def setup_additional_routing_in_container(self):
         """Implement the additional routing rules on the node."""
-        for rule in self.routing_rules:
+        for rule in self.routing_configs:
             with Namespace(self.container_pid, 'net'):
                 rule.setup()

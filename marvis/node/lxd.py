@@ -178,6 +178,6 @@ class LXDNode(Node):
         container_state = pylxd.Client().api.containers[self.name].state.get().json()
         pid = container_state['metadata']['pid']
 
-        for rule in self.routing_rules:
+        for rule in self.routing_configs:
             with Namespace(pid, 'net'):
                 rule.setup()

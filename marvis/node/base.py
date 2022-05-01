@@ -51,6 +51,8 @@ class Node:
 
         #: The interfaces (~network cards) of this node.
         self.interfaces = dict()
+        #: A list of additional routing configurations for this node.
+        self.routing_configs = []
         #: The command executor for running (shell) commands.
         self.command_executor = None
 
@@ -99,6 +101,20 @@ class Node:
         # Set the name. The name can e.g. be used in a container.
         interface.ifname = name
         self.interfaces[name] = interface
+
+    def add_routing(self, routing_config):
+        """Add a routing rule to configure routing inside the Node.
+        The rule will be activated will preparing the Node.
+
+        *Warning:* Do not call this function manually.
+            The functionality is handled by the network and channels.
+
+        Parameters
+        ----------
+        rule : :class:`.RoutingRule`
+            The routing to be configured on Node prepare.
+        """
+        self.routing_configs.append(routing_config)
 
     def prepare(self, simulation):
         """Do all neccesary steps to prepare a node for the simulation.

@@ -76,7 +76,7 @@ class ExternalNode(Node):
     def setup_additional_routing(self):
         """Implement the additional routing rules."""
         
-        for rule in self.routing_rules:
+        for rule in self.routing_configs:
             command_base = ['ip', 'route', 'add']
             command_params = []
 
