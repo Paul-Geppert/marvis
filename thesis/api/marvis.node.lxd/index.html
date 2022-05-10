@@ -66,6 +66,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../marvis.node.switch/">marvis.node.switch</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="../marvis.routing_config/">marvis.routing_config</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../marvis.scenario/">marvis.scenario</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../marvis.simulation/">marvis.simulation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../marvis.util/">marvis.util</a></li>
@@ -259,6 +260,38 @@ them to the container.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="marvis.node.lxd.LXDNode.setup_dummy_interfaces_in_container">
+<span class="sig-name descname"><span class="pre">setup_dummy_interfaces_in_container</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/marvis/node/lxd/#LXDNode.setup_dummy_interfaces_in_container"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#marvis.node.lxd.LXDNode.setup_dummy_interfaces_in_container" title="Permalink to this definition"></a></dt>
+<dd><p>Add configured interfaces of type dummy in the container.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="marvis.node.lxd.LXDNode.setup_additional_routing_in_container">
+<span class="sig-name descname"><span class="pre">setup_additional_routing_in_container</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/marvis/node/lxd/#LXDNode.setup_additional_routing_in_container"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#marvis.node.lxd.LXDNode.setup_additional_routing_in_container" title="Permalink to this definition"></a></dt>
+<dd><p>Implement the additional routing rules on the node.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="marvis.node.lxd.LXDNode.add_dummy_interface">
+<span class="sig-name descname"><span class="pre">add_dummy_interface</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dummy_interface</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'dummy'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#marvis.node.lxd.LXDNode.add_dummy_interface" title="Permalink to this definition"></a></dt>
+<dd><p>Add a dummy interface to the node.</p>
+<dl class="simple">
+<dt><em>Warning:</em> Do not call this function manually.</dt><dd><p>The functionality is handled by the network and channels.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>interface</strong> (<a class="reference internal" href="../marvis.interface/#marvis.interface.Interface" title="marvis.interface.Interface"><code class="xref py py-class docutils literal notranslate"><span class="pre">Interface</span></code></a>) – The interface to add.</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – The name of the interface.</p></li>
+<li><p><strong>prefix</strong> (<em>str</em>) – If no name is supplied, the function works out
+a name by appending a number to the prefix.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="marvis.node.lxd.LXDNode.add_interface">
 <span class="sig-name descname"><span class="pre">add_interface</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">interface</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'eth'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#marvis.node.lxd.LXDNode.add_interface" title="Permalink to this definition"></a></dt>
 <dd><p>Add an interface to the node.</p>
@@ -274,6 +307,22 @@ them to the container.</p>
 <li><p><strong>prefix</strong> (<em>str</em>) – If no name is supplied, the function works out
 a name by appending a number to the prefix.</p></li>
 </ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="marvis.node.lxd.LXDNode.add_routing">
+<span class="sig-name descname"><span class="pre">add_routing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">routing_config</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#marvis.node.lxd.LXDNode.add_routing" title="Permalink to this definition"></a></dt>
+<dd><p>Add a routing rule to configure routing inside the Node.
+The rule will be activated will preparing the Node.</p>
+<dl class="simple">
+<dt><em>Warning:</em> Do not call this function manually.</dt><dd><p>The functionality is handled by the network and channels.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>rule</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">RoutingRule</span></code>) – The routing to be configured on Node prepare.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -304,6 +353,11 @@ as this user. <strong>Warning:</strong> Not all nodes support this feature.</p><
 <span class="sig-name descname"><span class="pre">go_online</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#marvis.node.lxd.LXDNode.go_online" title="Permalink to this definition"></a></dt>
 <dd><p>Connect the node back to all channels.</p>
 </dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="marvis.node.lxd.LXDNode.interface_names">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">interface_names</span></span><a class="headerlink" href="#marvis.node.lxd.LXDNode.interface_names" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="marvis.node.lxd.LXDNode.set_position">
@@ -339,12 +393,6 @@ as this user. <strong>Warning:</strong> Not all nodes support this feature.</p><
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="marvis.node.lxd.LXDNode.position">
-<span class="sig-name descname"><span class="pre">position</span></span><a class="headerlink" href="#marvis.node.lxd.LXDNode.position" title="Permalink to this definition"></a></dt>
-<dd><p>The position of the node (used by wifi models and visualization)</p>
-</dd></dl>
-
-<dl class="py attribute">
 <dt class="sig sig-object py" id="marvis.node.lxd.LXDNode.color">
 <span class="sig-name descname"><span class="pre">color</span></span><a class="headerlink" href="#marvis.node.lxd.LXDNode.color" title="Permalink to this definition"></a></dt>
 <dd><p>The color of the node used in the visualization.</p>
@@ -354,6 +402,18 @@ as this user. <strong>Warning:</strong> Not all nodes support this feature.</p><
 <dt class="sig sig-object py" id="marvis.node.lxd.LXDNode.interfaces">
 <span class="sig-name descname"><span class="pre">interfaces</span></span><a class="headerlink" href="#marvis.node.lxd.LXDNode.interfaces" title="Permalink to this definition"></a></dt>
 <dd><p>The interfaces (~network cards) of this node.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.node.lxd.LXDNode.dummy_interfaces">
+<span class="sig-name descname"><span class="pre">dummy_interfaces</span></span><a class="headerlink" href="#marvis.node.lxd.LXDNode.dummy_interfaces" title="Permalink to this definition"></a></dt>
+<dd><p>The dummy interfaces (~network cards of type dummy) of this node.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.node.lxd.LXDNode.routing_configs">
+<span class="sig-name descname"><span class="pre">routing_configs</span></span><a class="headerlink" href="#marvis.node.lxd.LXDNode.routing_configs" title="Permalink to this definition"></a></dt>
+<dd><p>A list of additional routing configurations for this node.</p>
 </dd></dl>
 
 </dd></dl>

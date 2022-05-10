@@ -74,6 +74,8 @@
 <span></span><span class="sd">&quot;&quot;&quot;Base abstract class for a node.&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 
+<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span>
+
 <span class="kn">from</span> <span class="nn">ns</span> <span class="kn">import</span> <span class="n">core</span><span class="p">,</span> <span class="n">csma</span><span class="p">,</span> <span class="n">network</span><span class="p">,</span> <span class="n">wifi</span><span class="p">,</span> <span class="n">mobility</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
@@ -106,7 +108,8 @@
         <span class="n">core</span><span class="o">.</span><span class="n">Names</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ns3_node</span><span class="p">)</span>
 
         <span class="c1">#: The position of the node (used by wifi models and visualization)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">position</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="c1"># TODO GPA: Find a better solution for positioning problem</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">position</span> <span class="o">=</span> <span class="p">(</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
 
         <span class="c1"># Install mobility model for networks</span>
         <span class="n">mobility_helper</span> <span class="o">=</span> <span class="n">mobility</span><span class="o">.</span><span class="n">MobilityHelper</span><span class="p">()</span>
@@ -121,8 +124,16 @@
 
         <span class="c1">#: The interfaces (~network cards) of this node.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">interfaces</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="c1">#: The dummy interfaces (~network cards of type dummy) of this node.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dummy_interfaces</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="c1">#: A list of additional routing configurations for this node.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">routing_configs</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="c1">#: The command executor for running (shell) commands.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">command_executor</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">interface_names</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">interfaces</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">dummy_interfaces</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>
 
 <div class="viewcode-block" id="Node.set_position"><a class="viewcode-back" href="../../../../api/marvis.node.base/#marvis.node.base.Node.set_position">[docs]</a>    <span class="k">def</span> <span class="nf">set_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span> <span class="c1"># pylint: disable=invalid-name</span>
         <span class="sd">&quot;&quot;&quot;Set the position of the node and updates the mobitlity model.</span>
@@ -156,12 +167,12 @@
 <span class="sd">            If no name is supplied, the function works out</span>
 <span class="sd">            a name by appending a number to the prefix.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">interfaces</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">interface_names</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Interface </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1"> already added&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">256</span><span class="p">):</span>
                 <span class="n">test</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;ns3-</span><span class="si">{</span><span class="n">prefix</span><span class="si">}{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span>
-                <span class="k">if</span> <span class="n">test</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">interfaces</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">test</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">interface_names</span><span class="p">:</span>
                     <span class="n">name</span> <span class="o">=</span> <span class="n">test</span>
                     <span class="k">break</span>
             <span class="k">assert</span> <span class="n">name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
@@ -169,6 +180,50 @@
         <span class="c1"># Set the name. The name can e.g. be used in a container.</span>
         <span class="n">interface</span><span class="o">.</span><span class="n">ifname</span> <span class="o">=</span> <span class="n">name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">interfaces</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">interface</span></div>
+
+<div class="viewcode-block" id="Node.add_dummy_interface"><a class="viewcode-back" href="../../../../api/marvis.node.base/#marvis.node.base.Node.add_dummy_interface">[docs]</a>    <span class="k">def</span> <span class="nf">add_dummy_interface</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dummy_interface</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;dummy&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Add a dummy interface to the node.</span>
+
+<span class="sd">        *Warning:* Do not call this function manually.</span>
+<span class="sd">            The functionality is handled by the network and channels.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        interface : :class:`.Interface`</span>
+<span class="sd">            The interface to add.</span>
+<span class="sd">        name : str</span>
+<span class="sd">            The name of the interface.</span>
+<span class="sd">        prefix : str</span>
+<span class="sd">            If no name is supplied, the function works out</span>
+<span class="sd">            a name by appending a number to the prefix.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">interface_names</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Dummy interface </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1"> already added&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">256</span><span class="p">):</span>
+                <span class="n">test</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;ns3-</span><span class="si">{</span><span class="n">prefix</span><span class="si">}{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span>
+                <span class="k">if</span> <span class="n">test</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">interface_names</span><span class="p">:</span>
+                    <span class="n">name</span> <span class="o">=</span> <span class="n">test</span>
+                    <span class="k">break</span>
+            <span class="k">assert</span> <span class="n">name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Added dummy interface </span><span class="si">%s</span><span class="s1"> to node </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="c1"># Set the name. The name can e.g. be used in a container.</span>
+        <span class="n">dummy_interface</span><span class="o">.</span><span class="n">ifname</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dummy_interfaces</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">dummy_interface</span></div>
+
+<div class="viewcode-block" id="Node.add_routing"><a class="viewcode-back" href="../../../../api/marvis.node.base/#marvis.node.base.Node.add_routing">[docs]</a>    <span class="k">def</span> <span class="nf">add_routing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">routing_config</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Add a routing rule to configure routing inside the Node.</span>
+<span class="sd">        The rule will be activated will preparing the Node.</span>
+
+<span class="sd">        *Warning:* Do not call this function manually.</span>
+<span class="sd">            The functionality is handled by the network and channels.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        rule : :class:`.RoutingRule`</span>
+<span class="sd">            The routing to be configured on Node prepare.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">routing_configs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">routing_config</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Node.prepare"><a class="viewcode-back" href="../../../../api/marvis.node.base/#marvis.node.base.Node.prepare">[docs]</a>    <span class="k">def</span> <span class="nf">prepare</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">simulation</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Do all neccesary steps to prepare a node for the simulation.</span>

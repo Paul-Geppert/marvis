@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>marvis.mobility_input &mdash; marvis 0.2.0 - thesis documentation</title>
+  <title>marvis.routing_config &mdash; marvis 0.2.0 - thesis documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
@@ -20,8 +20,8 @@
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex/" />
     <link rel="search" title="Search" href="../../search/" />
-    <link rel="next" title="marvis.mobility_input.mobility_input" href="../marvis.mobility_input.mobility_input/" />
-    <link rel="prev" title="marvis.interface" href="../marvis.interface/" /> 
+    <link rel="next" title="marvis.scenario" href="../marvis.scenario/" />
+    <link rel="prev" title="marvis.node.switch" href="../marvis.node.switch/" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -54,14 +54,10 @@
 <li class="toctree-l3"><a class="reference internal" href="../marvis.context/">marvis.context</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../marvis.events/">marvis.events</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../marvis.interface/">marvis.interface</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">marvis.mobility_input</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../marvis.mobility_input.mobility_input/">marvis.mobility_input.mobility_input</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../marvis.mobility_input.sumo/">marvis.mobility_input.sumo</a></li>
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="../marvis.mobility_input/">marvis.mobility_input</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../marvis.network/">marvis.network</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../marvis.node/">marvis.node</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../marvis.routing_config/">marvis.routing_config</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">marvis.routing_config</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../marvis.scenario/">marvis.scenario</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../marvis.simulation/">marvis.simulation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../marvis.util/">marvis.util</a></li>
@@ -88,7 +84,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../" class="icon icon-home"></a> &raquo;</li>
           <li><a href="../">API Reference</a> &raquo;</li>
-      <li>marvis.mobility_input</li>
+      <li>marvis.routing_config</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -97,24 +93,59 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-marvis.mobility_input">
-<span id="marvis-mobility-input"></span><h1>marvis.mobility_input<a class="headerlink" href="#module-marvis.mobility_input" title="Permalink to this headline"></a></h1>
-<p>MobilityInputs describe how external simulation interfaces move nodes.</p>
+  <section id="module-marvis.routing_config">
+<span id="marvis-routing-config"></span><h1>marvis.routing_config<a class="headerlink" href="#module-marvis.routing_config" title="Permalink to this headline"></a></h1>
+<p>Describes a route config for traffic on the Node.</p>
 <table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="../marvis.mobility_input.mobility_input/#module-marvis.mobility_input.mobility_input" title="marvis.mobility_input.mobility_input"><code class="xref py py-obj docutils literal notranslate"><span class="pre">marvis.mobility_input.mobility_input</span></code></a></p></td>
-<td><p>Base abstract class for co-simulation positional input.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../marvis.mobility_input.sumo/#module-marvis.mobility_input.sumo" title="marvis.mobility_input.sumo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">marvis.mobility_input.sumo</span></code></a></p></td>
-<td><p>SUMO co-simulation.</p></td>
+</tbody>
+</table>
+<p class="rubric">Classes</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#marvis.routing_config.RoutingConfig" title="marvis.routing_config.RoutingConfig"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RoutingConfig</span></code></a></p></td>
+<td><p>The RoutingConfig describes a routing config on the Node.</p></td>
 </tr>
 </tbody>
 </table>
 <div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl class="py class">
+<dt class="sig sig-object py" id="marvis.routing_config.RoutingConfig">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">marvis.routing_config.</span></span><span class="sig-name descname"><span class="pre">RoutingConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dst</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gateway</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/marvis/routing_config/#RoutingConfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#marvis.routing_config.RoutingConfig" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>The RoutingConfig describes a routing config on the Node.
+At the moment, only ADD operation is supported.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>node</strong> (<a class="reference internal" href="../marvis.node.base/#marvis.node.base.Node" title="marvis.node.base.Node"><code class="xref py py-class docutils literal notranslate"><span class="pre">Node</span></code></a>) – The node to connect the interface to.</p></li>
+<li><p><strong>dst</strong> (<em>str</em>) – The destination IP or subnet, e.g. 192.168.0.0/16.</p></li>
+<li><p><strong>gateway</strong> (<a class="reference internal" href="../marvis.interface/#marvis.interface.Interface" title="marvis.interface.Interface"><code class="xref py py-class docutils literal notranslate"><span class="pre">Interface</span></code></a> | str) – The network interface or the gateway IP address to connect to.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="marvis.routing_config.RoutingConfig.setup">
+<span class="sig-name descname"><span class="pre">setup</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/marvis/routing_config/#RoutingConfig.setup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#marvis.routing_config.RoutingConfig.setup" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<p class="rubric">Inheritance Diagramm</p>
+<div class="graphviz"><img src="../../_images/inheritance-c785b1dfdf26f44689ec058eb96aea5984b068a5.png" alt="Inheritance diagram of marvis.routing_config" usemap="#inheritance7f97b80970" class="inheritance graphviz" /></div>
+<map id="inheritance7f97b80970" name="inheritance7f97b80970">
+<area shape="rect" id="node1" href="#marvis.routing_config.RoutingConfig" target="_top" title="The RoutingConfig describes a routing config on the Node." alt="" coords="5,5,263,31"/>
+</map><div class="line-block">
 <div class="line"><br /></div>
 </div>
 </section>
@@ -123,8 +154,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../marvis.interface/" class="btn btn-neutral float-left" title="marvis.interface" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../marvis.mobility_input.mobility_input/" class="btn btn-neutral float-right" title="marvis.mobility_input.mobility_input" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../marvis.node.switch/" class="btn btn-neutral float-left" title="marvis.node.switch" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../marvis.scenario/" class="btn btn-neutral float-right" title="marvis.scenario" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
