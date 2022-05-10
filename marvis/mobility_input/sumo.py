@@ -58,6 +58,19 @@ class SumoMobilityProvider(MobilityProvider):
         self.lock = lock
         self.logger = logging.getLogger(__name__ + ".mobility_provider")
 
+    def setVehicleSpeedMode(self, vehId, sm):
+        self.lock.acquire()
+
+        try:
+            traci.vehicle.setSpeedMode(vehId, sm)
+        except traci.exceptions.TraCIException as e:
+            self.logger.error(f"Caught TraCI exception. {e.getType()}: {e} Command: {e.getCommand()}")
+        except traci.exceptions.FatalTraCIError as e:
+            self.logger.error(f"Fatal TraCI error caught for {self.name}. Reason: {e}.")
+        except Exception:
+            pass
+        self.lock.release()
+
     def getVehicleDetails(self, vehId):
         self.lock.acquire()
 
