@@ -19,7 +19,7 @@ class Interface:
     ns3_device
         The ns-3 equivalent of the interface.
     address : str
-        An IP address.
+        One IP address of this interface.
     mac_address : str
         An MAC address. If :code:`None`, a random MAC address will be assigned internally.
         **Warning:** You may need to set the MAC address in order to reach your nodes correctly.
@@ -27,7 +27,7 @@ class Interface:
     """
     __counter = 0
 
-    def __init__(self, node, ns3_device, address, mac_address=None):
+    def __init__(self, node, ns3_device, address=None, mac_address=None):
         #: A unique number identifying the interface.
         self.number = Interface.__counter
         Interface.__counter += 1
@@ -36,8 +36,10 @@ class Interface:
         self.node = node
         #: The ns-3 equivalent of the interface.
         self.ns3_device = ns3_device
-        #: The interface's IP
-        self.address = address
+        #: The interface's IP-Adresses
+        self.addresses = []
+        if address is not None:
+            self.addresses.append(address)
         #: The name of the interface. This will be set by in :func:`.Node.add_interface()`.
         self.ifname = None
         #: The MAC address of this interface.
@@ -105,6 +107,10 @@ class Interface:
             A PCAP log file name.
         """
         return f'{self.node.name}.{self.ifname}.pcap'
+
+    def add_address(self, address):
+        """Append an address for this interface."""
+        self.addresses.append(address)
 
     def setup_bridge(self):
         """Setup a bridge for adding a tap later on."""
@@ -208,7 +214,8 @@ class Interface:
         """
         ipr = IPRoute()
 
-        logger.debug('Bind veth %s to %s at %s', self.veth_name, ifname, self.address)
         index = ipr.link_lookup(ifname=ifname)[0]
-        ipr.addr('add', index=index, address=str(self.address.ip), mask=self.address.network.prefixlen)
+        for address in self.addresses:
+            logger.debug('Bind veth %s to %s at %s', self.veth_name, ifname, address)
+            ipr.addr('add', index=index, address=str(address.ip), mask=address.network.prefixlen)
         ipr.link('set', index=index, state='up')

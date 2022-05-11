@@ -21,7 +21,7 @@ class SwitchNode(Node):
         self.bridge_device = bridge_helper.Install(self.name, network.NetDeviceContainer()).Get(0)
 
     def add_interface(self, interface, *args, **kwargs):  # pylint: disable=signature-differs
-        assert interface.address is None, 'Bridges may not have IP addresses.'
+        assert len(interface.addresses) == 0, 'Bridges may not have IP addresses.'
         super().add_interface(interface, *args, **kwargs)
         self.bridge_device.AddBridgePort(interface.ns3_device)
 
