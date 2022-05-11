@@ -7,7 +7,7 @@ import os
 from ns import buildings, config_store, core, internet, lte, mobility, network as ns_net
 
 from .channel import Channel
-from ..interface import DummyInterface, Interface
+from ..interface import Interface
 from ..routing_config import RoutingConfig
 
 logger = logging.getLogger(__name__)
