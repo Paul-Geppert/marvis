@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>marvis.channel.wifi &mdash; marvis 0.2.0 - feature/additional_addresses_for_interface documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="https://diselab.github.io/marvis/versions.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex/" />
+    <link rel="search" title="Search" href="../../search/" />
+    <link rel="next" title="marvis.command_executor" href="../marvis.command_executor/" />
+    <link rel="prev" title="marvis.channel.csma" href="../marvis.channel.csma/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../" class="icon icon-home"> marvis
+          </a>
+              <div class="version">
+                0.2.0 - feature/additional_addresses_for_interface
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../installation/">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sumo/">Using SUMO With marvis</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../#module-marvis">marvis</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../marvis.argparse/">marvis.argparse</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../marvis.channel/">marvis.channel</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../marvis.channel.channel/">marvis.channel.channel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../marvis.channel.csma/">marvis.channel.csma</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">marvis.channel.wifi</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../marvis.command_executor/">marvis.command_executor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../marvis.context/">marvis.context</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../marvis.events/">marvis.events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../marvis.interface/">marvis.interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../marvis.mobility_input/">marvis.mobility_input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../marvis.network/">marvis.network</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../marvis.node/">marvis.node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../marvis.scenario/">marvis.scenario</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../marvis.simulation/">marvis.simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../marvis.util/">marvis.util</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../marvis.visualization/">marvis.visualization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../marvis.workflow/">marvis.workflow</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../">marvis</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../">API Reference</a> &raquo;</li>
+          <li><a href="../marvis.channel/">marvis.channel</a> &raquo;</li>
+      <li>marvis.channel.wifi</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-marvis.channel.wifi">
+<span id="marvis-channel-wifi"></span><h1>marvis.channel.wifi<a class="headerlink" href="#module-marvis.channel.wifi" title="Permalink to this headline"></a></h1>
+<p>Wireless channel.</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+</tbody>
+</table>
+<p class="rubric">Classes</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#marvis.channel.wifi.WiFiChannel" title="marvis.channel.wifi.WiFiChannel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WiFiChannel</span></code></a></p></td>
+<td><p>A WiFiChannel is a physical (but of course wireless) connection between two or more wireless devices.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl class="py class">
+<dt class="sig sig-object py" id="marvis.channel.wifi.WiFiChannel">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">marvis.channel.wifi.</span></span><span class="sig-name descname"><span class="pre">WiFiChannel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">network</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nodes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frequency</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">40</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">antennas</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tx_power</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">standard</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard" title="marvis.channel.wifi.WiFiChannel.WiFiStandard"><span class="pre">marvis.channel.wifi.WiFiChannel.WiFiStandard</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">WiFiStandard.WIFI_802_11b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_rate</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#marvis.channel.wifi.WiFiChannel.WiFiDataRate" title="marvis.channel.wifi.WiFiChannel.WiFiDataRate"><span class="pre">marvis.channel.wifi.WiFiChannel.WiFiDataRate</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">WiFiDataRate.DSSS_RATE_11Mbps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delay</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'0ms'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/marvis/channel/wifi/#WiFiChannel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#marvis.channel.wifi.WiFiChannel" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../marvis.channel.channel/#marvis.channel.channel.Channel" title="marvis.channel.channel.Channel"><code class="xref py py-class docutils literal notranslate"><span class="pre">marvis.channel.channel.Channel</span></code></a></p>
+<p>A WiFiChannel is a physical (but of course wireless) connection
+between two or more wireless devices.</p>
+<p>Further information can be found reading the
+<a class="reference external" href="https://www.nsnam.org/doxygen/wifi-phy_8cc_source.html">ns-3 source here</a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>channel</strong> (<em>int</em>) – The WiFi channel to use.
+This will be <strong>ignored</strong> if frequency is set.</p></li>
+<li><p><strong>frequency</strong> (<em>int</em>) – The frequency of the wireless channel in MHz.</p></li>
+<li><p><strong>channel_width</strong> (<em>int</em>) – The width of the channel in MHz.
+Valid values are <code class="code docutils literal notranslate"><span class="pre">5</span></code>, <code class="code docutils literal notranslate"><span class="pre">10</span></code>, <code class="code docutils literal notranslate"><span class="pre">20</span></code>, <code class="code docutils literal notranslate"><span class="pre">22</span></code>, <code class="code docutils literal notranslate"><span class="pre">40</span></code>, <code class="code docutils literal notranslate"><span class="pre">80</span></code>, <code class="code docutils literal notranslate"><span class="pre">160</span></code>.</p></li>
+<li><p><strong>antennas</strong> (<em>int</em>) – The number of antennas / spatial streams to use.</p></li>
+<li><p><strong>tx_power</strong> (<em>float</em>) – The sending power in dBm.</p></li>
+<li><p><strong>standard</strong> (<a class="reference internal" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard" title="marvis.channel.wifi.WiFiChannel.WiFiStandard"><code class="xref py py-class docutils literal notranslate"><span class="pre">WiFiStandard</span></code></a>) – The WiFi standard to use.</p></li>
+<li><p><strong>data_rate</strong> (<a class="reference internal" href="#marvis.channel.wifi.WiFiChannel.WiFiDataRate" title="marvis.channel.wifi.WiFiChannel.WiFiDataRate"><code class="xref py py-class docutils literal notranslate"><span class="pre">WiFiDataRate</span></code></a>) – The WiFi data rate to use. Please make sure to pick a valid data rate for your <code class="code docutils literal notranslate"><span class="pre">standard</span></code>.</p></li>
+<li><p><strong>delay</strong> (<em>str</em>) – A time for delay in the channel in seconds (10s) or milliseconds (10ms) at 100m distance.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="marvis.channel.wifi.WiFiChannel.WiFiStandard">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">WiFiStandard</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/marvis/channel/wifi/#WiFiChannel.WiFiStandard"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>All available WiFi standards.</p>
+<p>See here for further information: <a class="reference external" href="https://en.wikipedia.org/wiki/IEEE_802.11">https://en.wikipedia.org/wiki/IEEE_802.11</a>.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11a">
+<span class="sig-name descname"><span class="pre">WIFI_802_11a</span></span><em class="property"> <span class="pre">=</span> <span class="pre">0</span></em><a class="headerlink" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11a" title="Permalink to this definition"></a></dt>
+<dd><p>The first WiFi standard from 1999.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11b">
+<span class="sig-name descname"><span class="pre">WIFI_802_11b</span></span><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em><a class="headerlink" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11b" title="Permalink to this definition"></a></dt>
+<dd><p>Standard with maximum raw data rate of 11 Mbit/s.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11g">
+<span class="sig-name descname"><span class="pre">WIFI_802_11g</span></span><em class="property"> <span class="pre">=</span> <span class="pre">2</span></em><a class="headerlink" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11g" title="Permalink to this definition"></a></dt>
+<dd><p>Standard with maximum raw bitrate of 54 Mbit/s in 2.4GHz band.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11n">
+<span class="sig-name descname"><span class="pre">WIFI_802_11n</span></span><em class="property"> <span class="pre">=</span> <span class="pre">7</span></em><a class="headerlink" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11n" title="Permalink to this definition"></a></dt>
+<dd><p>Standard from 2009 in 2.4GHz band.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11n_5G">
+<span class="sig-name descname"><span class="pre">WIFI_802_11n_5G</span></span><em class="property"> <span class="pre">=</span> <span class="pre">8</span></em><a class="headerlink" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11n_5G" title="Permalink to this definition"></a></dt>
+<dd><p>Standard from 2009 in 5GHz band.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11ac">
+<span class="sig-name descname"><span class="pre">WIFI_802_11ac</span></span><em class="property"> <span class="pre">=</span> <span class="pre">10</span></em><a class="headerlink" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11ac" title="Permalink to this definition"></a></dt>
+<dd><p>Standard from 2013.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11ax">
+<span class="sig-name descname"><span class="pre">WIFI_802_11ax</span></span><em class="property"> <span class="pre">=</span> <span class="pre">11</span></em><a class="headerlink" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11ax" title="Permalink to this definition"></a></dt>
+<dd><p>“WiFi 6”.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11p">
+<span class="sig-name descname"><span class="pre">WIFI_802_11p</span></span><em class="property"> <span class="pre">=</span> <span class="pre">3</span></em><a class="headerlink" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11p" title="Permalink to this definition"></a></dt>
+<dd><p>Wireless Access in Vehicular Environments (WAVE).</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="marvis.channel.wifi.WiFiChannel.WiFiDataRate">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">WiFiDataRate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/marvis/channel/wifi/#WiFiChannel.WiFiDataRate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#marvis.channel.wifi.WiFiChannel.WiFiDataRate" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>All available WiFi data rates.</p>
+<p>Choosing the correct and best data rate depends on the standard you are using.
+The data rate list is incomplete. Please consider reading the ns-3 source
+<a class="reference external" href="https://gitlab.com/nsnam/ns-3-dev/blob/master/src/wifi/model/wifi-phy.cc">here</a>.
+You can pass another valid string to the channel, too.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.channel.wifi.WiFiChannel.WiFiDataRate.OFDM_RATE_6Mbps">
+<span class="sig-name descname"><span class="pre">OFDM_RATE_6Mbps</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'OfdmRate6Mbps'</span></em><a class="headerlink" href="#marvis.channel.wifi.WiFiChannel.WiFiDataRate.OFDM_RATE_6Mbps" title="Permalink to this definition"></a></dt>
+<dd><p>Use with <a class="reference internal" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11a" title="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11a"><code class="xref py py-attr docutils literal notranslate"><span class="pre">WiFiStandard.WIFI_802_11a</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.channel.wifi.WiFiChannel.WiFiDataRate.OFDM_RATE_9Mbps">
+<span class="sig-name descname"><span class="pre">OFDM_RATE_9Mbps</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'OfdmRate9Mbps'</span></em><a class="headerlink" href="#marvis.channel.wifi.WiFiChannel.WiFiDataRate.OFDM_RATE_9Mbps" title="Permalink to this definition"></a></dt>
+<dd><p>Use with <a class="reference internal" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11a" title="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11a"><code class="xref py py-attr docutils literal notranslate"><span class="pre">WiFiStandard.WIFI_802_11a</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.channel.wifi.WiFiChannel.WiFiDataRate.OFDM_RATE_12Mbps">
+<span class="sig-name descname"><span class="pre">OFDM_RATE_12Mbps</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'OfdmRate12Mbps'</span></em><a class="headerlink" href="#marvis.channel.wifi.WiFiChannel.WiFiDataRate.OFDM_RATE_12Mbps" title="Permalink to this definition"></a></dt>
+<dd><p>Use with <a class="reference internal" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11a" title="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11a"><code class="xref py py-attr docutils literal notranslate"><span class="pre">WiFiStandard.WIFI_802_11a</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.channel.wifi.WiFiChannel.WiFiDataRate.OFDM_RATE_18Mbps">
+<span class="sig-name descname"><span class="pre">OFDM_RATE_18Mbps</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'OfdmRate18Mbps'</span></em><a class="headerlink" href="#marvis.channel.wifi.WiFiChannel.WiFiDataRate.OFDM_RATE_18Mbps" title="Permalink to this definition"></a></dt>
+<dd><p>Use with <a class="reference internal" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11a" title="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11a"><code class="xref py py-attr docutils literal notranslate"><span class="pre">WiFiStandard.WIFI_802_11a</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.channel.wifi.WiFiChannel.WiFiDataRate.OFDM_RATE_24Mbps">
+<span class="sig-name descname"><span class="pre">OFDM_RATE_24Mbps</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'OfdmRate24Mbps'</span></em><a class="headerlink" href="#marvis.channel.wifi.WiFiChannel.WiFiDataRate.OFDM_RATE_24Mbps" title="Permalink to this definition"></a></dt>
+<dd><p>Use with <a class="reference internal" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11a" title="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11a"><code class="xref py py-attr docutils literal notranslate"><span class="pre">WiFiStandard.WIFI_802_11a</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.channel.wifi.WiFiChannel.WiFiDataRate.OFDM_RATE_36Mbps">
+<span class="sig-name descname"><span class="pre">OFDM_RATE_36Mbps</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'OfdmRate36Mbps'</span></em><a class="headerlink" href="#marvis.channel.wifi.WiFiChannel.WiFiDataRate.OFDM_RATE_36Mbps" title="Permalink to this definition"></a></dt>
+<dd><p>Use with <a class="reference internal" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11a" title="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11a"><code class="xref py py-attr docutils literal notranslate"><span class="pre">WiFiStandard.WIFI_802_11a</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.channel.wifi.WiFiChannel.WiFiDataRate.OFDM_RATE_48Mbps">
+<span class="sig-name descname"><span class="pre">OFDM_RATE_48Mbps</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'OfdmRate48Mbps'</span></em><a class="headerlink" href="#marvis.channel.wifi.WiFiChannel.WiFiDataRate.OFDM_RATE_48Mbps" title="Permalink to this definition"></a></dt>
+<dd><p>Use with <a class="reference internal" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11a" title="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11a"><code class="xref py py-attr docutils literal notranslate"><span class="pre">WiFiStandard.WIFI_802_11a</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.channel.wifi.WiFiChannel.WiFiDataRate.OFDM_RATE_54Mbps">
+<span class="sig-name descname"><span class="pre">OFDM_RATE_54Mbps</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'OfdmRate54Mbps'</span></em><a class="headerlink" href="#marvis.channel.wifi.WiFiChannel.WiFiDataRate.OFDM_RATE_54Mbps" title="Permalink to this definition"></a></dt>
+<dd><p>Use with <a class="reference internal" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11a" title="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11a"><code class="xref py py-attr docutils literal notranslate"><span class="pre">WiFiStandard.WIFI_802_11a</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.channel.wifi.WiFiChannel.WiFiDataRate.DSSS_RATE_1Mbps">
+<span class="sig-name descname"><span class="pre">DSSS_RATE_1Mbps</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'DsssRate1Mbps'</span></em><a class="headerlink" href="#marvis.channel.wifi.WiFiChannel.WiFiDataRate.DSSS_RATE_1Mbps" title="Permalink to this definition"></a></dt>
+<dd><p>Use with <a class="reference internal" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11b" title="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11b"><code class="xref py py-attr docutils literal notranslate"><span class="pre">WiFiStandard.WIFI_802_11b</span></code></a>, <a class="reference internal" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11g" title="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11g"><code class="xref py py-attr docutils literal notranslate"><span class="pre">WiFiStandard.WIFI_802_11g</span></code></a>,
+<a class="reference internal" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11ac" title="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11ac"><code class="xref py py-attr docutils literal notranslate"><span class="pre">WiFiStandard.WIFI_802_11ac</span></code></a> or <a class="reference internal" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11ax" title="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11ax"><code class="xref py py-attr docutils literal notranslate"><span class="pre">WiFiStandard.WIFI_802_11ax</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.channel.wifi.WiFiChannel.WiFiDataRate.DSSS_RATE_2Mbps">
+<span class="sig-name descname"><span class="pre">DSSS_RATE_2Mbps</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'DsssRate2Mbps'</span></em><a class="headerlink" href="#marvis.channel.wifi.WiFiChannel.WiFiDataRate.DSSS_RATE_2Mbps" title="Permalink to this definition"></a></dt>
+<dd><p>Use with <a class="reference internal" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11b" title="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11b"><code class="xref py py-attr docutils literal notranslate"><span class="pre">WiFiStandard.WIFI_802_11b</span></code></a>, <a class="reference internal" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11g" title="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11g"><code class="xref py py-attr docutils literal notranslate"><span class="pre">WiFiStandard.WIFI_802_11g</span></code></a>,
+<a class="reference internal" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11ac" title="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11ac"><code class="xref py py-attr docutils literal notranslate"><span class="pre">WiFiStandard.WIFI_802_11ac</span></code></a> or <a class="reference internal" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11ax" title="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11ax"><code class="xref py py-attr docutils literal notranslate"><span class="pre">WiFiStandard.WIFI_802_11ax</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.channel.wifi.WiFiChannel.WiFiDataRate.DSSS_RATE_5_5Mbps">
+<span class="sig-name descname"><span class="pre">DSSS_RATE_5_5Mbps</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'DsssRate5_5Mbps'</span></em><a class="headerlink" href="#marvis.channel.wifi.WiFiChannel.WiFiDataRate.DSSS_RATE_5_5Mbps" title="Permalink to this definition"></a></dt>
+<dd><p>Use with <a class="reference internal" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11b" title="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11b"><code class="xref py py-attr docutils literal notranslate"><span class="pre">WiFiStandard.WIFI_802_11b</span></code></a>, <a class="reference internal" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11g" title="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11g"><code class="xref py py-attr docutils literal notranslate"><span class="pre">WiFiStandard.WIFI_802_11g</span></code></a>,
+<a class="reference internal" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11ac" title="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11ac"><code class="xref py py-attr docutils literal notranslate"><span class="pre">WiFiStandard.WIFI_802_11ac</span></code></a> or <a class="reference internal" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11ax" title="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11ax"><code class="xref py py-attr docutils literal notranslate"><span class="pre">WiFiStandard.WIFI_802_11ax</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.channel.wifi.WiFiChannel.WiFiDataRate.DSSS_RATE_11Mbps">
+<span class="sig-name descname"><span class="pre">DSSS_RATE_11Mbps</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'DsssRate11Mbps'</span></em><a class="headerlink" href="#marvis.channel.wifi.WiFiChannel.WiFiDataRate.DSSS_RATE_11Mbps" title="Permalink to this definition"></a></dt>
+<dd><p>Use with <a class="reference internal" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11b" title="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11b"><code class="xref py py-attr docutils literal notranslate"><span class="pre">WiFiStandard.WIFI_802_11b</span></code></a>, <a class="reference internal" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11g" title="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11g"><code class="xref py py-attr docutils literal notranslate"><span class="pre">WiFiStandard.WIFI_802_11g</span></code></a>,
+<a class="reference internal" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11ac" title="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11ac"><code class="xref py py-attr docutils literal notranslate"><span class="pre">WiFiStandard.WIFI_802_11ac</span></code></a> or <a class="reference internal" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11ax" title="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11ax"><code class="xref py py-attr docutils literal notranslate"><span class="pre">WiFiStandard.WIFI_802_11ax</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.channel.wifi.WiFiChannel.WiFiDataRate.ERP_OFDM_RATE_6Mbps">
+<span class="sig-name descname"><span class="pre">ERP_OFDM_RATE_6Mbps</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'ErpOfdmRate6Mbps'</span></em><a class="headerlink" href="#marvis.channel.wifi.WiFiChannel.WiFiDataRate.ERP_OFDM_RATE_6Mbps" title="Permalink to this definition"></a></dt>
+<dd><p>Use with <a class="reference internal" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11g" title="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11g"><code class="xref py py-attr docutils literal notranslate"><span class="pre">WiFiStandard.WIFI_802_11g</span></code></a>, <a class="reference internal" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11ac" title="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11ac"><code class="xref py py-attr docutils literal notranslate"><span class="pre">WiFiStandard.WIFI_802_11ac</span></code></a> or
+<a class="reference internal" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11ax" title="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11ax"><code class="xref py py-attr docutils literal notranslate"><span class="pre">WiFiStandard.WIFI_802_11ax</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.channel.wifi.WiFiChannel.WiFiDataRate.ERP_OFDM_RATE_9Mbps">
+<span class="sig-name descname"><span class="pre">ERP_OFDM_RATE_9Mbps</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'ErpOfdmRate9Mbps'</span></em><a class="headerlink" href="#marvis.channel.wifi.WiFiChannel.WiFiDataRate.ERP_OFDM_RATE_9Mbps" title="Permalink to this definition"></a></dt>
+<dd><p>Use with <a class="reference internal" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11g" title="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11g"><code class="xref py py-attr docutils literal notranslate"><span class="pre">WiFiStandard.WIFI_802_11g</span></code></a>, <a class="reference internal" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11ac" title="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11ac"><code class="xref py py-attr docutils literal notranslate"><span class="pre">WiFiStandard.WIFI_802_11ac</span></code></a> or
+<a class="reference internal" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11ax" title="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11ax"><code class="xref py py-attr docutils literal notranslate"><span class="pre">WiFiStandard.WIFI_802_11ax</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.channel.wifi.WiFiChannel.WiFiDataRate.ERP_OFDM_RATE_12Mbps">
+<span class="sig-name descname"><span class="pre">ERP_OFDM_RATE_12Mbps</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'ErpOfdmRate12Mbps'</span></em><a class="headerlink" href="#marvis.channel.wifi.WiFiChannel.WiFiDataRate.ERP_OFDM_RATE_12Mbps" title="Permalink to this definition"></a></dt>
+<dd><p>Use with <a class="reference internal" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11g" title="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11g"><code class="xref py py-attr docutils literal notranslate"><span class="pre">WiFiStandard.WIFI_802_11g</span></code></a>, <a class="reference internal" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11ac" title="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11ac"><code class="xref py py-attr docutils literal notranslate"><span class="pre">WiFiStandard.WIFI_802_11ac</span></code></a> or
+<a class="reference internal" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11ax" title="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11ax"><code class="xref py py-attr docutils literal notranslate"><span class="pre">WiFiStandard.WIFI_802_11ax</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.channel.wifi.WiFiChannel.WiFiDataRate.ERP_OFDM_RATE_18Mbps">
+<span class="sig-name descname"><span class="pre">ERP_OFDM_RATE_18Mbps</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'ErpOfdmRate18Mbps'</span></em><a class="headerlink" href="#marvis.channel.wifi.WiFiChannel.WiFiDataRate.ERP_OFDM_RATE_18Mbps" title="Permalink to this definition"></a></dt>
+<dd><p>Use with <a class="reference internal" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11g" title="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11g"><code class="xref py py-attr docutils literal notranslate"><span class="pre">WiFiStandard.WIFI_802_11g</span></code></a>, <a class="reference internal" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11ac" title="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11ac"><code class="xref py py-attr docutils literal notranslate"><span class="pre">WiFiStandard.WIFI_802_11ac</span></code></a> or
+<a class="reference internal" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11ax" title="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11ax"><code class="xref py py-attr docutils literal notranslate"><span class="pre">WiFiStandard.WIFI_802_11ax</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.channel.wifi.WiFiChannel.WiFiDataRate.ERP_OFDM_RATE_24Mbps">
+<span class="sig-name descname"><span class="pre">ERP_OFDM_RATE_24Mbps</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'ErpOfdmRate24Mbps'</span></em><a class="headerlink" href="#marvis.channel.wifi.WiFiChannel.WiFiDataRate.ERP_OFDM_RATE_24Mbps" title="Permalink to this definition"></a></dt>
+<dd><p>Use with <a class="reference internal" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11g" title="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11g"><code class="xref py py-attr docutils literal notranslate"><span class="pre">WiFiStandard.WIFI_802_11g</span></code></a>, <a class="reference internal" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11ac" title="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11ac"><code class="xref py py-attr docutils literal notranslate"><span class="pre">WiFiStandard.WIFI_802_11ac</span></code></a> or
+<a class="reference internal" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11ax" title="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11ax"><code class="xref py py-attr docutils literal notranslate"><span class="pre">WiFiStandard.WIFI_802_11ax</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.channel.wifi.WiFiChannel.WiFiDataRate.ERP_OFDM_RATE_36Mbps">
+<span class="sig-name descname"><span class="pre">ERP_OFDM_RATE_36Mbps</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'ErpOfdmRate36Mbps'</span></em><a class="headerlink" href="#marvis.channel.wifi.WiFiChannel.WiFiDataRate.ERP_OFDM_RATE_36Mbps" title="Permalink to this definition"></a></dt>
+<dd><p>Use with <a class="reference internal" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11g" title="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11g"><code class="xref py py-attr docutils literal notranslate"><span class="pre">WiFiStandard.WIFI_802_11g</span></code></a>, <a class="reference internal" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11ac" title="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11ac"><code class="xref py py-attr docutils literal notranslate"><span class="pre">WiFiStandard.WIFI_802_11ac</span></code></a> or
+<a class="reference internal" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11ax" title="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11ax"><code class="xref py py-attr docutils literal notranslate"><span class="pre">WiFiStandard.WIFI_802_11ax</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.channel.wifi.WiFiChannel.WiFiDataRate.ERP_OFDM_RATE_48Mbps">
+<span class="sig-name descname"><span class="pre">ERP_OFDM_RATE_48Mbps</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'ErpOfdmRate48Mbps'</span></em><a class="headerlink" href="#marvis.channel.wifi.WiFiChannel.WiFiDataRate.ERP_OFDM_RATE_48Mbps" title="Permalink to this definition"></a></dt>
+<dd><p>Use with <a class="reference internal" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11g" title="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11g"><code class="xref py py-attr docutils literal notranslate"><span class="pre">WiFiStandard.WIFI_802_11g</span></code></a>, <a class="reference internal" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11ac" title="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11ac"><code class="xref py py-attr docutils literal notranslate"><span class="pre">WiFiStandard.WIFI_802_11ac</span></code></a> or
+<a class="reference internal" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11ax" title="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11ax"><code class="xref py py-attr docutils literal notranslate"><span class="pre">WiFiStandard.WIFI_802_11ax</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.channel.wifi.WiFiChannel.WiFiDataRate.ERP_OFDM_RATE_54Mbps">
+<span class="sig-name descname"><span class="pre">ERP_OFDM_RATE_54Mbps</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'ErpOfdmRate54Mbps'</span></em><a class="headerlink" href="#marvis.channel.wifi.WiFiChannel.WiFiDataRate.ERP_OFDM_RATE_54Mbps" title="Permalink to this definition"></a></dt>
+<dd><p>Use with <a class="reference internal" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11g" title="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11g"><code class="xref py py-attr docutils literal notranslate"><span class="pre">WiFiStandard.WIFI_802_11g</span></code></a>, <a class="reference internal" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11ac" title="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11ac"><code class="xref py py-attr docutils literal notranslate"><span class="pre">WiFiStandard.WIFI_802_11ac</span></code></a> or
+<a class="reference internal" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11ax" title="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11ax"><code class="xref py py-attr docutils literal notranslate"><span class="pre">WiFiStandard.WIFI_802_11ax</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.channel.wifi.WiFiChannel.WiFiDataRate.OFDM_RATE_BW_3Mbps">
+<span class="sig-name descname"><span class="pre">OFDM_RATE_BW_3Mbps</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'OfdmRate3MbpsBW10MHz'</span></em><a class="headerlink" href="#marvis.channel.wifi.WiFiChannel.WiFiDataRate.OFDM_RATE_BW_3Mbps" title="Permalink to this definition"></a></dt>
+<dd><p>Use with <a class="reference internal" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11p" title="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11p"><code class="xref py py-attr docutils literal notranslate"><span class="pre">WiFiStandard.WIFI_802_11p</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.channel.wifi.WiFiChannel.WiFiDataRate.OFDM_RATE_BW_4_5Mbps">
+<span class="sig-name descname"><span class="pre">OFDM_RATE_BW_4_5Mbps</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'OfdmRate4_5MbpsBW10MHz'</span></em><a class="headerlink" href="#marvis.channel.wifi.WiFiChannel.WiFiDataRate.OFDM_RATE_BW_4_5Mbps" title="Permalink to this definition"></a></dt>
+<dd><p>Use with <a class="reference internal" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11p" title="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11p"><code class="xref py py-attr docutils literal notranslate"><span class="pre">WiFiStandard.WIFI_802_11p</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.channel.wifi.WiFiChannel.WiFiDataRate.OFDM_RATE_BW_6Mbps">
+<span class="sig-name descname"><span class="pre">OFDM_RATE_BW_6Mbps</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'OfdmRate6MbpsBW10MHz'</span></em><a class="headerlink" href="#marvis.channel.wifi.WiFiChannel.WiFiDataRate.OFDM_RATE_BW_6Mbps" title="Permalink to this definition"></a></dt>
+<dd><p>Use with <a class="reference internal" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11p" title="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11p"><code class="xref py py-attr docutils literal notranslate"><span class="pre">WiFiStandard.WIFI_802_11p</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.channel.wifi.WiFiChannel.WiFiDataRate.OFDM_RATE_BW_9Mbps">
+<span class="sig-name descname"><span class="pre">OFDM_RATE_BW_9Mbps</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'OfdmRate9MbpsBW10MHz'</span></em><a class="headerlink" href="#marvis.channel.wifi.WiFiChannel.WiFiDataRate.OFDM_RATE_BW_9Mbps" title="Permalink to this definition"></a></dt>
+<dd><p>Use with <a class="reference internal" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11p" title="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11p"><code class="xref py py-attr docutils literal notranslate"><span class="pre">WiFiStandard.WIFI_802_11p</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.channel.wifi.WiFiChannel.WiFiDataRate.OFDM_RATE_BW_12Mbps">
+<span class="sig-name descname"><span class="pre">OFDM_RATE_BW_12Mbps</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'OfdmRate12MbpsBW10MHz'</span></em><a class="headerlink" href="#marvis.channel.wifi.WiFiChannel.WiFiDataRate.OFDM_RATE_BW_12Mbps" title="Permalink to this definition"></a></dt>
+<dd><p>Use with <a class="reference internal" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11p" title="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11p"><code class="xref py py-attr docutils literal notranslate"><span class="pre">WiFiStandard.WIFI_802_11p</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.channel.wifi.WiFiChannel.WiFiDataRate.OFDM_RATE_BW_18Mbps">
+<span class="sig-name descname"><span class="pre">OFDM_RATE_BW_18Mbps</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'OfdmRate18MbpsBW10MHz'</span></em><a class="headerlink" href="#marvis.channel.wifi.WiFiChannel.WiFiDataRate.OFDM_RATE_BW_18Mbps" title="Permalink to this definition"></a></dt>
+<dd><p>Use with <a class="reference internal" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11p" title="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11p"><code class="xref py py-attr docutils literal notranslate"><span class="pre">WiFiStandard.WIFI_802_11p</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.channel.wifi.WiFiChannel.WiFiDataRate.OFDM_RATE_BW_24Mbps">
+<span class="sig-name descname"><span class="pre">OFDM_RATE_BW_24Mbps</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'OfdmRate24MbpsBW10MHz'</span></em><a class="headerlink" href="#marvis.channel.wifi.WiFiChannel.WiFiDataRate.OFDM_RATE_BW_24Mbps" title="Permalink to this definition"></a></dt>
+<dd><p>Use with <a class="reference internal" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11p" title="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11p"><code class="xref py py-attr docutils literal notranslate"><span class="pre">WiFiStandard.WIFI_802_11p</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.channel.wifi.WiFiChannel.WiFiDataRate.OFDM_RATE_BW_27Mbps">
+<span class="sig-name descname"><span class="pre">OFDM_RATE_BW_27Mbps</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'OfdmRate27MbpsBW10MHz'</span></em><a class="headerlink" href="#marvis.channel.wifi.WiFiChannel.WiFiDataRate.OFDM_RATE_BW_27Mbps" title="Permalink to this definition"></a></dt>
+<dd><p>Use with <a class="reference internal" href="#marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11p" title="marvis.channel.wifi.WiFiChannel.WiFiStandard.WIFI_802_11p"><code class="xref py py-attr docutils literal notranslate"><span class="pre">WiFiStandard.WIFI_802_11p</span></code></a>.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.channel.wifi.WiFiChannel.channel">
+<span class="sig-name descname"><span class="pre">channel</span></span><a class="headerlink" href="#marvis.channel.wifi.WiFiChannel.channel" title="Permalink to this definition"></a></dt>
+<dd><p>The channel to use.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.channel.wifi.WiFiChannel.frequency">
+<span class="sig-name descname"><span class="pre">frequency</span></span><a class="headerlink" href="#marvis.channel.wifi.WiFiChannel.frequency" title="Permalink to this definition"></a></dt>
+<dd><p>The frequency to use.</p>
+<p>This could collide with other WiFi channels.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.channel.wifi.WiFiChannel.channel_width">
+<span class="sig-name descname"><span class="pre">channel_width</span></span><a class="headerlink" href="#marvis.channel.wifi.WiFiChannel.channel_width" title="Permalink to this definition"></a></dt>
+<dd><p>The width of the channel in MHz.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.channel.wifi.WiFiChannel.antennas">
+<span class="sig-name descname"><span class="pre">antennas</span></span><a class="headerlink" href="#marvis.channel.wifi.WiFiChannel.antennas" title="Permalink to this definition"></a></dt>
+<dd><p>The number of antennas to use.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.channel.wifi.WiFiChannel.tx_power">
+<span class="sig-name descname"><span class="pre">tx_power</span></span><a class="headerlink" href="#marvis.channel.wifi.WiFiChannel.tx_power" title="Permalink to this definition"></a></dt>
+<dd><p>The sending power in dBm.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.channel.wifi.WiFiChannel.standard">
+<span class="sig-name descname"><span class="pre">standard</span></span><a class="headerlink" href="#marvis.channel.wifi.WiFiChannel.standard" title="Permalink to this definition"></a></dt>
+<dd><p>The WiFi standard to use.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.channel.wifi.WiFiChannel.data_rate">
+<span class="sig-name descname"><span class="pre">data_rate</span></span><a class="headerlink" href="#marvis.channel.wifi.WiFiChannel.data_rate" title="Permalink to this definition"></a></dt>
+<dd><p>The data rate to use.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.channel.wifi.WiFiChannel.delay">
+<span class="sig-name descname"><span class="pre">delay</span></span><a class="headerlink" href="#marvis.channel.wifi.WiFiChannel.delay" title="Permalink to this definition"></a></dt>
+<dd><p>The delay for the channel</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.channel.wifi.WiFiChannel.wifi">
+<span class="sig-name descname"><span class="pre">wifi</span></span><a class="headerlink" href="#marvis.channel.wifi.WiFiChannel.wifi" title="Permalink to this definition"></a></dt>
+<dd><p>Helper for creating the WiFi channel.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="marvis.channel.wifi.WiFiChannel.nodes">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">nodes</span></span><a class="headerlink" href="#marvis.channel.wifi.WiFiChannel.nodes" title="Permalink to this definition"></a></dt>
+<dd><p>Return all nodes of this channel.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The list of nodes in this channel.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list of <a class="reference internal" href="../marvis.node.base/#marvis.node.base.Node" title="marvis.node.base.Node"><code class="xref py py-class docutils literal notranslate"><span class="pre">Node</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.channel.wifi.WiFiChannel.wifi_mac_helper">
+<span class="sig-name descname"><span class="pre">wifi_mac_helper</span></span><a class="headerlink" href="#marvis.channel.wifi.WiFiChannel.wifi_mac_helper" title="Permalink to this definition"></a></dt>
+<dd><p>Helper for creating MAC layers.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.channel.wifi.WiFiChannel.network">
+<span class="sig-name descname"><span class="pre">network</span></span><a class="headerlink" href="#marvis.channel.wifi.WiFiChannel.network" title="Permalink to this definition"></a></dt>
+<dd><p>The network the channel belongs to.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.channel.wifi.WiFiChannel.channel_name">
+<span class="sig-name descname"><span class="pre">channel_name</span></span><a class="headerlink" href="#marvis.channel.wifi.WiFiChannel.channel_name" title="Permalink to this definition"></a></dt>
+<dd><p>The name of the channel</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.channel.wifi.WiFiChannel.interfaces">
+<span class="sig-name descname"><span class="pre">interfaces</span></span><a class="headerlink" href="#marvis.channel.wifi.WiFiChannel.interfaces" title="Permalink to this definition"></a></dt>
+<dd><p>All Interfaces (~network cards) on this channel.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.channel.wifi.WiFiChannel.ns3_nodes_container">
+<span class="sig-name descname"><span class="pre">ns3_nodes_container</span></span><a class="headerlink" href="#marvis.channel.wifi.WiFiChannel.ns3_nodes_container" title="Permalink to this definition"></a></dt>
+<dd><p>A container with all ns-3 internal nodes.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="marvis.channel.wifi.WiFiChannel.devices_container">
+<span class="sig-name descname"><span class="pre">devices_container</span></span><a class="headerlink" href="#marvis.channel.wifi.WiFiChannel.devices_container" title="Permalink to this definition"></a></dt>
+<dd><p>All ns-3 devices on this channel.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="marvis.channel.wifi.WiFiChannel.prepare">
+<span class="sig-name descname"><span class="pre">prepare</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">simulation</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/marvis/channel/wifi/#WiFiChannel.prepare"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#marvis.channel.wifi.WiFiChannel.prepare" title="Permalink to this definition"></a></dt>
+<dd><p>Prepare the channel (for logging).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>simulation</strong> (<a class="reference internal" href="../marvis.simulation/#marvis.simulation.Simulation" title="marvis.simulation.Simulation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Simulation</span></code></a>) – The simulation to prepare the channel for.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="marvis.channel.wifi.WiFiChannel.set_delay">
+<span class="sig-name descname"><span class="pre">set_delay</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delay</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/marvis/channel/wifi/#WiFiChannel.set_delay"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#marvis.channel.wifi.WiFiChannel.set_delay" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="marvis.channel.wifi.WiFiChannel.set_data_rate">
+<span class="sig-name descname"><span class="pre">set_data_rate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_rate</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/marvis/channel/wifi/#WiFiChannel.set_data_rate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#marvis.channel.wifi.WiFiChannel.set_data_rate" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<p class="rubric">Inheritance Diagramm</p>
+<div class="graphviz"><img src="../../_images/inheritance-85a9debd0f7b8a94ae74a629367e4f57a4695ebd.png" alt="Inheritance diagram of marvis.channel.wifi" usemap="#inheritance2d3cc86f3b" class="inheritance graphviz" /></div>
+<map id="inheritance2d3cc86f3b" name="inheritance2d3cc86f3b">
+<area shape="rect" id="node1" href="../marvis.channel.channel/#marvis.channel.channel.Channel" target="_top" title="The Channel resembles a physical connection of nodes." alt="" coords="5,5,240,31"/>
+<area shape="rect" id="node2" href="#marvis.channel.wifi.WiFiChannel" target="_top" title="A WiFiChannel is a physical (but of course wireless) connection" alt="" coords="6,79,239,104"/>
+</map><div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../marvis.channel.csma/" class="btn btn-neutral float-left" title="marvis.channel.csma" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../marvis.command_executor/" class="btn btn-neutral float-right" title="marvis.command_executor" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Arne Boockmeyer, Martin Michaelis, Felix Gohla.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
