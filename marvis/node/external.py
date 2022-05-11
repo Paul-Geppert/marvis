@@ -48,7 +48,8 @@ class ExternalNode(Node):
         """
         for interface in self.interfaces.values():
             interface.connect_tap_to_bridge(bridge_name=self.bridge)
-            self.setup_remote_address(interface.address)
+            for address in interface.addresses:
+                self.setup_remote_address(address)
 
     def setup_remote_address(self, address):
         """Add the simulation IP address to the remote device.
