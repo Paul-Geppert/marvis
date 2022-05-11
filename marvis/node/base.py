@@ -51,16 +51,10 @@ class Node:
 
         #: The interfaces (~network cards) of this node.
         self.interfaces = dict()
-        #: The dummy interfaces (~network cards of type dummy) of this node.
-        self.dummy_interfaces = dict()
         #: A list of additional routing configurations for this node.
         self.routing_configs = []
         #: The command executor for running (shell) commands.
         self.command_executor = None
-
-    @property
-    def interface_names(self):
-        return [*self.interfaces.keys(), *self.dummy_interfaces.keys()]
 
     def set_position(self, x, y, z=0): # pylint: disable=invalid-name
         """Set the position of the node and updates the mobitlity model.
@@ -94,12 +88,12 @@ class Node:
             If no name is supplied, the function works out
             a name by appending a number to the prefix.
         """
-        if name in self.interface_names:
+        if name in self.interfaces:
             raise ValueError(f'Interface {name} already added')
         if name is None:
             for i in range(256):
                 test = f'ns3-{prefix}{i}'
-                if test not in self.interface_names:
+                if test not in self.interfaces:
                     name = test
                     break
             assert name is not None
@@ -107,36 +101,6 @@ class Node:
         # Set the name. The name can e.g. be used in a container.
         interface.ifname = name
         self.interfaces[name] = interface
-
-    def add_dummy_interface(self, dummy_interface, name=None, prefix='dummy'):
-        """Add a dummy interface to the node.
-
-        *Warning:* Do not call this function manually.
-            The functionality is handled by the network and channels.
-
-        Parameters
-        ----------
-        interface : :class:`.Interface`
-            The interface to add.
-        name : str
-            The name of the interface.
-        prefix : str
-            If no name is supplied, the function works out
-            a name by appending a number to the prefix.
-        """
-        if name in self.interface_names:
-            raise ValueError(f'Dummy interface {name} already added')
-        if name is None:
-            for i in range(256):
-                test = f'ns3-{prefix}{i}'
-                if test not in self.interface_names:
-                    name = test
-                    break
-            assert name is not None
-        logger.debug('Added dummy interface %s to node %s', name, self.name)
-        # Set the name. The name can e.g. be used in a container.
-        dummy_interface.ifname = name
-        self.dummy_interfaces[name] = dummy_interface
 
     def add_routing(self, routing_config):
         """Add a routing rule to configure routing inside the Node.

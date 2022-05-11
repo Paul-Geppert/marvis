@@ -49,10 +49,7 @@ class ExternalNode(Node):
         for interface in self.interfaces.values():
             interface.connect_tap_to_bridge(bridge_name=self.bridge)
             self.setup_remote_address(interface.address)
-        for interface in self.dummy_interfaces.values():
-            self.setup_dummy_interface(interface)
         self.setup_additional_routing()
-
 
     def setup_remote_address(self, address):
         """Add the simulation IP address to the remote device.
@@ -74,30 +71,6 @@ class ExternalNode(Node):
             The address to remove from the external node.
         """
         self.execute_command(['ip', 'addr', 'del', str(address), 'dev', self.ifname], user='root')
-
-
-    def setup_dummy_interface(self, interface):
-        """Add a new interface of type dummy.
-
-        Parameters
-        ----------
-        interface : :code:`DummyInterface`
-            The interface to add.
-        """
-
-        self.execute_command(['ip', 'link', 'add', interface.ifname, 'type', 'dummy'], user='root')
-        self.execute_command(['ip', 'addr', 'add', f'{interface.address}/{interface.mask}', 'dev', interface.ifname], user='root')
-        defer(f'remove dummy interface {interface.ifname}', self.remove_dummy_interface, interface.ifname)
-
-    def remove_interface(self, ifname):
-        """Remove the the interface with name = ifname.
-
-        Parameters
-        ----------
-        ifname : str
-            The name of the interface to remove
-        """
-        self.execute_command(['ip', 'link', 'delete', ifname], user='root')
 
 
     def setup_additional_routing(self):

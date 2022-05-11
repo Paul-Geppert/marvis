@@ -150,7 +150,6 @@ class DockerNode(Node):
         self.build_docker_image()
         self.start_docker_container(simulation.log_directory, simulation.hosts)
         self.setup_host_interfaces()
-        self.setup_dummy_interfaces_in_container()
         self.setup_additional_routing_in_container()
 
     def build_docker_image(self):
@@ -258,11 +257,6 @@ class DockerNode(Node):
             with Namespace(self.container_pid, 'net'):
                 interface.setup_veth_container_end(name)
 
-    def setup_dummy_interfaces_in_container(self):
-        """Add configured interfaces of type dummy in the container."""
-        for name, interface in self.dummy_interfaces.items():
-            with Namespace(self.container_pid, 'net'):
-                interface.setup(name)
 
     def setup_additional_routing_in_container(self):
         """Implement the additional routing rules on the node."""
