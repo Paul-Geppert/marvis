@@ -19,6 +19,8 @@ class CV2XChannel(Channel):
 
     Parameters
     ----------
+    client_base : str
+        The network base address for C-V2X Sidelink addresses.
     frequency : int
         The uplink frequency of the wireless channel in MHz.
     tx_power : float
@@ -42,9 +44,11 @@ class CV2XChannel(Channel):
     """
 
     def __init__(self, network, channel_name, nodes,
-        frequency=54990,
-        tx_power=23.0,
-        numSubchannel=3,
+        sl_ip_base = "225.0.0.0",
+        sl_receiving_ip = "35.0.0.1",
+        frequency = 54990,
+        tx_power = 23.0,
+        numSubchannel = 3,
         sizeSubchannel = 10,
         adjacencyPscchPssch = True,
         probResourceKeep = 0.0,
@@ -175,10 +179,7 @@ class CV2XChannel(Channel):
         # Assign IP adress to UEs
         logger.debug ("Allocating IP addresses and setting up network route...")
 
-        client_mask = ns_net.Ipv4Mask ("255.0.0.0")
-        client_base = ns_net.Ipv4Address ("225.0.0.0")
-        internet.Ipv4AddressGenerator.Init(client_base, client_mask)
-        clientRespondersAddress = internet.Ipv4AddressGenerator.NextAddress (client_mask)
+        cv2x_receiving_ip = ipaddress.ip_interface(f'{sl_receiving_ip}/255.255.255.255')
     
         for i, (connected_node, group) in enumerate(zip(nodes, txGroups)):
             ns3_device = self.ueDevs.Get(i)
@@ -207,27 +208,25 @@ class CV2XChannel(Channel):
             # Create an interface for Marvis to connect the device with the Node
             interface = Interface(node=connected_node.node, ns3_device=ns3_device,
                                   address=ipaddress.ip_interface(f'{str(address)}/{network.netmask}'))
+            interface.add_address(cv2x_receiving_ip)
             self.interfaces.append(interface)
             connected_node.node.add_interface(interface, name=connected_node.ifname)
-            
-            # Create a dummy interface that will hold the IP address to send SL messages to
-            mask_length=client_mask.GetPrefixLength()
-            dummy_interface = DummyInterface(node=connected_node.node, address=str(clientRespondersAddress), mask=mask_length)
-            connected_node.node.add_dummy_interface(dummy_interface, name="cv2x_ip")
 
-            # Add a route config to route all SL traffic via the interface connected to ns3 (and not via the dummy interface)
-            connected_node.node.add_routing(RoutingConfig(connected_node.node, dst=f"{str(client_base)}/{mask_length}", gateway=interface))
+            # Add a route config to route all SL traffic via the interface connected to ns3
+            network_address = ipaddress.ip_network(f'{sl_ip_base}/{network.netmask}', strict=False)
+            cv2x_sidelink_address = ipaddress.ip_address(int(network_address.network_address) + int(base))
+            connected_node.node.add_routing(RoutingConfig(connected_node.node, dst=f"{str(sl_ip_base)}/{network_address.prefixlen}", gateway=interface))
+
+            ns3_cv2x_sidelink_address = ns_net.Ipv4Address(str(cv2x_sidelink_address))
 
             # Create Traffic Flow Templates (TFT) to configure Sidelink Bearers
             groupL2Address = i
             txUe = ns_net.NetDeviceContainer (group.Get(0))
             rxUes = self.lteV2xHelper.RemoveNetDevice (group, txUe.Get (0))
-            tft = lte.LteSlTft (lte.LteSlTft.TRANSMIT, clientRespondersAddress, groupL2Address)
+            tft = lte.LteSlTft (lte.LteSlTft.TRANSMIT, ns3_cv2x_sidelink_address, groupL2Address)
             self.lteV2xHelper.ActivateSidelinkBearer (core.Seconds(0.0), txUe, tft)
-            tft = lte.LteSlTft (lte.LteSlTft.RECEIVE, clientRespondersAddress, groupL2Address)
+            tft = lte.LteSlTft (lte.LteSlTft.RECEIVE, ns3_cv2x_sidelink_address, groupL2Address)
             self.lteV2xHelper.ActivateSidelinkBearer (core.Seconds(0.0), rxUes, tft)
-
-            clientRespondersAddress = internet.Ipv4AddressGenerator.NextAddress (client_mask)
 
         ipv4RoutingHelper = internet.Ipv4StaticRoutingHelper()
 
@@ -282,6 +281,8 @@ class CV2XChannel(Channel):
         for interface in self.interfaces:
             pcap_log_path = os.path.join(simulation.log_directory, interface.pcap_file_name)
             self.lteHelper.EnablePcap(pcap_log_path, interface.ns3_device, True, True)
+            pcap_log_path = os.path.join(simulation.log_directory, "simple-" + interface.pcap_file_name)
+            self.lteHelper.EnablePcap(pcap_log_path, interface.ns3_device, False, True)
 
     def set_delay(self, delay):
         pass
