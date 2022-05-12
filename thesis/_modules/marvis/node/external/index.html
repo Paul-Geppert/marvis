@@ -121,11 +121,9 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">interface</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">interfaces</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
             <span class="n">interface</span><span class="o">.</span><span class="n">connect_tap_to_bridge</span><span class="p">(</span><span class="n">bridge_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">bridge</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">setup_remote_address</span><span class="p">(</span><span class="n">interface</span><span class="o">.</span><span class="n">address</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">interface</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dummy_interfaces</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">setup_dummy_interface</span><span class="p">(</span><span class="n">interface</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">setup_additional_routing</span><span class="p">()</span></div>
-
+            <span class="k">for</span> <span class="n">address</span> <span class="ow">in</span> <span class="n">interface</span><span class="o">.</span><span class="n">addresses</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">setup_remote_address</span><span class="p">(</span><span class="n">address</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">setup_additional_routing</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="ExternalNode.setup_remote_address"><a class="viewcode-back" href="../../../../api/marvis.node.external/#marvis.node.external.ExternalNode.setup_remote_address">[docs]</a>    <span class="k">def</span> <span class="nf">setup_remote_address</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">address</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Add the simulation IP address to the remote device.</span>
@@ -147,30 +145,6 @@
 <span class="sd">            The address to remove from the external node.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">execute_command</span><span class="p">([</span><span class="s1">&#39;ip&#39;</span><span class="p">,</span> <span class="s1">&#39;addr&#39;</span><span class="p">,</span> <span class="s1">&#39;del&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">address</span><span class="p">),</span> <span class="s1">&#39;dev&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ifname</span><span class="p">],</span> <span class="n">user</span><span class="o">=</span><span class="s1">&#39;root&#39;</span><span class="p">)</span></div>
-
-
-<div class="viewcode-block" id="ExternalNode.setup_dummy_interface"><a class="viewcode-back" href="../../../../api/marvis.node.external/#marvis.node.external.ExternalNode.setup_dummy_interface">[docs]</a>    <span class="k">def</span> <span class="nf">setup_dummy_interface</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interface</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Add a new interface of type dummy.</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        interface : :code:`DummyInterface`</span>
-<span class="sd">            The interface to add.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">execute_command</span><span class="p">([</span><span class="s1">&#39;ip&#39;</span><span class="p">,</span> <span class="s1">&#39;link&#39;</span><span class="p">,</span> <span class="s1">&#39;add&#39;</span><span class="p">,</span> <span class="n">interface</span><span class="o">.</span><span class="n">ifname</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">,</span> <span class="s1">&#39;dummy&#39;</span><span class="p">],</span> <span class="n">user</span><span class="o">=</span><span class="s1">&#39;root&#39;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">execute_command</span><span class="p">([</span><span class="s1">&#39;ip&#39;</span><span class="p">,</span> <span class="s1">&#39;addr&#39;</span><span class="p">,</span> <span class="s1">&#39;add&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">interface</span><span class="o">.</span><span class="n">address</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="n">interface</span><span class="o">.</span><span class="n">mask</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;dev&#39;</span><span class="p">,</span> <span class="n">interface</span><span class="o">.</span><span class="n">ifname</span><span class="p">],</span> <span class="n">user</span><span class="o">=</span><span class="s1">&#39;root&#39;</span><span class="p">)</span>
-        <span class="n">defer</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;remove dummy interface </span><span class="si">{</span><span class="n">interface</span><span class="o">.</span><span class="n">ifname</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">remove_dummy_interface</span><span class="p">,</span> <span class="n">interface</span><span class="o">.</span><span class="n">ifname</span><span class="p">)</span></div>
-
-<div class="viewcode-block" id="ExternalNode.remove_interface"><a class="viewcode-back" href="../../../../api/marvis.node.external/#marvis.node.external.ExternalNode.remove_interface">[docs]</a>    <span class="k">def</span> <span class="nf">remove_interface</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ifname</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Remove the the interface with name = ifname.</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        ifname : str</span>
-<span class="sd">            The name of the interface to remove</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">execute_command</span><span class="p">([</span><span class="s1">&#39;ip&#39;</span><span class="p">,</span> <span class="s1">&#39;link&#39;</span><span class="p">,</span> <span class="s1">&#39;delete&#39;</span><span class="p">,</span> <span class="n">ifname</span><span class="p">],</span> <span class="n">user</span><span class="o">=</span><span class="s1">&#39;root&#39;</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="ExternalNode.setup_additional_routing"><a class="viewcode-back" href="../../../../api/marvis.node.external/#marvis.node.external.ExternalNode.setup_additional_routing">[docs]</a>    <span class="k">def</span> <span class="nf">setup_additional_routing</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>

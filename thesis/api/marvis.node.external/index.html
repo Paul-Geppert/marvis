@@ -211,28 +211,6 @@ the device is assigned during simulation.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="marvis.node.external.ExternalNode.setup_dummy_interface">
-<span class="sig-name descname"><span class="pre">setup_dummy_interface</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">interface</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/marvis/node/external/#ExternalNode.setup_dummy_interface"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#marvis.node.external.ExternalNode.setup_dummy_interface" title="Permalink to this definition"></a></dt>
-<dd><p>Add a new interface of type dummy.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>interface</strong> (<code class="code docutils literal notranslate"><span class="pre">DummyInterface</span></code>) – The interface to add.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="marvis.node.external.ExternalNode.remove_interface">
-<span class="sig-name descname"><span class="pre">remove_interface</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ifname</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/marvis/node/external/#ExternalNode.remove_interface"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#marvis.node.external.ExternalNode.remove_interface" title="Permalink to this definition"></a></dt>
-<dd><p>Remove the the interface with name = ifname.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>ifname</strong> (<em>str</em>) – The name of the interface to remove</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="marvis.node.external.ExternalNode.setup_additional_routing">
 <span class="sig-name descname"><span class="pre">setup_additional_routing</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/marvis/node/external/#ExternalNode.setup_additional_routing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#marvis.node.external.ExternalNode.setup_additional_routing" title="Permalink to this definition"></a></dt>
 <dd><p>Implement the additional routing rules.</p>
@@ -245,26 +223,6 @@ the device is assigned during simulation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>command_params</strong> (<em>str[]</em>) – The parameters used to create the route.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="marvis.node.external.ExternalNode.add_dummy_interface">
-<span class="sig-name descname"><span class="pre">add_dummy_interface</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dummy_interface</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'dummy'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#marvis.node.external.ExternalNode.add_dummy_interface" title="Permalink to this definition"></a></dt>
-<dd><p>Add a dummy interface to the node.</p>
-<dl class="simple">
-<dt><em>Warning:</em> Do not call this function manually.</dt><dd><p>The functionality is handled by the network and channels.</p>
-</dd>
-</dl>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>interface</strong> (<a class="reference internal" href="../marvis.interface/#marvis.interface.Interface" title="marvis.interface.Interface"><code class="xref py py-class docutils literal notranslate"><span class="pre">Interface</span></code></a>) – The interface to add.</p></li>
-<li><p><strong>name</strong> (<em>str</em>) – The name of the interface.</p></li>
-<li><p><strong>prefix</strong> (<em>str</em>) – If no name is supplied, the function works out
-a name by appending a number to the prefix.</p></li>
-</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -332,11 +290,6 @@ as this user. <strong>Warning:</strong> Not all nodes support this feature.</p><
 <dd><p>Connect the node back to all channels.</p>
 </dd></dl>
 
-<dl class="py property">
-<dt class="sig sig-object py" id="marvis.node.external.ExternalNode.interface_names">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">interface_names</span></span><a class="headerlink" href="#marvis.node.external.ExternalNode.interface_names" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
 <dl class="py method">
 <dt class="sig sig-object py" id="marvis.node.external.ExternalNode.set_position">
 <span class="sig-name descname"><span class="pre">set_position</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#marvis.node.external.ExternalNode.set_position" title="Permalink to this definition"></a></dt>
@@ -380,12 +333,6 @@ as this user. <strong>Warning:</strong> Not all nodes support this feature.</p><
 <dt class="sig sig-object py" id="marvis.node.external.ExternalNode.interfaces">
 <span class="sig-name descname"><span class="pre">interfaces</span></span><a class="headerlink" href="#marvis.node.external.ExternalNode.interfaces" title="Permalink to this definition"></a></dt>
 <dd><p>The interfaces (~network cards) of this node.</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="marvis.node.external.ExternalNode.dummy_interfaces">
-<span class="sig-name descname"><span class="pre">dummy_interfaces</span></span><a class="headerlink" href="#marvis.node.external.ExternalNode.dummy_interfaces" title="Permalink to this definition"></a></dt>
-<dd><p>The dummy interfaces (~network cards of type dummy) of this node.</p>
 </dd></dl>
 
 <dl class="py attribute">
