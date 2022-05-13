@@ -272,9 +272,13 @@ class SUMOMobilityInput(MobilityInput):
         logger.info('Trying to close SUMO for %s.', self.name)
         # Abort SUMO simulation loop
         self.step_counter = self.steps
+        # Release the lock to stop the RCP server
+        try:
+            self.lock.release()
+        except RuntimeError:
+            # lock was not locked or was released in the meantime
+            pass
         # Stop RPC mobility provider server
         self.rpc_server.stop()
-        if self.lock.locked():
-            self.lock.release()
         # Stop SUMO and TraCI
         traci.close()
