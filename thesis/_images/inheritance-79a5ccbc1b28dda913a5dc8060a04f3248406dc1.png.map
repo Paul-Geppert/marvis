@@ -1,4 +1,0 @@
-<map id="inheritance54e7f03126" name="inheritance54e7f03126">
-<area shape="rect" id="node1" href="../marvis.mobility_input.mobility_input/#marvis.mobility_input.mobility_input.MobilityInput" target="_top" title="A MobilityInput can be used to control multiple node&#39;s positions via an external positional simulation." alt="" coords="5,5,357,31"/>
-<area shape="rect" id="node2" href="#marvis.mobility_input.sumo.SUMOMobilityInput" target="_top" title="SUMOMobilityInput is an interface to the SUMO simulation environment." alt="" coords="15,79,348,104"/>
-</map>
