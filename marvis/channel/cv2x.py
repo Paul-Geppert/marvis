@@ -163,7 +163,6 @@ class CV2XChannel(Channel):
 
         # Required to use NIST 3GPP model
         buildings.BuildingsHelper.Install (self.eNodeB)
-        buildings.BuildingsHelper.Install (ueAllNodes)
         buildings.BuildingsHelper.MakeMobilityModelConsistent ()
 
         # Install LTE devices to all UEs 

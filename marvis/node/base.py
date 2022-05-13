@@ -3,7 +3,7 @@ import logging
 
 from random import randint
 
-from ns import core, csma, network, wifi, mobility
+from ns import buildings, core, csma, network, wifi, mobility
 
 logger = logging.getLogger(__name__)
 
@@ -45,6 +45,11 @@ class Node:
         position_alloc.Add(core.Vector(self.position[0], self.position[1], self.position[2]))
         mobility_helper.SetPositionAllocator(position_alloc)
         mobility_helper.Install(self.ns3_node)
+
+        # CV2XChannel require that nodes are installed at the BuildingsHelper
+        # 
+        # When channels create additional ns-3 nodes: make sure to Install them on the BuildingsHelper as well
+        buildings.BuildingsHelper.Install (self.ns3_node)
 
         #: The color of the node used in the visualization.
         self.color = None
