@@ -61,14 +61,17 @@ class SumoMobilityProvider(MobilityProvider):
     The SumoMobilityProvider will be wrapped by a server to serve traffic requests.
     """
 
-    def __init__(self, lock):
-        # A lock object to access a shared connection
-        # This might be necessary when using TraCI
-        self.lock = lock
+    def __init__(self, next_access_lock, traci_lock):
+        # A lock object to reserve next access to the shared connection
+        self.next_access_lock = next_access_lock
+        # A lock object to use the connection exclusively
+        self.traci_lock = traci_lock
         self.logger = logging.getLogger(__name__ + ".mobility_provider")
 
     def setVehicleSpeedMode(self, vehId, sm):
-        self.lock.acquire()
+        self.next_access_lock.acquire()
+        self.traci_lock.acquire()
+        self.next_access_lock.release()
 
         try:
             traci.vehicle.setSpeedMode(vehId, sm)
@@ -78,10 +81,12 @@ class SumoMobilityProvider(MobilityProvider):
             self.logger.error(f"Fatal TraCI error caught for {self.name}. Reason: {e}.")
         except Exception:
             pass
-        self.lock.release()
+        self.traci_lock.release()
 
     def getVehicleDetails(self, vehId):
-        self.lock.acquire()
+        self.next_access_lock.acquire()
+        self.traci_lock.acquire()
+        self.next_access_lock.release()
 
         try:
             vehicleIsActive = vehId in traci.vehicle.getIDList()
@@ -99,12 +104,15 @@ class SumoMobilityProvider(MobilityProvider):
             self.logger.error(f"Fatal TraCI error caught for {self.name}. Reason: {e}.")
         except Exception:
             pass
-        self.lock.release()
+        self.traci_lock.release()
 
         return vehicle_details
 
     def stopAtEndOfCurrentSegment(self, vehId, duration=0):
-        self.lock.acquire()
+        self.next_access_lock.acquire()
+        self.traci_lock.acquire()
+        self.next_access_lock.release()
+
         try:
             end_of_road_segment = traci.lane.getLength(traci.vehicle.getLaneID(vehId))
             traci.vehicle.setStop(
@@ -120,10 +128,13 @@ class SumoMobilityProvider(MobilityProvider):
             self.logger.error(f"Fatal TraCI error caught for {self.name}. Reason: {e}.")
         except Exception:
             pass
-        self.lock.release()
+        self.traci_lock.release()
 
     def resumeOrCancelStop(self, vehId):
-        self.lock.acquire()
+        self.next_access_lock.acquire()
+        self.traci_lock.acquire()
+        self.next_access_lock.release()
+
         try:
             if traci.vehicle.isStopped(vehId):
                 traci.vehicle.resume(vehId)
@@ -142,7 +153,7 @@ class SumoMobilityProvider(MobilityProvider):
             self.logger.error(f"Fatal TraCI error caught for {self.name}. Reason: {e}.")
         except Exception:
             pass
-        self.lock.release()
+        self.traci_lock.release()
 
 class SUMOMobilityInput(MobilityInput):
     """SUMOMobilityInput is an interface to the SUMO simulation environment.
@@ -207,8 +218,10 @@ class SUMOMobilityInput(MobilityInput):
         self.rpc_server = None
         #: The connection details of the RPC server
         self.rpc_server_config = rpc_server_config
-        #: The lock to acquire traci connection
-        self.lock = NullLock() if USE_LIBSUMO else threading.Lock()
+        #: The lock to reserve next access to the shared traci connection
+        self.next_access_lock = NullLock() if USE_LIBSUMO else threading.Lock()
+        #: The lock to use the traci connection exclusively
+        self.traci_lock = NullLock() if USE_LIBSUMO else threading.Lock()
 
     def prepare(self, simulation):
         """Connect to SUMO server."""
@@ -221,7 +234,7 @@ class SUMOMobilityInput(MobilityInput):
 
         if self.rpc_server_config is not None:
             logger.info(f"Starting RPC server on {self.rpc_server_config[0]}:{self.rpc_server_config[1]}. Logs requests: {self.rpc_server_config[2]}")
-            self.rpc_server = RPCMobilityProviderServer(self.rpc_server_config, SumoMobilityProvider, (self.lock))
+            self.rpc_server = RPCMobilityProviderServer(self.rpc_server_config, SumoMobilityProvider, (self.next_access_lock, self.traci_lock, ))
 
     def start(self):
         """Start a thread stepping through the sumo simulation."""
@@ -229,7 +242,10 @@ class SUMOMobilityInput(MobilityInput):
         def run_sumo():
             try:
                 while self.step_counter < self.steps:
-                    self.lock.acquire()
+                    self.next_access_lock.acquire()
+                    self.traci_lock.acquire()
+                    self.next_access_lock.release()
+
                     traci.simulationStep()
                     step_start_time = time.time()
 
@@ -249,7 +265,7 @@ class SUMOMobilityInput(MobilityInput):
                     self.step_counter = self.step_counter + 1
                     delta_t = traci.simulation.getDeltaT()
                     time_this_step = time.time() - step_start_time
-                    self.lock.release()
+                    self.traci_lock.release()
                     time.sleep(max(0, delta_t - time_this_step))
             except traci.exceptions.TraCIException as e:
                 logger.error(f"Caught TraCI exception. {e.getType()}: {e} Command: {e.getCommand()}")
@@ -283,7 +299,12 @@ class SUMOMobilityInput(MobilityInput):
         self.step_counter = self.steps
         # Release the lock to stop the RCP server
         try:
-            self.lock.release()
+            self.next_access_lock.release()
+        except RuntimeError:
+            # lock was not locked or was released in the meantime
+            pass
+        try:
+            self.traci_lock.release()
         except RuntimeError:
             # lock was not locked or was released in the meantime
             pass

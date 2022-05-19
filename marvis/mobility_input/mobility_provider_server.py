@@ -29,7 +29,7 @@ class RPCMobilityProviderServer:
 
     def run(self, mobility_provider_cl, server, mobility_provider_args):
         """Creates a `MobilityProvider` instance and registers it to serve requests."""
-        mobility_provider_inst = mobility_provider_cl(mobility_provider_args)
+        mobility_provider_inst = mobility_provider_cl(*mobility_provider_args)
         server.register_instance(mobility_provider_inst, allow_dotted_names=True)
         server.serve_forever()
 
