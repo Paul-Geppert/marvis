@@ -45,7 +45,6 @@ class CV2XChannel(Channel):
 
     def __init__(self, network, channel_name, nodes,
         sl_ip_base = "225.0.0.0",
-        sl_receiving_ip = "35.0.0.1",
         frequency = 54990,
         tx_power = 23.0,
         numSubchannel = 3,
@@ -178,8 +177,6 @@ class CV2XChannel(Channel):
         # Assign IP adress to UEs
         logger.debug ("Allocating IP addresses and setting up network route...")
 
-        cv2x_receiving_ip = ipaddress.ip_interface(f'{sl_receiving_ip}/255.255.255.255')
-    
         for i, (connected_node, group) in enumerate(zip(nodes, txGroups)):
             ns3_device = self.ueDevs.Get(i)
 
@@ -207,7 +204,6 @@ class CV2XChannel(Channel):
             # Create an interface for Marvis to connect the device with the Node
             interface = Interface(node=connected_node.node, ns3_device=ns3_device,
                                   address=ipaddress.ip_interface(f'{str(address)}/{network.netmask}'))
-            interface.add_address(cv2x_receiving_ip)
             self.interfaces.append(interface)
             connected_node.node.add_interface(interface, name=connected_node.ifname)
 
