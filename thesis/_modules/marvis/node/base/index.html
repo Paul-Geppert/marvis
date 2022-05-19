@@ -76,7 +76,7 @@
 
 <span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span>
 
-<span class="kn">from</span> <span class="nn">ns</span> <span class="kn">import</span> <span class="n">core</span><span class="p">,</span> <span class="n">csma</span><span class="p">,</span> <span class="n">network</span><span class="p">,</span> <span class="n">wifi</span><span class="p">,</span> <span class="n">mobility</span>
+<span class="kn">from</span> <span class="nn">ns</span> <span class="kn">import</span> <span class="n">buildings</span><span class="p">,</span> <span class="n">core</span><span class="p">,</span> <span class="n">csma</span><span class="p">,</span> <span class="n">network</span><span class="p">,</span> <span class="n">wifi</span><span class="p">,</span> <span class="n">mobility</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
@@ -118,6 +118,11 @@
         <span class="n">position_alloc</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">Vector</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
         <span class="n">mobility_helper</span><span class="o">.</span><span class="n">SetPositionAllocator</span><span class="p">(</span><span class="n">position_alloc</span><span class="p">)</span>
         <span class="n">mobility_helper</span><span class="o">.</span><span class="n">Install</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ns3_node</span><span class="p">)</span>
+
+        <span class="c1"># CV2XChannel require that nodes are installed at the BuildingsHelper</span>
+        <span class="c1"># </span>
+        <span class="c1"># When channels create additional ns-3 nodes: make sure to Install them on the BuildingsHelper as well</span>
+        <span class="n">buildings</span><span class="o">.</span><span class="n">BuildingsHelper</span><span class="o">.</span><span class="n">Install</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ns3_node</span><span class="p">)</span>
 
         <span class="c1">#: The color of the node used in the visualization.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="kc">None</span>
