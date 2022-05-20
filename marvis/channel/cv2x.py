@@ -41,6 +41,8 @@ class CV2XChannel(Channel):
         T1 value of selection window.
     t2 : int
         T2 value of selection window.
+    position_eNodeB : list of int
+        The position of the eNodeB. Should be different than the simulation nodes.
     """
 
     def __init__(self, network, channel_name, nodes,
@@ -54,7 +56,8 @@ class CV2XChannel(Channel):
         mcs = 20,
         pRsvp = 100,
         t1 = 4,
-        t2 = 100
+        t2 = 100,
+        position_eNodeB = (0, 0, 100)
     ):
         super().__init__(network, channel_name, nodes)
 
@@ -146,7 +149,7 @@ class CV2XChannel(Channel):
 
         # Topology eNodeB
         pos_eNB = mobility.ListPositionAllocator()
-        pos_eNB.Add(core.Vector(0, 0, 0))
+        pos_eNB.Add(core.Vector(*position_eNodeB))
 
         # Install mobility eNodeB
         mob_eNB = mobility.MobilityHelper()

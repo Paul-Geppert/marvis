@@ -34,9 +34,8 @@ class Node:
         self.ns3_node = network.Node()
         core.Names.Add(self.name, self.ns3_node)
 
-        #: The position of the node (used by wifi models and visualization)
-        # TODO GPA: Find a better solution for positioning problem
-        self.position = (randint(1, 10), randint(1, 10), 0)
+        #: The position of the node (used by wifi and C-V2X models and visualization)
+        self.position = (0, 0, 0)
 
         # Install mobility model for networks
         mobility_helper = mobility.MobilityHelper()
