@@ -107,9 +107,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">ns3_node</span> <span class="o">=</span> <span class="n">network</span><span class="o">.</span><span class="n">Node</span><span class="p">()</span>
         <span class="n">core</span><span class="o">.</span><span class="n">Names</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ns3_node</span><span class="p">)</span>
 
-        <span class="c1">#: The position of the node (used by wifi models and visualization)</span>
-        <span class="c1"># TODO GPA: Find a better solution for positioning problem</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">position</span> <span class="o">=</span> <span class="p">(</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="c1">#: The position of the node (used by wifi and C-V2X models and visualization)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">position</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 
         <span class="c1"># Install mobility model for networks</span>
         <span class="n">mobility_helper</span> <span class="o">=</span> <span class="n">mobility</span><span class="o">.</span><span class="n">MobilityHelper</span><span class="p">()</span>
