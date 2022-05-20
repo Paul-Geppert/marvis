@@ -132,9 +132,6 @@ class CV2XChannel(Channel):
         self.lteV2xHelper = lte.LteV2xHelper ()
         self.lteV2xHelper.SetLteHelper (self.lteHelper)
 
-        # Configure eNBs' antenna parameters before deploying them.
-        self.lteHelper.SetEnbAntennaModelType ("ns3::NistParabolic3dAntennaModel")
-
         # Set pathloss model
         # FIXME: InstallEnbDevice overrides PathlossModel Frequency with values from Earfcn
         # TODO GPA: Check if this is still an issue
