@@ -21,8 +21,6 @@ class CV2XChannel(Channel):
     ----------
     client_base : str
         The network base address for C-V2X Sidelink addresses.
-    frequency : int
-        The uplink frequency of the wireless channel in MHz.
     tx_power : float
         The transmission power in dBm.
     numSubchannel : int
@@ -47,7 +45,6 @@ class CV2XChannel(Channel):
 
     def __init__(self, network, channel_name, nodes,
         sl_ip_base = "225.0.0.0",
-        frequency = 54990,
         tx_power = 23.0,
         numSubchannel = 3,
         sizeSubchannel = 10,
@@ -133,11 +130,11 @@ class CV2XChannel(Channel):
         self.lteV2xHelper.SetLteHelper (self.lteHelper)
 
         # Set pathloss model
-        # FIXME: InstallEnbDevice overrides PathlossModel Frequency with values from Earfcn
-        # TODO GPA: Check if this is still an issue
         self.lteHelper.SetAttribute ("UseSameUlDlPropagationCondition", core.BooleanValue(True))
-        core.Config.SetDefault ("ns3::LteEnbNetDevice::UlEarfcn", core.StringValue (str(frequency)))
-        # core.Config.SetDefault ("ns3::CniUrbanmicrocellPropagationLossModel::Frequency", core.DoubleValue(5800e6));
+        # The original example (v2x_communication_example.cc) from ns-3_c-v2x overwrites the default value for UlEarfcn.
+        # But as eNodeB are not part of the C-V2X mode 4 communication this should not be necessary and experiments could not find any problems.
+        # Just leaving it here if this might be relevant in the future, for example combining C-V2X with LTE or using C-V2X mode 3.
+        # core.Config.SetDefault ("ns3::LteEnbNetDevice::UlEarfcn", core.StringValue (str(frequency)))
         self.lteHelper.SetAttribute ("PathlossModel", core.StringValue ("ns3::CniUrbanmicrocellPropagationLossModel"))
 
         # Create eNB Container
