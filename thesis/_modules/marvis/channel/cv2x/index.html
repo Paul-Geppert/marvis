@@ -94,8 +94,6 @@
 <span class="sd">    ----------</span>
 <span class="sd">    client_base : str</span>
 <span class="sd">        The network base address for C-V2X Sidelink addresses.</span>
-<span class="sd">    frequency : int</span>
-<span class="sd">        The uplink frequency of the wireless channel in MHz.</span>
 <span class="sd">    tx_power : float</span>
 <span class="sd">        The transmission power in dBm.</span>
 <span class="sd">    numSubchannel : int</span>
@@ -120,7 +118,6 @@
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">network</span><span class="p">,</span> <span class="n">channel_name</span><span class="p">,</span> <span class="n">nodes</span><span class="p">,</span>
         <span class="n">sl_ip_base</span> <span class="o">=</span> <span class="s2">&quot;225.0.0.0&quot;</span><span class="p">,</span>
-        <span class="n">frequency</span> <span class="o">=</span> <span class="mi">54990</span><span class="p">,</span>
         <span class="n">tx_power</span> <span class="o">=</span> <span class="mf">23.0</span><span class="p">,</span>
         <span class="n">numSubchannel</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
         <span class="n">sizeSubchannel</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
@@ -206,11 +203,11 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">lteV2xHelper</span><span class="o">.</span><span class="n">SetLteHelper</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lteHelper</span><span class="p">)</span>
 
         <span class="c1"># Set pathloss model</span>
-        <span class="c1"># FIXME: InstallEnbDevice overrides PathlossModel Frequency with values from Earfcn</span>
-        <span class="c1"># TODO GPA: Check if this is still an issue</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">lteHelper</span><span class="o">.</span><span class="n">SetAttribute</span> <span class="p">(</span><span class="s2">&quot;UseSameUlDlPropagationCondition&quot;</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">BooleanValue</span><span class="p">(</span><span class="kc">True</span><span class="p">))</span>
-        <span class="n">core</span><span class="o">.</span><span class="n">Config</span><span class="o">.</span><span class="n">SetDefault</span> <span class="p">(</span><span class="s2">&quot;ns3::LteEnbNetDevice::UlEarfcn&quot;</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">StringValue</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">frequency</span><span class="p">)))</span>
-        <span class="c1"># core.Config.SetDefault (&quot;ns3::CniUrbanmicrocellPropagationLossModel::Frequency&quot;, core.DoubleValue(5800e6));</span>
+        <span class="c1"># The original example (v2x_communication_example.cc) from ns-3_c-v2x overwrites the default value for UlEarfcn.</span>
+        <span class="c1"># But as eNodeB are not part of the C-V2X mode 4 communication this should not be necessary and experiments could not find any problems.</span>
+        <span class="c1"># Just leaving it here if this might be relevant in the future, for example combining C-V2X with LTE or using C-V2X mode 3.</span>
+        <span class="c1"># core.Config.SetDefault (&quot;ns3::LteEnbNetDevice::UlEarfcn&quot;, core.StringValue (str(frequency)))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">lteHelper</span><span class="o">.</span><span class="n">SetAttribute</span> <span class="p">(</span><span class="s2">&quot;PathlossModel&quot;</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">StringValue</span> <span class="p">(</span><span class="s2">&quot;ns3::CniUrbanmicrocellPropagationLossModel&quot;</span><span class="p">))</span>
 
         <span class="c1"># Create eNB Container</span>
